@@ -1,122 +1,65 @@
-import React from 'react';
-import { Phone, MessageSquare, X, Clock } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Phone, MessageSquare, X } from 'lucide-react';
 import { Stylist } from '../types.ts';
+import { statusToday } from '../utils/hours.ts';
 
 interface PhoneModalProps {
   isOpen: boolean;
   onClose: () => void;
   stylists: Stylist[];
-  selectedStylistId?: string | null;
 }
 
-export const PhoneModal: React.FC<PhoneModalProps> = ({
-  isOpen,
-  onClose,
-  stylists,
-  selectedStylistId,
-}) => {
-  if (!isOpen) return null;
+// Native <dialog>: Escape, focus trapping and the backdrop come from the browser.
+export const PhoneModal: React.FC<PhoneModalProps> = ({ isOpen, onClose, stylists }) => {
+  const ref = useRef<HTMLDialogElement>(null);
 
-  const todayName = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date());
+  useEffect(() => {
+    const d = ref.current;
+    if (!d) return;
+    if (isOpen && !d.open) d.showModal();
+    if (!isOpen && d.open) d.close();
+  }, [isOpen]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1F241C]/65 backdrop-blur-xs animate-fade-in">
-      <div
-        className="relative w-full max-w-md bg-[#FAF7F2] border border-[#DDD5C7] p-6 sm:p-8 shadow-xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close Button */}
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-4 right-4 text-[#786E5E] hover:text-[#211F1D] transition-colors"
-          aria-label="Close phone directory"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        {/* Modal Header */}
-        <div className="text-left mb-6">
-          <span className="text-xs uppercase tracking-widest text-[#3D4A38] font-bold block mb-1">
-            Haven Lofts · Lakeville, MN
-          </span>
-          <h3 className="font-serif-display text-2xl sm:text-3xl text-[#211F1D] font-normal">
-            Call or Text Your Stylist
-          </h3>
-          <p className="text-xs text-[#5A5245] mt-1.5 leading-relaxed">
-            Reach out directly to Sara or Leah to check open times or schedule your next visit.
-          </p>
+    <dialog
+      ref={ref}
+      onClose={onClose}
+      onClick={(e) => e.target === ref.current && onClose()}
+      aria-labelledby="phone-modal-title"
+      className="m-auto w-[calc(100%-2rem)] max-w-md bg-ground text-ink p-0 shadow-2xl"
+    >
+      <div className="p-6 sm:p-8">
+        <div className="flex items-start justify-between gap-4">
+          <h2 id="phone-modal-title" className="font-display text-4xl leading-none">Call or text your stylist</h2>
+          <button type="button" onClick={onClose} aria-label="Close" className="w-11 h-11 -mt-2 -mr-2 flex items-center justify-center hover:bg-field transition-colors">
+            <X className="w-5 h-5" />
+          </button>
         </div>
+        <p className="mt-3 text-base text-muted">Reach Sara or Leah directly to find a time.</p>
 
-        {/* Stylists List */}
-        <div className="space-y-4">
-          {stylists.map((stylist) => {
-            const todaySchedule = stylist.schedule.find(
-              (s) => s.day.toLowerCase() === todayName.toLowerCase()
-            );
-            const isHighlight = selectedStylistId === stylist.id;
-
+        <div className="mt-6 flex flex-col gap-4">
+          {stylists.map((s) => {
+            const { today } = statusToday(s);
             return (
-              <div
-                key={stylist.id}
-                className={`p-4 border transition-all ${
-                  isHighlight
-                    ? 'border-[#4A5843] bg-white shadow-xs'
-                    : 'border-[#DDD5C7] bg-[#F5F1EB] hover:border-[#4A5843]/60'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="font-serif-display text-2xl text-[#211F1D]">
-                    {stylist.name}
-                  </div>
-                  <span className="text-[11px] text-[#3D4A38] uppercase tracking-wider font-bold">
-                    {stylist.role}
-                  </span>
+              <div key={s.id} className="bg-field p-5">
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="font-display text-3xl">{s.name}</p>
+                  <p className="text-lg font-semibold tabular-nums">{s.phone}</p>
                 </div>
-
-                {todaySchedule && (
-                  <div className="flex items-center gap-1.5 text-xs text-[#5C5549] mb-2.5">
-                    <Clock className="w-3.5 h-3.5 text-[#4A5843]" />
-                    <span>Today: {todaySchedule.hours}</span>
-                  </div>
-                )}
-
-                <div className="text-base font-bold text-[#211F1D] tabular-nums mb-3">
-                  {stylist.phone}
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <a
-                    href={`tel:${stylist.phoneRaw}`}
-                    className="flex items-center justify-center gap-1.5 py-2.5 bg-[#4A5843] hover:bg-[#3D4937] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-2xs"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-[#E0B275]" />
-                    <span>Call {stylist.name}</span>
+                {today && <p className="mt-1 text-sm text-muted">Today: {today.hours}</p>}
+                <div className="grid grid-cols-2 gap-2 mt-4">
+                  <a href={`tel:${s.phoneRaw}`} className="flex items-center justify-center gap-2 h-12 bg-sage hover:bg-sage-dark text-white font-semibold transition-colors">
+                    <Phone className="w-4 h-4" aria-hidden="true" /> Call
                   </a>
-
-                  <a
-                    href={`sms:${stylist.phoneRaw}`}
-                    className="flex items-center justify-center gap-1.5 py-2.5 bg-white hover:bg-[#F2EDE3] text-[#211F1D] text-xs font-bold uppercase tracking-wider border border-[#DDD5C7] transition-colors"
-                  >
-                    <MessageSquare className="w-3.5 h-3.5 text-[#4A5843]" />
-                    <span>Text {stylist.name}</span>
+                  <a href={`sms:${s.phoneRaw}`} className="flex items-center justify-center gap-2 h-12 bg-ground hover:bg-white font-semibold transition-colors">
+                    <MessageSquare className="w-4 h-4" aria-hidden="true" /> Text
                   </a>
                 </div>
               </div>
             );
           })}
         </div>
-
-        <div className="mt-6 pt-4 border-t border-[#E8E1D5] text-center">
-          <button
-            type="button"
-            onClick={onClose}
-            className="text-xs uppercase tracking-wider text-[#6B6252] hover:text-[#211F1D] font-semibold transition-colors"
-          >
-            Close
-          </button>
-        </div>
       </div>
-    </div>
+    </dialog>
   );
 };
