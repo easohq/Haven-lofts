@@ -28,3 +28,15 @@ export function statusToday(stylist: Stylist, now = lakevilleNow()) {
   const inNow = !!range && now.minutes >= range[0] && now.minutes < range[1];
   return { today, inNow, untilLabel: today?.hours.split(/[–—-]/)[1]?.trim() };
 }
+
+/** "10:00 AM – 8:00 PM" → "10am–8pm" */
+export const shortHours = (hours: string) =>
+  hours.replace(/:00/g, '').replace(/\s?(AM|PM)/g, (m) => m.trim().toLowerCase()).replace(/\s*[–—-]\s*/, '–');
+
+/** A text message to the stylist, already written. `?&body=` works on both iOS and Android. */
+export const smsHref = (stylist: Stylist, day?: string) =>
+  `sms:${stylist.phoneRaw}?&body=${encodeURIComponent(
+    day
+      ? `Hi ${stylist.name}! I'd like to book an appointment on ${day}. What times do you have open?`
+      : `Hi ${stylist.name}! I'd like to book an appointment. What times do you have open?`,
+  )}`;

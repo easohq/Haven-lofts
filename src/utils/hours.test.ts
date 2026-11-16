@@ -20,3 +20,10 @@ test('statusToday', () => {
   assert.equal(statusToday(sara, { day: 'Tuesday', minutes: 1080 }).inNow, false);
   assert.equal(statusToday(sara, { day: 'Sunday', minutes: 600 }).inNow, false);
 });
+
+test('shortHours and smsHref', async () => {
+  const { shortHours, smsHref } = await import('./hours.ts');
+  assert.equal(shortHours('10:00 AM – 8:00 PM'), '10am–8pm');
+  assert.equal(shortHours('8:30 AM – 3:00 PM'), '8:30am–3pm');
+  assert.match(smsHref(INITIAL_STYLISTS[1], 'Friday'), /^sms:9523568215\?&body=Hi%20Leah!.*Friday/);
+});

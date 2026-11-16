@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
+/* Palette taken from the street the salon is on (Juniper Path) and the gold ring of the logo. */
 @theme {
-  --color-ground: #FAF7F2;
-  --color-field: #F0EAE0;
-  --color-ink: #211F1D;
-  --color-muted: #5C554B;
-  --color-sage: #4A5843;
-  --color-sage-dark: #3B4735;
-  --color-on-sage: #F4F1EA;
-  --color-gold: #8C6B38;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --color-paper: #F3F1EA;
+  --color-mist: #E3E6DE;
+  --color-ink: #18231F;
+  --color-muted: #4F5A54;
+  --color-juniper: #2C4A3E;
+  --color-juniper-deep: #1F362D;
+  --color-on-dark: #EDEFE7;
+  --color-berry: #6C7FA0;
+  --color-gold: #B08D45;
+  --font-display: 'Young Serif', Georgia, serif;
+  --font-sans: 'Albert Sans', system-ui, -apple-system, sans-serif;
 }
 
 @layer base {
+  :root {
+    --needle-1: #8FAE99;
+    --needle-2: #6E917E;
+    --stem: #C2A867;
+    --berry: #7D90B0;
+    --berry-bloom: #B4C0D4;
+  }
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
   }
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-ground);
+    background-color: var(--color-paper);
     color: var(--color-ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -29,16 +38,15 @@
     touch-action: manipulation;
   }
   :focus-visible {
-    outline: 2px solid var(--color-sage);
+    outline: 2px solid var(--color-berry);
     outline-offset: 3px;
   }
   ::selection {
-    background: var(--color-sage);
+    background: var(--color-juniper);
     color: white;
   }
 }
 
-/* Entrance for the first screen; content is visible without it. */
 @keyframes rise {
   from { opacity: 0; transform: translateY(20px); }
 }
@@ -47,11 +55,13 @@
 .rise-3 { animation-delay: 160ms; }
 .rise-4 { animation-delay: 240ms; }
 
+@keyframes sway {
+  from { transform: rotate(-1.5deg); }
+  to { transform: rotate(1.5deg); }
+}
+.sway { transform-origin: 10% 95%; animation: sway 7s ease-in-out infinite alternate; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise { animation: none; }
-}
-
-dialog::backdrop {
-  background: rgb(31 36 28 / 0.6);
+  .rise, .sway { animation: none; }
 }

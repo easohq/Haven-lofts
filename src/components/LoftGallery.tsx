@@ -1,29 +1,25 @@
 import React from 'react';
 import { LoftSpace } from '../types.ts';
+import { Juniper } from './Juniper.tsx';
 
-interface LoftGalleryProps {
-  spaces: LoftSpace[];
-}
-
-export const LoftGallery: React.FC<LoftGalleryProps> = ({ spaces }) => (
-  <section id="space" className="py-24 md:py-36 scroll-mt-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-      <div className="lg:col-span-5">
-        <h2 className="font-display font-medium text-6xl sm:text-7xl leading-[0.95] tracking-[-0.02em]">The space</h2>
-        <p className="mt-8 text-lg leading-relaxed max-w-md">
-          Haven Lofts is a building of private salon suites along one quiet hallway, with a front desk to greet you
-          and a room set aside for spray tanning. Your appointment happens in your stylist's own suite, never on a
-          busy salon floor.
+// Set like the directory board in a building lobby.
+export const LoftGallery: React.FC<{ spaces: LoftSpace[] }> = ({ spaces }) => (
+  <section id="lofts" className="bg-juniper text-on-dark py-24 md:py-36 scroll-mt-16 overflow-hidden">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14">
+      <div className="lg:col-span-5 relative">
+        <h2 className="font-display text-5xl sm:text-6xl leading-[1] tracking-[-0.02em]">Inside the lofts</h2>
+        <p className="mt-6 text-lg leading-relaxed max-w-md">
+          A front desk, one quiet hallway and a row of private suites. Your appointment happens in your stylist's
+          own room, with the door closed and the music low.
         </p>
-        <p className="mt-10 font-display text-[clamp(5rem,12vw,10rem)] leading-[0.8] text-sage [font-variant-numeric:lining-nums]">{spaces.length}</p>
-        <p className="mt-4 text-lg">rooms under one roof</p>
+        <Juniper className="hidden lg:block w-80 mt-12 -ml-6 opacity-90" />
       </div>
 
-      <ul className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-10 self-center">
+      <ul className="lg:col-span-7 bg-juniper-deep px-5 sm:px-10 py-6 sm:py-8">
         {spaces.map((space) => (
-          <li key={space.id} className="bg-field p-6">
-            <h3 className="font-display text-3xl leading-tight">{space.title}</h3>
-            <p className="mt-2 text-base leading-relaxed">{space.description}</p>
+          <li key={space.id} className="grid grid-cols-1 sm:grid-cols-5 gap-1 sm:gap-6 py-5">
+            <h3 className="sm:col-span-2 font-display text-2xl sm:text-3xl text-gold leading-tight">{space.title}</h3>
+            <p className="sm:col-span-3 text-lg leading-relaxed text-on-dark/90">{space.description}</p>
           </li>
         ))}
       </ul>
