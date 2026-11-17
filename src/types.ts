@@ -15,6 +15,17 @@ export interface Stylist {
   specialties: string[];
   schedule: StylistScheduleDay[];
   imageKey: string;
+  /** Headshot path in /public, e.g. '/sarah.jpg'. Empty shows a monogram. */
+  photo: string;
+  /** Instagram handle without the @. Empty hides the link. */
+  instagram: string;
+}
+
+export interface Service {
+  name: string;
+  description: string;
+  /** Starting price, e.g. 'from $65'. Empty shows "Priced at consultation". */
+  price: string;
 }
 
 export interface LoftSpace {
@@ -39,4 +50,8 @@ export interface SalonInfo {
   coFounders: string;
   phone: string;
   phoneRaw: string;
+  /** Instagram handle without the @. Empty hides the icon. */
+  instagram: string;
+  /** Parking or arrival note for the Visit section. Empty hides it. */
+  parking: string;
 }

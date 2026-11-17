@@ -1,4 +1,4 @@
-import { Stylist, LoftSpace, SalonInfo } from '../types.ts';
+import { Stylist, LoftSpace, SalonInfo, Service } from '../types.ts';
 
 export const INITIAL_SALON_INFO: SalonInfo = {
   name: 'Haven Lofts',
@@ -11,6 +11,8 @@ export const INITIAL_SALON_INFO: SalonInfo = {
   coFounders: 'Sarah & Leah',
   phone: '',
   phoneRaw: '',
+  instagram: '',
+  parking: '',
 };
 
 // Phone numbers are left empty until the real ones are known. Filling in phoneRaw
@@ -25,6 +27,8 @@ export const INITIAL_STYLISTS: Stylist[] = [
     bio: 'Sarah has been doing hair in the south metro for over 20 years. She loves easy-to-manage lived-in cuts, soft dimensional color, and catching up with her clients in a relaxed, comfortable chair. No rushing, no pressure—just good honest hair care.',
     specialties: ['Lived-In Cuts & Layers', 'Dimensional Color & Highlights', 'Easy Low-Maintenance Styles', 'Blowouts & Styling'],
     imageKey: 'stylist_sarah',
+    photo: '',
+    instagram: '',
     schedule: [
       { day: 'Monday', shortDay: 'Mon', hours: 'Closed / By Special Request', isClosed: true },
       { day: 'Tuesday', shortDay: 'Tue', hours: '9:00 AM – 6:00 PM' },
@@ -44,6 +48,8 @@ export const INITIAL_STYLISTS: Stylist[] = [
     bio: 'With over two decades behind the chair, Leah is known for her friendly, down-to-earth approach and great listening ear. She specializes in natural gray blending, soft dimensional blonding, and precision cuts that look great every morning without fuss.',
     specialties: ['Custom Blonding & Foiling', 'Gray Coverage & Blending', 'Textured Bobs & Soft Shags', 'Deep Conditioning Treatments'],
     imageKey: 'stylist_leah',
+    photo: '',
+    instagram: '',
     schedule: [
       { day: 'Monday', shortDay: 'Mon', hours: '10:00 AM – 6:00 PM' },
       { day: 'Tuesday', shortDay: 'Tue', hours: '9:00 AM – 7:00 PM' },
@@ -53,6 +59,30 @@ export const INITIAL_STYLISTS: Stylist[] = [
       { day: 'Saturday', shortDay: 'Sat', hours: '8:30 AM – 3:00 PM' },
       { day: 'Sunday', shortDay: 'Sun', hours: 'Closed', isClosed: true },
     ],
+  },
+];
+
+// The service menu. Add a starting price like 'from $65' to show it; empty reads "Priced at consultation".
+export const SERVICES: Service[] = [
+  {
+    name: 'Cuts & Styling',
+    description: 'Lived-in cuts, soft layers, textured bobs and shags, finished with a blowout.',
+    price: '',
+  },
+  {
+    name: 'Dimensional Color & Balayage',
+    description: 'Soft, blended color and hand-painted balayage that grows out gracefully.',
+    price: '',
+  },
+  {
+    name: 'Blonding & Gray Blending',
+    description: 'Custom foils and brightening, or natural gray blending that lets you go longer between visits.',
+    price: '',
+  },
+  {
+    name: 'Gloss & Treatments',
+    description: 'Shine-boosting glosses and deep conditioning treatments to bring hair back to life.',
+    price: '',
   },
 ];
 

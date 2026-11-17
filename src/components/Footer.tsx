@@ -1,30 +1,79 @@
 import React from 'react';
-import { SalonInfo } from '../types.ts';
-import { GoldArrow } from './Brand.tsx';
+import { SalonInfo, Stylist } from '../types.ts';
+import { InstagramIcon, Logo, Sprig } from './Brand.tsx';
+import { mapsUrl } from '../utils/maps.ts';
 
-// The close is the poster: gold frame, logo, "By appointment only", the arrow.
-export const Footer: React.FC<{ salonInfo: SalonInfo; onMessage?: () => void }> = ({ salonInfo, onMessage }) => (
-  <footer className={`bg-paper pt-8 ${onMessage ? 'pb-28' : 'pb-16'} md:pb-16`}>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="border-2 border-gold px-6 py-14 sm:py-20 flex flex-col items-center text-center">
-        <img src="/haven-lofts-logo.png" alt="Haven Lofts" className="w-full max-w-[440px] h-auto" />
-        <p className="caps text-xl sm:text-3xl mt-8">By appointment only</p>
-        {onMessage && (
-          <button
-            type="button"
-            onClick={onMessage}
-            className="inline-flex items-center gap-4 h-14 px-8 mt-10 bg-ink hover:bg-black active:scale-[0.97] text-white text-lg font-semibold transition"
-          >
-            Message a stylist <GoldArrow className="w-9" />
-          </button>
-        )}
-        <address className="not-italic mt-12 text-lg leading-relaxed">
-          {salonInfo.street}, {salonInfo.suite}
-          <br />
-          {salonInfo.city}, MN {salonInfo.zip}
-        </address>
+const LINKS = [
+  { href: '#services', label: 'Services' },
+  { href: '#stylists', label: 'Stylists' },
+  { href: '#visit', label: 'Visit' },
+];
+
+export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[] }> = ({ salonInfo, stylists }) => {
+  const socials = [
+    salonInfo.instagram && { handle: salonInfo.instagram, label: 'Haven Lofts on Instagram' },
+    ...stylists.map((s) => s.instagram && { handle: s.instagram, label: `${s.name} on Instagram` }),
+  ].filter(Boolean) as { handle: string; label: string }[];
+
+  return (
+    <footer className="bg-bg-alt pt-14 pb-28 md:pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="double-frame">
+          <div className="double-frame-inner px-6 sm:px-10 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start">
+            <div className="sm:col-span-2 lg:col-span-1">
+              <Logo className="w-48 h-auto" />
+            </div>
+
+            <nav aria-label="Footer">
+              <p className="label">Explore</p>
+              <ul className="mt-4 space-y-2 text-lg">
+                {LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="hover:text-cognac transition-colors">{l.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div>
+              <p className="label">Location</p>
+              <a href={mapsUrl(salonInfo)} target="_blank" rel="noopener noreferrer" className="block mt-4 text-lg leading-relaxed hover:text-cognac transition-colors">
+                {salonInfo.street}, {salonInfo.suite}
+                <br />
+                {salonInfo.city}, MN {salonInfo.zip}
+              </a>
+            </div>
+
+            <div>
+              <p className="label">Owners</p>
+              <p className="mt-4 text-lg">{salonInfo.coFounders}</p>
+              <p className="text-ink-soft">By appointment only</p>
+              {socials.length > 0 && (
+                <ul className="mt-5 flex gap-3">
+                  {socials.map((s) => (
+                    <li key={s.handle}>
+                      <a
+                        href={`https://instagram.com/${s.handle}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={s.label}
+                        className="glow flex items-center justify-center w-11 h-11 rounded-full border border-gold/60 text-gold-ink hover:text-ink transition-colors"
+                      >
+                        <InstagramIcon />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-ink-soft">
+          <p>© {new Date().getFullYear()} Haven Lofts · Lakeville, Minnesota</p>
+          <Sprig className="w-36 text-gold" />
+        </div>
       </div>
-      <p className="mt-8 text-muted">© {new Date().getFullYear()} Haven Lofts, Lakeville, Minnesota</p>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};

@@ -1,16 +1,61 @@
 @import "tailwindcss";
 
-/* Brand colors from the Haven Lofts poster and the salon lounge: white, black, olive wall green, gold. */
-@theme {
-  --color-paper: #FBFAF7;
-  --color-stone: #F0EDE6;
-  --color-ink: #141414;
-  --color-muted: #55534E;
-  --color-green: #565C45;
-  --color-green-deep: #40442F;
-  --color-on-dark: #F4F2EC;
-  --color-gold: #C29A45;
-  --color-gold-text: #8A6526;
+/* Boho modern vintage: cream and sand, deep olive, cognac leather, brushed gold, walnut.
+   Every color is a variable so light and dark mode swap in one place. */
+:root {
+  --bg: #F6EFE4;
+  --bg-alt: #EADFCB;
+  --surface: #FBF7F0;
+  --ink: #2B211C;
+  --ink-soft: #5C4D42;
+  --olive: #4F5638;
+  --olive-deep: #3E442C;
+  --on-olive: #F3ECDF;
+  --cognac: #9A4F2E;
+  --gold: #B8893B;
+  --gold-ink: #8A6526;
+  --btn: #2B211C;
+  --btn-ink: #F6EFE4;
+  --btn-arrow: #B8893B;
+  --logo-dark: block;
+  --logo-light: none;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #1A1C15;
+  --bg-alt: #241F19;
+  --surface: #2A2620;
+  --ink: #F0E6D3;
+  --ink-soft: #CBBDA6;
+  --olive: #2C3122;
+  --olive-deep: #22261A;
+  --on-olive: #F0E6D3;
+  --cognac: #D08A5F;
+  --gold: #D4AA5E;
+  --gold-ink: #E0BC74;
+  --btn: #D4AA5E;
+  --btn-ink: #1A1C15;
+  --btn-arrow: #1A1C15;
+  --logo-dark: none;
+  --logo-light: block;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-olive: var(--olive);
+  --color-olive-deep: var(--olive-deep);
+  --color-on-olive: var(--on-olive);
+  --color-cognac: var(--cognac);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-btn: var(--btn);
+  --color-btn-ink: var(--btn-ink);
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Albert Sans', system-ui, -apple-system, sans-serif;
 }
@@ -22,8 +67,8 @@
   }
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--bg);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -31,41 +76,83 @@
     touch-action: manipulation;
   }
   :focus-visible {
-    outline: 2px solid var(--color-gold);
+    outline: 2px solid var(--gold);
     outline-offset: 3px;
   }
   ::selection {
-    background: var(--color-green);
-    color: white;
+    background: var(--olive);
+    color: var(--on-olive);
   }
 }
 
-/* The spaced capitals of the poster ("BY APPOINTMENT ONLY"). */
-.caps {
-  font-family: var(--font-display);
+/* The logo PNG has black script; dark mode swaps in the cream version. */
+.logo-for-light { display: var(--logo-dark); }
+.logo-for-dark { display: var(--logo-light); }
+
+/* Tracked-out uppercase label. */
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
   font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  color: var(--gold-ink);
 }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(20px); }
+/* Vintage double-line frame: an outer gold line and an inner one, a few px apart. */
+.double-frame {
+  border: 1.5px solid var(--gold);
+  padding: 6px;
 }
-.rise { animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-.rise-2 { animation-delay: 80ms; }
-.rise-3 { animation-delay: 160ms; }
-.rise-4 { animation-delay: 240ms; }
+.double-frame > .double-frame-inner {
+  border: 1px solid var(--gold);
+}
+
+/* Arched top, like a vintage mirror or doorway. */
+.arch { border-radius: 999px 999px 0 0; }
+
+/* Buttons and gold frames catch a slow shimmer of light on hover. */
+.shimmer { position: relative; overflow: hidden; isolation: isolate; }
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 236 190 / 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.shimmer:hover::after { transform: translateX(120%); }
+.glow { transition: box-shadow 400ms ease, border-color 400ms ease; }
+.glow:hover { box-shadow: 0 0 0 1px var(--gold), 0 0 28px -6px var(--gold); }
+
+/* Scroll reveal: content is visible by default and only hidden once the script has marked it. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 800ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--delay, 0ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
 
 /* The gold arrow nudges forward when its button is hovered. */
 .arrow { transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
 a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
+/* On the main button the arrow is gold on dark (light mode) and dark on gold (dark mode). */
+.bg-btn .arrow { color: var(--btn-arrow); }
+
+/* Theme switch: a cross-fade where the browser supports view transitions. */
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 450ms; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise { animation: none; }
-  .arrow { transition: none; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .shimmer::after, .arrow, .glow { transition: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
 
 dialog::backdrop {
-  background: rgb(20 20 20 / 0.55);
+  background: rgb(20 16 12 / 0.6);
 }
