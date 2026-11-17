@@ -233,8 +233,6 @@
 /* The gold arrow nudges forward on hover. On the main button it's gold-on-dark (light) / dark-on-gold (dark). */
 .arrow { transition: transform 450ms var(--ease); }
 a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
-.btn-primary .arrow { color: var(--btn-arrow); }
-.btn-gold .arrow { color: #1A1C15; }
 
 /* Text link: a gold underline, with a cognac one drawing in from the left on hover. */
 .link-u {
@@ -257,6 +255,23 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
   transform: translateY(-0.2em);
 }
 
+}
+
+/* Outside the components layer on purpose: these must beat the arrow's own text-gold utility. */
+.btn-primary .arrow { color: var(--btn-arrow); }
+.btn-gold .arrow { color: #1A1C15; }
+
+/* On phones the specialties stack, each with its own star. */
+@media (max-width: 639px) {
+  .star-list { flex-direction: column; gap: 0.4rem; }
+  .star-list li::before,
+  .star-list li + li::before {
+    content: '✦';
+    font-size: 0.55em;
+    color: var(--gold);
+    margin: 0 0.75rem 0 0;
+    transform: translateY(-0.2em);
+  }
 }
 
 /* ---------- Motion ---------- */
