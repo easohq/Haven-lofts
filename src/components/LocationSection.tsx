@@ -55,7 +55,7 @@ export const LocationSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo 
             </address>
 
             <div className="mt-8 flex items-center gap-5">
-              <AppointmentSeal className="w-24 h-24 shrink-0" />
+              <AppointmentSeal className="w-28 h-28 shrink-0" />
               <p className="leading-relaxed text-ink-soft">
                 Head inside to {salonInfo.suite}.{salonInfo.parking ? ` ${salonInfo.parking}` : ''} We're by appointment
                 only, so please book before you visit.

@@ -14,7 +14,7 @@
   --on-olive: #F3ECDF;
   --cognac: #9A4F2E;
   --gold: #B8893B;
-  --gold-ink: #8A6526;
+  --gold-ink: #7D5A1F; /* 4.75:1 on sand, 5.5:1 on cream (WCAG AA) */
   --gold-light: #E9CF95;
   --btn: #2B211C;
   --btn-ink: #F6EFE4;
@@ -98,6 +98,8 @@
   a, button { touch-action: manipulation; }
   :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
   ::selection { background: var(--olive); color: var(--on-olive); }
+  /* No single word stranded on a paragraph's last line. */
+  p { text-wrap: pretty; }
 }
 
 /* Component classes live in the components layer so Tailwind utilities (hidden, md:flex...) can override them. */

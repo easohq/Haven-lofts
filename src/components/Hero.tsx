@@ -81,7 +81,7 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
             </div>
           </div>
 
-          <AppointmentSeal className="absolute -right-2 sm:-right-8 top-[16%] w-24 h-24 sm:w-32 sm:h-32" />
+          <AppointmentSeal className="absolute -right-2 sm:-right-8 top-[16%] w-28 h-28 sm:w-32 sm:h-32" />
 
           {/* Vertical line of type along the photo's right edge (wide screens only). */}
           <p className="hidden xl:block absolute -right-10 bottom-0 label !text-ink-soft whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
