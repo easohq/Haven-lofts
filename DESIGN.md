@@ -90,4 +90,15 @@ Decor supports the content; it never sits on top of a headline or paragraph.
 Slow and soft: `--ease` (`cubic-bezier(0.22, 1, 0.36, 1)`), 500–1000ms. Fade-up reveals on scroll, lifting
 buttons, a cross-fade when switching themes. The room itself moves gently: ivy and pendants sway, candle flames
 flicker, the arch and pendant light breathe. The signature moment is the neon sign buzzing on when the spray tan
-band scrolls into view. Everything turns off for visitors who choose reduced motion.
+band scrolls into view.
+
+## Interaction
+
+- Feedback lands on the press, not the release: buttons scale to 0.97 (icon buttons 0.92) within 90ms.
+- The nav is a frosted layer (`.nav-material`) the page scrolls under. Its soft edge appears only once content is
+  beneath it, and the current section's link carries a gold underline (`aria-current`).
+- On phones the booking sheet follows the finger 1:1 from its top edge, resists when pulled up, and decides on release
+  from where the flick is heading (momentum projection), springing back or away at the finger's own speed. It can be
+  caught mid-motion. Built in `src/components/Drawer.tsx` with `motion` springs.
+- Reduced motion keeps the feedback but drops the travel: reveals and drawers cross-fade instead of sliding, and the
+  room decor stops moving. Reduced transparency makes the frosted bars solid; higher contrast adds edges.

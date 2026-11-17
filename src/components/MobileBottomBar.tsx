@@ -21,7 +21,7 @@ export const MobileBottomBar: React.FC<{ onBook: () => void }> = ({ onBook }) =>
   return (
     <div
       aria-hidden={hidden}
-      className={`sm:hidden fixed bottom-0 inset-x-0 z-30 bg-bg-alt px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-500 ease-[var(--ease)] motion-reduce:transition-none ${
+      className={`sm:hidden fixed bottom-0 inset-x-0 z-30 sheet-bar px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-500 ease-[var(--ease)] motion-reduce:transition-none ${
         hidden ? 'translate-y-full' : 'translate-y-0'
       }`}
     >

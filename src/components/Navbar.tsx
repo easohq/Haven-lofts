@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { SalonInfo } from '../types.ts';
 import { GoldArrow, Logo } from './Brand.tsx';
@@ -34,11 +34,38 @@ export const ThemeToggle: React.FC = () => (
   </button>
 );
 
+/** Which section is in the middle of the screen right now, for the nav's "you are here" mark. */
+function useCurrentSection() {
+  const [current, setCurrent] = useState<string | null>(null);
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setCurrent(`#${e.target.id}`)),
+      { rootMargin: '-45% 0px -50% 0px' }, // a thin band across the middle of the viewport
+    );
+    ['top', ...LINKS.map((l) => l.href.slice(1))].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+  }, []);
+  return current;
+}
+
 export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({ salonInfo, onBook }) => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const current = useCurrentSection();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-bg">
+    <header className="nav-material sticky top-0 z-40" data-scrolled={scrolled || undefined}>
       <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 h-[72px] flex items-center justify-between gap-6">
         <a href="#top" onClick={(e) => goTo(e)} className="shrink-0" aria-label="Haven Lofts, back to top">
           <Logo alt="" className="h-14 sm:h-[60px] w-auto -my-1" />
@@ -46,7 +73,13 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
 
         <nav aria-label="Main" className="hidden lg:flex items-center gap-10 ml-auto mr-4">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={(e) => goTo(e)} className="font-semibold text-ink-soft hover:text-ink transition-colors duration-300">
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={(e) => goTo(e)}
+              aria-current={current === l.href ? 'location' : undefined}
+              className="nav-link font-semibold text-ink-soft hover:text-ink"
+            >
               {l.label}
             </a>
           ))}
