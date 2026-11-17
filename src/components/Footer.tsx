@@ -1,31 +1,28 @@
 import React from 'react';
-import { SalonInfo, Stylist } from '../types.ts';
-import { smsHref } from '../utils/hours.ts';
+import { SalonInfo } from '../types.ts';
+import { GoldArrow } from './Brand.tsx';
 
-export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[] }> = ({ salonInfo, stylists }) => (
-  <footer className="bg-ink text-on-dark pt-20 pb-28 md:pb-14">
+// The close is the poster: gold frame, logo, "By appointment only", the arrow.
+export const Footer: React.FC<{ salonInfo: SalonInfo; onMessage: () => void }> = ({ salonInfo, onMessage }) => (
+  <footer className="bg-paper pt-8 pb-28 md:pb-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p className="font-display text-[clamp(4rem,15vw,13rem)] leading-[0.85] tracking-[-0.04em]">Haven Lofts</p>
-      <p className="mt-5 text-gold text-xl">Beautifully independent</p>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mt-16 text-lg">
-        <address className="not-italic leading-relaxed">
+      <div className="border-2 border-gold px-6 py-14 sm:py-20 flex flex-col items-center text-center">
+        <img src="/haven-lofts-logo.png" alt="Haven Lofts" className="w-full max-w-[440px] h-auto" />
+        <p className="caps text-xl sm:text-3xl mt-8">By appointment only</p>
+        <button
+          type="button"
+          onClick={onMessage}
+          className="inline-flex items-center gap-4 h-14 px-8 mt-10 bg-ink hover:bg-black active:scale-[0.97] text-white text-lg font-semibold transition"
+        >
+          Message a stylist <GoldArrow className="w-9" />
+        </button>
+        <address className="not-italic mt-12 text-lg leading-relaxed">
           {salonInfo.street}, {salonInfo.suite}
           <br />
           {salonInfo.city}, MN {salonInfo.zip}
         </address>
-        {stylists.map((s) => (
-          <p key={s.id} className="leading-relaxed">
-            <span className="font-semibold">{s.name}</span>
-            <br />
-            <a href={`tel:${s.phoneRaw}`} className="tabular-nums hover:underline">{s.phone}</a>
-            <span aria-hidden="true"> · </span>
-            <a href={smsHref(s)} className="underline underline-offset-4 hover:text-white">Text</a>
-          </p>
-        ))}
       </div>
-
-      <p className="mt-16 text-on-dark/70">© {new Date().getFullYear()} Haven Lofts, Lakeville, Minnesota</p>
+      <p className="mt-8 text-muted">© {new Date().getFullYear()} Haven Lofts, Lakeville, Minnesota</p>
     </div>
   </footer>
 );

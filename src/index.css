@@ -1,28 +1,21 @@
 @import "tailwindcss";
 
-/* Palette taken from the street the salon is on (Juniper Path) and the gold ring of the logo. */
+/* Brand colors from the Haven Lofts poster and the salon itself: white, black, wall green, gold. */
 @theme {
-  --color-paper: #F3F1EA;
-  --color-mist: #E3E6DE;
-  --color-ink: #18231F;
-  --color-muted: #4F5A54;
-  --color-juniper: #2C4A3E;
-  --color-juniper-deep: #1F362D;
-  --color-on-dark: #EDEFE7;
-  --color-berry: #6C7FA0;
-  --color-gold: #B08D45;
-  --font-display: 'Young Serif', Georgia, serif;
+  --color-paper: #FBFAF7;
+  --color-stone: #F0EDE6;
+  --color-ink: #141414;
+  --color-muted: #55534E;
+  --color-green: #3B4A3C;
+  --color-green-deep: #2B362C;
+  --color-on-dark: #F4F2EC;
+  --color-gold: #C29A45;
+  --color-gold-text: #8A6526;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Albert Sans', system-ui, -apple-system, sans-serif;
 }
 
 @layer base {
-  :root {
-    --needle-1: #8FAE99;
-    --needle-2: #6E917E;
-    --stem: #C2A867;
-    --berry: #7D90B0;
-    --berry-bloom: #B4C0D4;
-  }
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
@@ -38,13 +31,21 @@
     touch-action: manipulation;
   }
   :focus-visible {
-    outline: 2px solid var(--color-berry);
+    outline: 2px solid var(--color-gold);
     outline-offset: 3px;
   }
   ::selection {
-    background: var(--color-juniper);
+    background: var(--color-green);
     color: white;
   }
+}
+
+/* The spaced capitals of the poster ("BY APPOINTMENT ONLY"). */
+.caps {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 @keyframes rise {
@@ -55,13 +56,16 @@
 .rise-3 { animation-delay: 160ms; }
 .rise-4 { animation-delay: 240ms; }
 
-@keyframes sway {
-  from { transform: rotate(-1.5deg); }
-  to { transform: rotate(1.5deg); }
-}
-.sway { transform-origin: 10% 95%; animation: sway 7s ease-in-out infinite alternate; }
+/* The gold arrow nudges forward when its button is hovered. */
+.arrow { transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .sway { animation: none; }
+  .rise { animation: none; }
+  .arrow { transition: none; }
+}
+
+dialog::backdrop {
+  background: rgb(20 20 20 / 0.55);
 }
