@@ -3,7 +3,7 @@ import { X, Phone, MessageSquare, Copy, Check, Mail, CalendarCheck, Navigation }
 import { SalonInfo, Stylist } from '../types.ts';
 import { smsHref } from '../utils/sms.ts';
 import { directionsUrl } from '../utils/maps.ts';
-import { InstagramIcon, Sprig } from './Brand.tsx';
+import { InstagramIcon } from './Brand.tsx';
 import { Drawer } from './Drawer.tsx';
 
 interface BookDialogProps {
@@ -42,7 +42,7 @@ const CopyNumber: React.FC<{ stylist: Stylist }> = ({ stylist }) => {
 
 /** Small arched portrait; the photo crops into the arch, or the gold initial stands in. */
 const MiniArch: React.FC<{ stylist: Stylist }> = ({ stylist }) => (
-  <div className="arch border border-gold p-[3px] w-12 shrink-0">
+  <div className="w-12 shrink-0">
     <div className="arch overflow-hidden aspect-[3/4] bg-olive flex items-center justify-center">
       {stylist.photo ? (
         <img src={stylist.photo} alt="" className="w-full h-full object-cover object-[50%_25%]" />
@@ -62,7 +62,7 @@ const StylistPanel: React.FC<{ stylist: Stylist; salonInfo: SalonInfo }> = ({ st
     return (
       <div className="bg-bg-alt p-6">
         <p className="display text-2xl leading-snug">
-          {s.name}'s booking line is <em>almost ready.</em>
+          {s.name}'s booking line is almost ready.
         </p>
         <p className="mt-3 text-ink-soft leading-relaxed">
           We're by appointment only at {salonInfo.street}, {salonInfo.suite}. Online booking and a direct number for{' '}
@@ -146,16 +146,14 @@ export const BookDialog: React.FC<BookDialogProps> = ({ open, onClose, stylists,
         {/* Grab handle on the phone sheet */}
         <div className="sm:hidden mx-auto -mt-2 mb-4 h-1 w-10 rounded-full bg-gold/40" aria-hidden="true" />
 
-        <div className="flex items-center justify-between">
-          <p className="kicker">Concierge</p>
-          <button type="button" onClick={onClose} aria-label="Close" className="icon-btn">
+        <div className="flex items-start justify-between gap-4">
+          <h2 id="book-title" className="display text-5xl sm:text-6xl">
+            Reserve your chair
+          </h2>
+          <button type="button" onClick={onClose} aria-label="Close" className="icon-btn shrink-0">
             <X className="w-5 h-5" />
           </button>
         </div>
-
-        <h2 id="book-title" className="display text-5xl sm:text-6xl mt-8">
-          Reserve your <em>chair</em>
-        </h2>
         <p className="mt-4 text-lg leading-relaxed text-ink-soft max-w-sm">
           Every visit is one-on-one, by appointment. Choose who you'd like to see and we'll take it from there.
         </p>
@@ -176,22 +174,17 @@ export const BookDialog: React.FC<BookDialogProps> = ({ open, onClose, stylists,
                 aria-selected={selected}
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(i)}
-                className={`group relative flex items-center gap-3 p-3 text-left border transition-all duration-500 ${
-                  selected
-                    ? 'border-gold bg-surface shadow-[0_14px_30px_-20px_rgb(var(--shadow)/0.7)]'
-                    : 'border-gold/25 hover:border-gold/60 hover:-translate-y-0.5'
+                className={`flex items-center gap-3 p-3 text-left transition-[transform,background-color] duration-500 ${
+                  selected ? 'bg-gold/25' : 'bg-bg-alt hover:bg-gold/15 hover:-translate-y-0.5'
                 }`}
               >
                 <MiniArch stylist={s} />
                 <span>
                   <span className="display block text-2xl leading-none">{s.name}</span>
-                  <span className="block text-xs text-ink-soft mt-1.5">
+                  <span className="block text-sm text-ink-soft mt-1.5">
                     {s.role}
-                    <span className="hidden sm:inline"> &amp; stylist</span>
+                    <span className="hidden sm:inline"> and stylist</span>
                   </span>
-                </span>
-                <span className={`absolute top-2.5 right-3 text-gold text-xs transition-opacity duration-500 ${selected ? 'opacity-100' : 'opacity-0'}`} aria-hidden="true">
-                  ✦
                 </span>
               </button>
             );
@@ -206,8 +199,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({ open, onClose, stylists,
         )}
 
         <div className="mt-auto pt-10">
-          <Sprig className="w-32 text-gold" />
-          <p className="mt-4 text-sm text-ink-soft leading-relaxed">
+          <p className="text-sm text-ink-soft leading-relaxed">
             By appointment only
             <br />
             {salonInfo.street}, {salonInfo.suite}, {salonInfo.city}, MN {salonInfo.zip}

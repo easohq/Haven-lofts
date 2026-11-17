@@ -1,6 +1,7 @@
 import React from 'react';
 import { Stylist } from '../types.ts';
 import { GoldArrow, InstagramIcon } from './Brand.tsx';
+import { Ivy } from './Decor.tsx';
 
 interface StylistsSectionProps {
   stylists: Stylist[];
@@ -12,8 +13,8 @@ interface StylistsSectionProps {
  * exact double arch, weighted toward the face; until then a gold italic initial holds the space.
  */
 const Portrait: React.FC<{ stylist: Stylist }> = ({ stylist: s }) => (
-  <div className="double-frame arch glow">
-    <div className="double-frame-inner arch overflow-hidden aspect-[3/4] bg-olive-deep">
+  <div className="arch-glow">
+    <div className="arch overflow-hidden aspect-[3/4] bg-olive-deep">
       {s.photo ? (
         <img
           src={s.photo}
@@ -35,15 +36,16 @@ const Portrait: React.FC<{ stylist: Stylist }> = ({ stylist: s }) => (
 
 // Two magazine spreads: Sarah's portrait left with her story beside it; Leah's mirrored and set lower.
 export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBook }) => (
-  <section id="stylists" className="on-olive bg-olive text-on-olive pt-24 pb-32 lg:pt-32 lg:pb-44 scroll-mt-16">
-    <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+  <section id="stylists" className="relative overflow-hidden on-olive bg-olive text-on-olive pt-24 pb-32 lg:pt-32 lg:pb-44 scroll-mt-16">
+    <Ivy length={2} className="hidden md:block left-[4%]" delay={0.6} />
+    <Ivy length={3} flip className="right-[3%]" delay={1.8} />
+    <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
       <div className="lg:ml-[41.66%]">
-        <p className="kicker" data-reveal>The owners</p>
-        <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)] mt-7">
-          {stylists[0]?.name} <em>&amp;</em> {stylists[1]?.name}
+        <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)]">
+          {stylists[0]?.name} &amp; {stylists[1]?.name}
         </h2>
-        <p data-reveal className="mt-6 text-lg leading-[1.7] text-on-olive/80 max-w-lg">
-          Two longtime stylists with one shared idea: a salon that feels like coming home.
+        <p data-reveal className="mt-6 text-lg leading-[1.6] max-w-lg">
+          The owners: two longtime stylists with one shared idea, a salon that feels like coming home.
         </p>
       </div>
 
@@ -66,12 +68,12 @@ export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBo
                 style={{ '--delay': '140ms' } as React.CSSProperties}
                 className={`md:col-span-7 lg:col-span-5 ${mirrored ? 'md:order-1 lg:col-start-2' : 'lg:col-start-7'}`}
               >
-                <p className="kicker">{s.role} &amp; stylist</p>
-                <h3 className="display text-[clamp(3.5rem,7vw,6rem)] mt-5">{s.name}</h3>
-                <p className="mt-6 text-lg leading-[1.75] text-on-olive/90 max-w-lg">{s.bio}</p>
+                <h3 className="display text-[clamp(3.5rem,7vw,6rem)]">{s.name}</h3>
+                <p className="mt-3 label">{s.role} and stylist</p>
+                <p className="mt-6 text-lg leading-[1.6] max-w-lg">{s.bio}</p>
 
                 <p className="label mt-8">Ask {s.name} about</p>
-                <ul className="star-list mt-3 font-display italic text-xl text-on-olive/95" aria-label={`${s.name}'s specialties`}>
+                <ul className="spec-list mt-2 text-lg leading-[1.6] max-w-lg" aria-label={`${s.name}'s specialties`}>
                   {s.specialties.map((spec) => (
                     <li key={spec}>{spec}</li>
                   ))}
