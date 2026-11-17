@@ -14,12 +14,14 @@ export const StylistsSection: React.FC<{ stylists: Stylist[] }> = ({ stylists })
             <article key={s.id}>
               <h3 className="font-display font-semibold text-[clamp(4.5rem,8vw,7rem)] leading-[0.9]">{s.name}</h3>
               <p className="mt-4 text-lg text-on-dark/85">{s.role}</p>
-              <a
-                href={smsHref(s)}
-                className="inline-flex items-center gap-4 h-14 px-7 mt-8 bg-paper hover:bg-white active:scale-[0.97] text-ink text-lg font-semibold transition"
-              >
-                Message {s.name} <GoldArrow className="w-8" />
-              </a>
+              {s.phoneRaw && (
+                <a
+                  href={smsHref(s)}
+                  className="inline-flex items-center gap-4 h-14 px-7 mt-8 bg-paper hover:bg-white active:scale-[0.97] text-ink text-lg font-semibold transition"
+                >
+                  Message {s.name} <GoldArrow className="w-8" />
+                </a>
+              )}
             </article>
           ))}
         </div>

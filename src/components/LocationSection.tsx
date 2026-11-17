@@ -27,7 +27,7 @@ export const LocationSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo 
             {salonInfo.city}, MN {salonInfo.zip}
           </address>
           <p className="mt-8 text-lg leading-relaxed">
-            We are by appointment only, so please message your stylist before you come by.
+            We are by appointment only.
           </p>
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${query}`}

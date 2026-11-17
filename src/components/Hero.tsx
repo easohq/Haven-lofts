@@ -4,7 +4,7 @@ import { GoldArrow } from './Brand.tsx';
 
 interface HeroProps {
   salonInfo: SalonInfo;
-  onMessage: () => void;
+  onMessage?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ salonInfo, onMessage }) => (
@@ -19,13 +19,15 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onMessage }) => (
           A hair salon in {salonInfo.city}, Minnesota, owned by {salonInfo.coFounders}.
         </p>
         <div className="rise rise-3 flex flex-wrap items-center gap-x-8 gap-y-4 mt-10">
-          <button
-            type="button"
-            onClick={onMessage}
-            className="inline-flex items-center gap-4 h-14 px-8 bg-ink hover:bg-black active:scale-[0.97] text-white text-lg font-semibold transition"
-          >
-            Message a stylist <GoldArrow className="w-9" />
-          </button>
+          {onMessage && (
+            <button
+              type="button"
+              onClick={onMessage}
+              className="inline-flex items-center gap-4 h-14 px-8 bg-ink hover:bg-black active:scale-[0.97] text-white text-lg font-semibold transition"
+            >
+              Message a stylist <GoldArrow className="w-9" />
+            </button>
+          )}
           <a href="#visit" className="text-lg font-semibold underline underline-offset-[6px] decoration-2 decoration-gold hover:text-green transition-colors">
             Directions
           </a>

@@ -15,7 +15,9 @@ import { INITIAL_SALON_INFO as salonInfo, INITIAL_STYLISTS as stylists } from '.
 
 export default function App() {
   const [messageOpen, setMessageOpen] = useState(false);
-  const openMessage = () => setMessageOpen(true);
+  // Message buttons only appear for stylists with a real phone number.
+  const reachable = stylists.filter((s) => s.phoneRaw);
+  const openMessage = reachable.length ? () => setMessageOpen(true) : undefined;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -26,8 +28,12 @@ export default function App() {
         <LocationSection salonInfo={salonInfo} />
       </main>
       <Footer salonInfo={salonInfo} onMessage={openMessage} />
-      <MessageDialog open={messageOpen} onClose={() => setMessageOpen(false)} stylists={stylists} />
-      <MobileBottomBar onMessage={openMessage} />
+      {openMessage && (
+        <>
+          <MessageDialog open={messageOpen} onClose={() => setMessageOpen(false)} stylists={reachable} />
+          <MobileBottomBar onMessage={openMessage} />
+        </>
+      )}
     </div>
   );
 }

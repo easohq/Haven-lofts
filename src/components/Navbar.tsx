@@ -6,7 +6,7 @@ const LINKS = [
   { href: '#visit', label: 'Visit' },
 ];
 
-export const Navbar: React.FC<{ onMessage: () => void }> = ({ onMessage }) => {
+export const Navbar: React.FC<{ onMessage?: () => void }> = ({ onMessage }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -25,13 +25,15 @@ export const Navbar: React.FC<{ onMessage: () => void }> = ({ onMessage }) => {
         </nav>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onMessage}
-            className="hidden sm:inline-flex items-center h-11 px-5 bg-ink hover:bg-black active:scale-[0.97] text-white font-semibold transition"
-          >
-            Message a stylist
-          </button>
+          {onMessage && (
+            <button
+              type="button"
+              onClick={onMessage}
+              className="hidden sm:inline-flex items-center h-11 px-5 bg-ink hover:bg-black active:scale-[0.97] text-white font-semibold transition"
+            >
+              Message a stylist
+            </button>
+          )}
           <button
             type="button"
             onClick={() => setOpen(!open)}
