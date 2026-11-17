@@ -9,32 +9,32 @@ interface HeroProps {
   onBook: () => void;
 }
 
+const d = (ms: number) => ({ '--delay': `${ms}ms` }) as React.CSSProperties;
+
+// Off-center editorial hero: type sits left and low, the arched photo floats right, a smaller arch
+// overlaps its corner, and a vertical line of type runs down the photo's edge.
 export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
-  <section id="top" className="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-10 lg:gap-16 items-center">
-      <div className="md:col-span-6 lg:col-span-6">
-        <p className="label" data-reveal>
-          <span className="whitespace-nowrap">Haven Lofts</span> · <span className="whitespace-nowrap">Hair Salon</span> ·{' '}
-          <span className="whitespace-nowrap">{salonInfo.city}, MN</span>
+  <section id="top" className="relative overflow-hidden pt-12 pb-28 md:pt-16 lg:pt-20 lg:pb-40">
+    <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-start">
+      <div className="lg:col-span-6 lg:pt-24 relative z-10">
+        <p className="kicker" data-reveal>
+          <span className="whitespace-nowrap">{salonInfo.city}, Minnesota</span>
         </p>
-        <h1 data-reveal style={{ '--delay': '80ms' } as React.CSSProperties} className="font-display font-semibold text-[clamp(2.75rem,6vw,5.25rem)] leading-[0.98] tracking-[-0.01em] mt-5">
-          Unhurried hair care, <em className="font-medium text-cognac">made cozy.</em>
+        <h1 data-reveal style={d(90)} className="display text-[clamp(3.25rem,6vw,5.5rem)] mt-8">
+          <em>Unhurried</em> hair,
+          <br />
+          made cozy.
         </h1>
-        <p data-reveal style={{ '--delay': '160ms' } as React.CSSProperties} className="text-lg sm:text-xl leading-relaxed text-ink-soft mt-6 max-w-xl">
-          A boho, vintage-modern salon owned by stylists {salonInfo.coFounders}. Warm wood, leather chairs, soft light
-          and a cup of coffee while you settle in.
+        <p data-reveal style={d(180)} className="text-lg sm:text-xl leading-[1.7] text-ink-soft mt-8 max-w-md">
+          A boho, vintage-modern salon owned by stylists {salonInfo.coFounders}. Warm walnut, cognac leather, soft
+          light and a cup of coffee while you settle in.
         </p>
 
-        <div data-reveal style={{ '--delay': '240ms' } as React.CSSProperties} className="flex flex-wrap items-center gap-x-7 gap-y-4 mt-9">
-          <button
-            type="button"
-            onClick={onBook}
-            data-cta
-            className="shimmer inline-flex items-center gap-4 h-14 px-8 rounded-full bg-btn text-btn-ink text-lg font-semibold active:scale-[0.97] transition"
-          >
+        <div data-reveal style={d(270)} className="flex flex-wrap items-center gap-x-8 gap-y-5 mt-11">
+          <button type="button" onClick={onBook} data-cta className="btn btn-primary text-lg">
             Book Appointment <GoldArrow className="w-9" />
           </button>
-          <a href="#services" className="text-lg font-semibold underline underline-offset-[6px] decoration-2 decoration-gold hover:text-cognac transition-colors">
+          <a href="#services" className="link-u text-lg font-semibold">
             View services
           </a>
         </div>
@@ -44,10 +44,10 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
           target="_blank"
           rel="noopener noreferrer"
           data-reveal
-          style={{ '--delay': '320ms' } as React.CSSProperties}
-          className="inline-flex items-start gap-2.5 mt-9 text-base text-ink-soft hover:text-ink transition-colors"
+          style={d(360)}
+          className="group inline-flex items-start gap-3 mt-12 text-ink-soft hover:text-ink transition-colors duration-300"
         >
-          <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" aria-hidden="true" />
+          <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5 transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden="true" />
           <span>
             {salonInfo.street}, {salonInfo.suite},{' '}
             <span className="whitespace-nowrap">
@@ -57,19 +57,37 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
         </a>
       </div>
 
-      <div className="md:col-span-6 lg:col-span-6 relative max-w-[520px] w-full mx-auto" data-reveal style={{ '--delay': '120ms' } as React.CSSProperties}>
-        <div className="double-frame arch glow">
-          <div className="double-frame-inner arch overflow-hidden">
-            <img
-              src="/salon-lounge.jpg"
-              width={1312}
-              height={1199}
-              alt="The lounge at Haven Lofts: a walnut slat wall on olive green, a woven pendant light, two cognac leather chairs and a coffee bar"
-              className="block w-full aspect-[4/5] object-cover object-[60%_50%]"
-            />
+      <div className="lg:col-span-5 lg:col-start-8 relative">
+        {/* A fine gold rule drops toward the photo, like the pendant cord in the lounge. */}
+        <span className="hidden lg:block absolute left-[22%] -top-20 h-28 w-px bg-gold/70" aria-hidden="true" />
+
+        <div className="relative max-w-[500px] mx-auto lg:mr-6 lg:ml-auto">
+          <div className="double-frame arch glow" data-reveal="image" style={d(120)}>
+            <div className="double-frame-inner arch overflow-hidden">
+              <img
+                src="/salon-lounge.jpg"
+                width={1312}
+                height={1199}
+                alt="The lounge at Haven Lofts: a walnut slat wall on olive green, a woven pendant light, two cognac leather chairs and a coffee bar"
+                className="block w-full aspect-[4/5] object-cover object-[60%_50%]"
+              />
+            </div>
           </div>
+
+          {/* The smaller arch overlapping the corner: a close-up of the slat wall and pendant. */}
+          <div className="absolute -left-3 sm:-left-14 -bottom-12 sm:-bottom-16 w-32 sm:w-44 double-frame arch bg-bg" data-reveal style={d(420)}>
+            <div className="double-frame-inner arch overflow-hidden">
+              <img src="/salon-slat-wall.jpg" alt="" loading="lazy" className="block w-full aspect-[3/4] object-cover" />
+            </div>
+          </div>
+
+          <AppointmentSeal className="absolute -right-2 sm:-right-8 top-[16%] w-24 h-24 sm:w-32 sm:h-32" />
+
+          {/* Vertical line of type along the photo's right edge (wide screens only). */}
+          <p className="hidden xl:block absolute -right-10 bottom-0 label !text-ink-soft whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
+            {salonInfo.street} · {salonInfo.suite}
+          </p>
         </div>
-        <AppointmentSeal className="absolute -left-3 sm:-left-8 bottom-10 w-28 h-28 sm:w-32 sm:h-32" />
       </div>
     </div>
   </section>

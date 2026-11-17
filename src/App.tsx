@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar onBook={() => book()} />
+      <Navbar salonInfo={salonInfo} onBook={() => book()} />
       <main className="flex-1">
         <Hero salonInfo={salonInfo} onBook={() => book()} />
         <Wave top="bg-bg" fill="text-bg-alt" />
@@ -53,7 +53,7 @@ export default function App() {
         <LocationSection salonInfo={salonInfo} />
       </main>
       <Wave top="bg-bg" fill="text-bg-alt" flip />
-      <Footer salonInfo={salonInfo} stylists={stylists} />
+      <Footer salonInfo={salonInfo} stylists={stylists} onBook={() => book()} />
       <BookDialog
         open={booking.open}
         onClose={() => setBooking((b) => ({ ...b, open: false }))}

@@ -21,16 +21,11 @@ export const MobileBottomBar: React.FC<{ onBook: () => void }> = ({ onBook }) =>
   return (
     <div
       aria-hidden={hidden}
-      className={`sm:hidden fixed bottom-0 inset-x-0 z-30 bg-bg/95 backdrop-blur-md border-t border-gold/30 px-3 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] transition-transform duration-300 ease-out motion-reduce:transition-none ${
+      className={`sm:hidden fixed bottom-0 inset-x-0 z-30 bg-bg/90 backdrop-blur-md border-t border-gold/25 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-500 ease-[var(--ease)] motion-reduce:transition-none ${
         hidden ? 'translate-y-full' : 'translate-y-0'
       }`}
     >
-      <button
-        type="button"
-        onClick={onBook}
-        tabIndex={hidden ? -1 : 0}
-        className="shimmer w-full flex items-center justify-center gap-4 h-12 rounded-full bg-btn text-btn-ink text-base font-semibold"
-      >
+      <button type="button" onClick={onBook} tabIndex={hidden ? -1 : 0} className="btn btn-primary w-full !h-12">
         Book Appointment <GoldArrow className="w-8" />
       </button>
     </div>

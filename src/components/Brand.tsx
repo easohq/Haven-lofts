@@ -57,7 +57,7 @@ export const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'w
 export const AppointmentSeal: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div className={`rounded-full bg-surface border-[1.5px] border-gold p-1.5 ${className}`}>
     <div className="rounded-full border border-gold w-full h-full flex flex-col items-center justify-center text-center">
-      <span className="label !text-[0.625rem] !tracking-[0.18em] leading-tight">
+      <span className="label !text-[0.58rem] !tracking-[0.12em] leading-tight">
         By
         <br />
         appointment

@@ -1,89 +1,96 @@
 import React from 'react';
 import { Stylist } from '../types.ts';
-import { GoldArrow, InstagramIcon, Sprig } from './Brand.tsx';
+import { GoldArrow, InstagramIcon } from './Brand.tsx';
 
 interface StylistsSectionProps {
   stylists: Stylist[];
   onBook: (stylistId: string) => void;
 }
 
+/**
+ * Arched portrait. Set `photo: '/sarah.jpg'` in salonData.ts (file in /public) and it crops into this
+ * exact double arch, weighted toward the face; until then a gold italic initial holds the space.
+ */
+const Portrait: React.FC<{ stylist: Stylist }> = ({ stylist: s }) => (
+  <div className="double-frame arch glow">
+    <div className="double-frame-inner arch overflow-hidden aspect-[3/4] bg-olive-deep">
+      {s.photo ? (
+        <img
+          src={s.photo}
+          alt={`${s.name}, owner and stylist at Haven Lofts`}
+          loading="lazy"
+          className="w-full h-full object-cover object-[50%_25%] transition-transform duration-[1200ms] ease-[var(--ease)] group-hover:scale-[1.06]"
+        />
+      ) : (
+        <div
+          className="w-full h-full flex items-center justify-center font-display italic text-[9rem] leading-none text-gold-light/80 transition-transform duration-[1200ms] ease-[var(--ease)] group-hover:scale-[1.06]"
+          aria-hidden="true"
+        >
+          {s.name[0]}
+        </div>
+      )}
+    </div>
+  </div>
+);
+
+// Two magazine spreads: Sarah's portrait left with her story beside it; Leah's mirrored and set lower.
 export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBook }) => (
-  <section id="stylists" className="bg-olive text-on-olive py-20 md:py-28 scroll-mt-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col items-center text-center">
-        <p className="label !text-gold" data-reveal>Meet the owners</p>
-        <h2 data-reveal className="font-display font-semibold text-5xl sm:text-6xl leading-[1] mt-4">
-          {stylists.map((s) => s.name).join(' & ')}
+  <section id="stylists" className="on-olive bg-olive text-on-olive pt-24 pb-32 lg:pt-32 lg:pb-44 scroll-mt-16">
+    <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="lg:ml-[41.66%]">
+        <p className="kicker" data-reveal>The owners</p>
+        <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)] mt-7">
+          {stylists[0]?.name} <em>&amp;</em> {stylists[1]?.name}
         </h2>
-        <Sprig className="w-44 text-gold mt-6" />
+        <p data-reveal className="mt-6 text-lg leading-[1.7] text-on-olive/80 max-w-lg">
+          Two longtime stylists with one shared idea: a salon that feels like coming home.
+        </p>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
-        {stylists.map((s, i) => (
-          <article
-            key={s.id}
-            data-reveal
-            style={{ '--delay': `${i * 120}ms` } as React.CSSProperties}
-            className="group double-frame bg-olive-deep glow"
-          >
-            <div className="double-frame-inner p-5 sm:p-8 lg:p-10 h-full flex flex-col sm:flex-row md:flex-col lg:flex-row gap-7">
-              {/* Arched headshot frame. Set `photo: '/sarah.jpg'` in salonData.ts (file in /public) and the portrait crops
-                  into this exact arch; until then the gold monogram holds the space. Any size works; 3:4 portrait is ideal. */}
-              <div className="double-frame arch shrink-0 w-44 sm:w-48 md:w-44 lg:w-48 self-center sm:self-start md:self-center lg:self-start">
-                <div className="double-frame-inner arch overflow-hidden aspect-[3/4] bg-olive">
-                  {s.photo ? (
-                    <img
-                      src={s.photo}
-                      alt={`${s.name}, owner and stylist at Haven Lofts`}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-[50%_25%] transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center font-display italic text-8xl text-gold/80 transition-transform duration-700 ease-out group-hover:scale-105" aria-hidden="true">
-                      {s.name[0]}
-                    </div>
-                  )}
-                </div>
+      <div className="mt-20 lg:mt-28 flex flex-col gap-24 lg:gap-36">
+        {stylists.map((s, i) => {
+          const mirrored = i % 2 === 1;
+          return (
+            <article key={s.id} className="group grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 items-center">
+              <div
+                data-reveal="image"
+                className={`md:col-span-5 lg:col-span-4 max-w-[340px] w-full ${
+                  mirrored ? 'md:order-2 md:col-start-8 lg:col-start-8 justify-self-end' : 'lg:col-start-2'
+                }`}
+              >
+                <Portrait stylist={s} />
               </div>
 
-              <div className="flex-1 flex flex-col">
-                <h3 className="font-display font-semibold text-5xl leading-none">{s.name}</h3>
-                <p className="label !text-gold mt-3">{s.role} &amp; Stylist</p>
-                <p className="mt-5 text-base sm:text-lg leading-relaxed text-on-olive/90">{s.bio}</p>
+              <div
+                data-reveal
+                style={{ '--delay': '140ms' } as React.CSSProperties}
+                className={`md:col-span-7 lg:col-span-5 ${mirrored ? 'md:order-1 lg:col-start-2' : 'lg:col-start-7'}`}
+              >
+                <p className="kicker">{s.role} &amp; stylist</p>
+                <h3 className="display text-[clamp(3.5rem,7vw,6rem)] mt-5">{s.name}</h3>
+                <p className="mt-6 text-lg leading-[1.75] text-on-olive/90 max-w-lg">{s.bio}</p>
 
-                <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${s.name}'s specialties`}>
+                <p className="label mt-8">Ask {s.name} about</p>
+                <ul className="star-list mt-3 font-display italic text-xl text-on-olive/95" aria-label={`${s.name}'s specialties`}>
                   {s.specialties.map((spec) => (
-                    <li key={spec} className="text-sm px-3 py-1.5 rounded-full border border-gold/50 text-on-olive/90">
-                      {spec}
-                    </li>
+                    <li key={spec}>{spec}</li>
                   ))}
                 </ul>
 
-                <div className="mt-8 flex flex-wrap items-center gap-4 pt-1 sm:mt-auto">
-                  <button
-                    type="button"
-                    onClick={() => onBook(s.id)}
-                    data-cta
-                    className="shimmer inline-flex items-center gap-3 h-12 px-6 rounded-full bg-gold text-[#1A1C15] font-semibold active:scale-[0.97] transition"
-                  >
-                    Book with {s.name} <GoldArrow className="w-7 !text-[#1A1C15]" />
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <button type="button" onClick={() => onBook(s.id)} data-cta className="btn btn-gold">
+                    Book with {s.name} <GoldArrow className="w-8" />
                   </button>
                   {s.instagram && (
-                    <a
-                      href={`https://instagram.com/${s.instagram}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${s.name} on Instagram`}
-                      className="glow flex items-center justify-center w-12 h-12 rounded-full border border-gold/60 text-gold hover:text-on-olive transition-colors"
-                    >
+                    <a href={`https://instagram.com/${s.instagram}`} target="_blank" rel="noopener noreferrer" aria-label={`${s.name} on Instagram`} className="icon-btn !w-14 !h-14">
                       <InstagramIcon />
                     </a>
                   )}
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>

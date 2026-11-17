@@ -1,6 +1,6 @@
 import React from 'react';
 import { SalonInfo, Stylist } from '../types.ts';
-import { InstagramIcon, Logo, Sprig } from './Brand.tsx';
+import { GoldArrow, InstagramIcon, Logo, Sprig } from './Brand.tsx';
 import { mapsUrl } from '../utils/maps.ts';
 
 const LINKS = [
@@ -9,27 +9,40 @@ const LINKS = [
   { href: '#visit', label: 'Visit' },
 ];
 
-export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[] }> = ({ salonInfo, stylists }) => {
+// An asymmetric sign-off: a large italic line on the left, the logo set apart on the right,
+// then a framed strip of details.
+export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBook: () => void }> = ({ salonInfo, stylists, onBook }) => {
   const socials = [
     salonInfo.instagram && { handle: salonInfo.instagram, label: 'Haven Lofts on Instagram' },
     ...stylists.map((s) => s.instagram && { handle: s.instagram, label: `${s.name} on Instagram` }),
   ].filter(Boolean) as { handle: string; label: string }[];
 
   return (
-    <footer className="bg-bg-alt pt-14 pb-28 md:pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="double-frame">
-          <div className="double-frame-inner px-6 sm:px-10 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start">
-            <div className="sm:col-span-2 lg:col-span-1">
-              <Logo className="w-56 h-auto" />
-            </div>
+    <footer className="bg-bg-alt pt-20 pb-28 sm:pb-14">
+      <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+          <div className="lg:col-span-7" data-reveal>
+            <p className="kicker">Until next time</p>
+            <p className="display text-[clamp(3rem,6vw,5.5rem)] mt-6">
+              Come sit <em>a while.</em>
+            </p>
+            <button type="button" onClick={onBook} data-cta className="btn btn-primary mt-9">
+              Book Appointment <GoldArrow className="w-9" />
+            </button>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9 lg:justify-self-end" data-reveal>
+            <Logo className="w-56 h-auto" />
+          </div>
+        </div>
 
+        <div className="double-frame mt-16">
+          <div className="double-frame-inner px-6 sm:px-10 py-9 grid grid-cols-1 sm:grid-cols-3 gap-9">
             <nav aria-label="Footer">
               <p className="label">Explore</p>
               <ul className="mt-4 space-y-2 text-lg">
                 {LINKS.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} className="hover:text-cognac transition-colors">{l.label}</a>
+                    <a href={l.href} className="link-u">{l.label}</a>
                   </li>
                 ))}
               </ul>
@@ -37,7 +50,7 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[] }> = (
 
             <div>
               <p className="label">Location</p>
-              <a href={mapsUrl(salonInfo)} target="_blank" rel="noopener noreferrer" className="block mt-4 text-lg leading-relaxed hover:text-cognac transition-colors">
+              <a href={mapsUrl(salonInfo)} target="_blank" rel="noopener noreferrer" className="block mt-4 text-lg leading-relaxed hover:text-cognac transition-colors duration-300">
                 {salonInfo.street}, {salonInfo.suite}
                 <br />
                 {salonInfo.city}, MN {salonInfo.zip}
@@ -52,13 +65,7 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[] }> = (
                 <ul className="mt-5 flex gap-3">
                   {socials.map((s) => (
                     <li key={s.handle}>
-                      <a
-                        href={`https://instagram.com/${s.handle}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={s.label}
-                        className="glow flex items-center justify-center w-11 h-11 rounded-full border border-gold/60 text-gold-ink hover:text-ink transition-colors"
-                      >
+                      <a href={`https://instagram.com/${s.handle}`} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="icon-btn">
                         <InstagramIcon />
                       </a>
                     </li>
@@ -69,9 +76,9 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[] }> = (
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-ink-soft">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-ink-soft text-sm">
           <p>© {new Date().getFullYear()} Haven Lofts · Lakeville, Minnesota</p>
-          <Sprig className="w-36 text-gold" />
+          <Sprig className="w-32 text-gold" />
         </div>
       </div>
     </footer>
