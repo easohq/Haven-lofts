@@ -27,9 +27,6 @@ export const LocationSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo 
             {salonInfo.city}, MN {salonInfo.zip}
           </address>
           <p className="mt-8 text-lg leading-relaxed">
-            A few minutes off I-35. Park free right outside and come up through the private entrance to the lofts.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed">
             We are by appointment only, so please message your stylist before you come by.
           </p>
           <a

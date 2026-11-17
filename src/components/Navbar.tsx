@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const LINKS = [
-  { href: '#hours', label: 'Hours' },
   { href: '#stylists', label: 'Stylists' },
-  { href: '#suites', label: 'The suites' },
   { href: '#visit', label: 'Visit' },
 ];
 

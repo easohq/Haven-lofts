@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { Stylist } from '../types.ts';
-import { shortHours, smsHref, statusToday } from '../utils/hours.ts';
+import { smsHref } from '../utils/sms.ts';
 
 interface MessageDialogProps {
   open: boolean;
@@ -38,15 +38,9 @@ export const MessageDialog: React.FC<MessageDialogProps> = ({ open, onClose, sty
         <p className="mt-3 text-base text-muted">Choose your stylist. We'll start the text for you.</p>
 
         <ul className="mt-6 flex flex-col gap-3">
-          {stylists.map((s) => {
-            const { today } = statusToday(s);
-            const todayLabel = !today || today.isClosed ? 'Off today' : `Today ${shortHours(today.hours)}`;
-            return (
+          {stylists.map((s) => (
               <li key={s.id} className="bg-stone p-4 sm:p-5">
-                <div className="flex items-baseline justify-between gap-3">
-                  <p className="font-display font-semibold text-3xl">{s.name}</p>
-                  <p className="text-sm text-muted">{todayLabel}</p>
-                </div>
+                <p className="font-display font-semibold text-3xl">{s.name}</p>
                 <div className="grid grid-cols-[1fr_auto] gap-2 mt-3">
                   <a href={smsHref(s)} className="flex items-center justify-center h-12 bg-ink hover:bg-black text-white font-semibold transition-colors">
                     Message {s.name}
@@ -56,8 +50,7 @@ export const MessageDialog: React.FC<MessageDialogProps> = ({ open, onClose, sty
                   </a>
                 </div>
               </li>
-            );
-          })}
+          ))}
         </ul>
       </div>
     </dialog>
