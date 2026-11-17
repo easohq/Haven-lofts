@@ -1,12 +1,16 @@
 import React from 'react';
 import { Service } from '../types.ts';
 import { GoldArrow } from './Brand.tsx';
+import { Ivy, Pendant, SlatWall } from './Decor.tsx';
 
 // Editorial menu: a header weighted to the left with its intro pushed to the far right, then a
 // two-column list whose right column hangs lower, like a magazine spread.
 export const Services: React.FC<{ services: Service[]; onBook: () => void }> = ({ services, onBook }) => (
-  <section id="services" className="bg-bg-alt pt-32 pb-28 lg:pt-44 lg:pb-32 scroll-mt-16">
-    <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+  <section id="services" className="relative overflow-hidden bg-bg-alt pt-32 pb-28 lg:pt-44 lg:pb-32 scroll-mt-16">
+    <SlatWall className="top-0 right-0 h-[55%] w-full lg:w-1/2" />
+    <Pendant cord={70} className="hidden md:block right-[12%] w-28 lg:w-32" />
+    <Ivy length={2} flip className="right-[4%]" delay={0.8} />
+    <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-8 items-end">
         <div className="lg:col-span-7">
           <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)]">
@@ -38,9 +42,9 @@ export const Services: React.FC<{ services: Service[]; onBook: () => void }> = (
         ))}
       </ul>
 
-      <div className="mt-28 lg:mt-40 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10" data-reveal>
+      <div className="mt-28 lg:mt-40 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10" data-reveal>
         <p className="display text-3xl sm:text-4xl max-w-md">Not sure where to start? We'll talk it through.</p>
-        <button type="button" onClick={onBook} data-cta className="btn btn-primary text-lg shrink-0 self-start sm:self-auto">
+        <button type="button" onClick={onBook} data-cta className="btn btn-primary text-lg shrink-0 self-start lg:self-auto">
           Book Appointment <GoldArrow className="w-9" />
         </button>
       </div>

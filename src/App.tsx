@@ -46,7 +46,7 @@ export default function App() {
       <main className="flex-1">
         <Hero salonInfo={salonInfo} onBook={() => book()} />
         <Services services={SERVICES} onBook={() => book()} />
-        <SpaceSection salonInfo={salonInfo} />
+        <SpaceSection salonInfo={salonInfo} onBook={() => book()} />
         <StylistsSection stylists={stylists} onBook={book} />
         <LocationSection salonInfo={salonInfo} />
       </main>

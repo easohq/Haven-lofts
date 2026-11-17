@@ -2,10 +2,12 @@ import React from 'react';
 import { SalonInfo, Stylist } from '../types.ts';
 import { GoldArrow, InstagramIcon, Logo } from './Brand.tsx';
 import { mapsUrl } from '../utils/maps.ts';
+import { Ivy } from './Decor.tsx';
 
 const LINKS = [
   { href: '#services', label: 'Services' },
   { href: '#space', label: 'Space' },
+  { href: '#spray-tan', label: 'Spray tan' },
   { href: '#stylists', label: 'Stylists' },
   { href: '#visit', label: 'Visit' },
 ];
@@ -19,8 +21,9 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
   ].filter(Boolean) as { handle: string; label: string }[];
 
   return (
-    <footer className="bg-bg-alt pt-32 pb-28 sm:pb-14">
-      <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+    <footer className="relative overflow-hidden bg-bg-alt pt-32 pb-28 sm:pb-14">
+      <Ivy length={2} className="left-[45%] hidden lg:block" delay={1.1} />
+      <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7" data-reveal>
             <h2 className="display text-[clamp(3rem,6vw,5.5rem)]">Come sit a while.</h2>

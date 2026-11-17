@@ -2,12 +2,14 @@ import React from 'react';
 import { MapPin, Navigation, Phone, MessageSquare } from 'lucide-react';
 import { SalonInfo } from '../types.ts';
 import { AppointmentSeal } from './Brand.tsx';
+import { Pendant } from './Decor.tsx';
 import { directionsUrl, mapEmbedUrl, mapsUrl } from '../utils/maps.ts';
 
 // Layered: a wide framed map on the right, with the address card laid over its left edge.
 export const LocationSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo }) => (
-  <section id="visit" className="pt-32 pb-32 lg:pt-44 lg:pb-44 scroll-mt-16">
-    <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+  <section id="visit" className="relative overflow-hidden pt-32 pb-32 lg:pt-44 lg:pb-44 scroll-mt-16">
+    <Pendant cord={90} className="hidden md:block right-[10%] w-28 lg:w-32" />
+    <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
       <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)]">
         Visit the lofts
       </h2>
@@ -57,7 +59,7 @@ export const LocationSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo 
               </p>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-end gap-3">
               <a href={directionsUrl(salonInfo)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 <Navigation className="w-5 h-5" aria-hidden="true" /> Get directions
               </a>

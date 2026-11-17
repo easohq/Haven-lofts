@@ -93,6 +93,11 @@ export const SERVICES: Service[] = [
     description: 'Shine-boosting glosses and deep conditioning treatments to bring hair back to life.',
     price: '',
   },
+  {
+    name: 'Spray Tans',
+    description: 'An even, natural-looking tan in Sarah or Leah’s own private spray tan tent.',
+    price: '',
+  },
 ];
 
 export const INITIAL_LOFT_SPACES: LoftSpace[] = [

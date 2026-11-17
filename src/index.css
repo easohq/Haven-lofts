@@ -20,6 +20,18 @@
   --btn-ink: #F6EFE4;
   --btn-arrow: #B8893B;
   --shadow: 74 52 30;
+  /* Decor: the salon's own materials. */
+  --glow: #E9B45F;
+  --glow-rgb: 233 180 95;
+  --leaf: #6B7A55;
+  --leaf-light: #8A9870;
+  --leaf-dark: #4F5638;
+  --bloom: #FBF7F0;
+  --rattan: #D9B27A;
+  --rattan-dark: #9C7440;
+  --walnut: #7A5134;
+  --walnut-light: #946543;
+  --candle: #F3ECDF;
   --logo-dark: block;
   --logo-light: none;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -43,6 +55,17 @@
   --btn-ink: #1A1C15;
   --btn-arrow: #1A1C15;
   --shadow: 0 0 0;
+  --glow: #F4C77D;
+  --glow-rgb: 244 199 125;
+  --leaf: #55623F;
+  --leaf-light: #6E7D52;
+  --leaf-dark: #3B4230;
+  --bloom: #D9CFB8;
+  --rattan: #C99A5B;
+  --rattan-dark: #7C5528;
+  --walnut: #4A3020;
+  --walnut-light: #5C3C27;
+  --candle: #E8DFCB;
   --logo-dark: none;
   --logo-light: block;
   color-scheme: dark;
@@ -194,7 +217,81 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
 .btn-primary .arrow { color: var(--btn-arrow); }
 .btn-gold .arrow { color: #1A1C15; }
 
+/* ---------- Decor: the salon's light and greenery ---------- */
+
+/* Backlit arch, like the salon's mirrors: a thin warm rim and the light spilling past it. */
+.arch-glow { position: relative; isolation: isolate; }
+.arch-glow::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  border-radius: 999px 999px 0 0;
+  background: var(--glow);
+  box-shadow: 0 0 22px 4px rgb(var(--glow-rgb) / 0.55), 0 0 70px 10px rgb(var(--glow-rgb) / 0.22);
+}
+:root:not([data-theme='dark']) .arch-glow::before { box-shadow: 0 0 18px 2px rgb(var(--glow-rgb) / 0.45); }
+
+/* The pool of light under a rattan pendant. */
+.pendant-light {
+  top: 62%;
+  width: 340%;
+  aspect-ratio: 1;
+  background: radial-gradient(closest-side, rgb(var(--glow-rgb) / 0.32), rgb(var(--glow-rgb) / 0.1) 45%, transparent);
+  z-index: 0;
+}
+.bulb { filter: drop-shadow(0 0 8px var(--glow)); }
+
+/* Slat wall: lit from above, fading out at the edges into the room. */
+.slat-wall { opacity: 0.55; mask-image: radial-gradient(ellipse 70% 80% at 60% 30%, #000 30%, transparent 80%); }
+[data-theme='dark'] .slat-wall { opacity: 0.8; }
+
+/* Neon script sign, like the spray tan room's. */
+.neon {
+  font-family: 'Sacramento', cursive;
+  font-weight: 400;
+  line-height: 1;
+  color: #FFF4DE;
+  text-shadow:
+    0 0 2px #FFF4DE,
+    0 0 10px rgb(var(--glow-rgb) / 0.9),
+    0 0 26px rgb(var(--glow-rgb) / 0.75),
+    0 0 60px rgb(var(--glow-rgb) / 0.5);
+}
+
 /* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Ivy and pendants sway as if a door just opened. */
+  .sway { transform-origin: 50% 0; animation: sway 7s ease-in-out var(--sway-delay, 0s) infinite alternate; }
+  .sway-slow { transform-origin: 50% 0; animation: sway-small 9s ease-in-out infinite alternate; }
+  .flame { transform-origin: 50% 100%; animation: flicker 2.4s ease-in-out infinite; }
+  .flame-halo { transform-origin: 50% 50%; animation: halo 2.4s ease-in-out infinite; }
+  .pendant-light { animation: breathe 6s ease-in-out infinite alternate; }
+  .arch-glow::before { animation: arch-breathe 6s ease-in-out infinite alternate; }
+  /* The signature moment: the neon sign buzzes on when it scrolls into view. */
+  .js .neon { opacity: 0.12; }
+  .js .is-in .neon, .js .neon.is-in { animation: neon-on 1.6s steps(1, end) forwards; }
+}
+@keyframes sway { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
+@keyframes sway-small { from { transform: rotate(-0.9deg); } to { transform: rotate(0.9deg); } }
+@keyframes flicker {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); opacity: 1; }
+  25% { transform: scale(0.94, 1.06) skewX(2deg); opacity: 0.92; }
+  50% { transform: scale(1.04, 0.95) skewX(-2deg); }
+  75% { transform: scale(0.97, 1.03) skewX(1deg); opacity: 0.96; }
+}
+@keyframes halo { 0%, 100% { opacity: 0.18; transform: scale(1); } 50% { opacity: 0.26; transform: scale(1.1); } }
+@keyframes breathe { from { opacity: 0.8; } to { opacity: 1; } }
+@keyframes arch-breathe { from { opacity: 0.85; } to { opacity: 1; } }
+@keyframes neon-on {
+  0% { opacity: 0.12; }
+  12% { opacity: 1; }
+  18% { opacity: 0.2; }
+  30% { opacity: 1; }
+  36% { opacity: 0.35; }
+  44%, 100% { opacity: 1; }
+}
 
 /* Scroll reveal: visible by default; only hidden once the script has marked the page (`js`). */
 .js [data-reveal] {

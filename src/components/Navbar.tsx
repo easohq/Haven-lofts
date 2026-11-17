@@ -9,6 +9,7 @@ import { mapsUrl } from '../utils/maps.ts';
 const LINKS = [
   { href: '#services', label: 'Services' },
   { href: '#space', label: 'Space' },
+  { href: '#spray-tan', label: 'Spray tan' },
   { href: '#stylists', label: 'Stylists' },
   { href: '#visit', label: 'Visit' },
 ];
@@ -43,7 +44,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
           <Logo alt="" className="h-14 sm:h-[60px] w-auto -my-1" />
         </a>
 
-        <nav aria-label="Main" className="hidden md:flex items-center gap-10 ml-auto mr-4">
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-10 ml-auto mr-4">
           {LINKS.map((l) => (
             <a key={l.href} href={l.href} onClick={(e) => goTo(e)} className="font-semibold text-ink-soft hover:text-ink transition-colors duration-300">
               {l.label}
@@ -56,7 +57,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
           <button type="button" onClick={onBook} className="btn btn-primary btn-sm hidden sm:inline-flex">
             Book Appointment
           </button>
-          <button type="button" onClick={() => setOpen(true)} aria-label="Open menu" aria-haspopup="dialog" className="icon-btn md:hidden">
+          <button type="button" onClick={() => setOpen(true)} aria-label="Open menu" aria-haspopup="dialog" className="icon-btn lg:hidden">
             <Menu className="w-5 h-5" />
           </button>
         </div>
