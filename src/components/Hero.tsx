@@ -1,6 +1,6 @@
 import React from 'react';
 import { SalonInfo } from '../types.ts';
-import { GoldArrow, Wallpaper } from './Brand.tsx';
+import { GoldArrow } from './Brand.tsx';
 
 interface HeroProps {
   salonInfo: SalonInfo;
@@ -32,9 +32,15 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onMessage }) => (
         </div>
       </div>
 
-      <div className="lg:col-span-6 border-2 border-gold p-2">
-        <Wallpaper className="block w-full h-full min-h-[320px] lg:min-h-[600px]" />
-      </div>
+      <figure className="lg:col-span-6 border-2 border-gold p-2">
+        <img
+          src="/salon-lounge.jpg"
+          width={1312}
+          height={1199}
+          alt="The lounge corner at Haven Lofts: a walnut slat wall on olive green, a woven pendant light, two leather chairs and a coffee bar"
+          className="block w-full h-full object-cover"
+        />
+      </figure>
     </div>
   </section>
 );

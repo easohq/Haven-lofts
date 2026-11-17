@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* Brand colors from the Haven Lofts poster and the salon itself: white, black, olive green, gold. */
+/* Brand colors from the Haven Lofts poster and the salon lounge: white, black, olive wall green, gold. */
 @theme {
   --color-paper: #FBFAF7;
   --color-stone: #F0EDE6;
   --color-ink: #141414;
   --color-muted: #55534E;
-  --color-green: #5A5E36;
-  --color-green-deep: #45482A;
+  --color-green: #565C45;
+  --color-green-deep: #40442F;
   --color-on-dark: #F4F2EC;
   --color-gold: #C29A45;
   --color-gold-text: #8A6526;
