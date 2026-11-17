@@ -13,6 +13,7 @@ export const INITIAL_SALON_INFO: SalonInfo = {
   phoneRaw: '',
   instagram: '',
   parking: '',
+  suitePhoto: '',
 };
 
 // Contact details stay empty until the real ones are known; each button appears once its field is filled:

@@ -8,6 +8,7 @@ import { Navbar } from './components/Navbar.tsx';
 import { Hero } from './components/Hero.tsx';
 import { Services } from './components/Services.tsx';
 import { StylistsSection } from './components/StylistsSection.tsx';
+import { SpaceSection } from './components/SpaceSection.tsx';
 import { LocationSection } from './components/LocationSection.tsx';
 import { Footer } from './components/Footer.tsx';
 import { BookDialog } from './components/BookDialog.tsx';
@@ -47,7 +48,9 @@ export default function App() {
         <Hero salonInfo={salonInfo} onBook={() => book()} />
         <Wave top="bg-bg" fill="text-bg-alt" />
         <Services services={SERVICES} onBook={() => book()} />
-        <Wave top="bg-bg-alt" fill="text-olive" flip />
+        <Wave top="bg-bg-alt" fill="text-surface" flip />
+        <SpaceSection salonInfo={salonInfo} />
+        <Wave top="bg-surface" fill="text-olive" />
         <StylistsSection stylists={stylists} onBook={book} />
         <Wave top="bg-olive" fill="text-bg" />
         <LocationSection salonInfo={salonInfo} />

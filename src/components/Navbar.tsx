@@ -8,6 +8,7 @@ import { mapsUrl } from '../utils/maps.ts';
 
 const LINKS = [
   { href: '#services', label: 'Services', note: 'The craft' },
+  { href: '#space', label: 'Space', note: 'Inside the lofts' },
   { href: '#stylists', label: 'Stylists', note: 'Sarah & Leah' },
   { href: '#visit', label: 'Visit', note: 'Find the lofts' },
 ];

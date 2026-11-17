@@ -5,6 +5,7 @@ import { mapsUrl } from '../utils/maps.ts';
 
 const LINKS = [
   { href: '#services', label: 'Services' },
+  { href: '#space', label: 'Space' },
   { href: '#stylists', label: 'Stylists' },
   { href: '#visit', label: 'Visit' },
 ];

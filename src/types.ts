@@ -58,4 +58,6 @@ export interface SalonInfo {
   instagram: string;
   /** Parking or arrival note for the Visit section. Empty hides it. */
   parking: string;
+  /** Full-size photo of a styling suite in /public, e.g. '/suite.jpg'. Empty shows the line drawing. */
+  suitePhoto: string;
 }
