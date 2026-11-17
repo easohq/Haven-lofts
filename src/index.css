@@ -141,6 +141,7 @@
 }
 .kicker.rule-end { flex-direction: row-reverse; }
 .on-olive .kicker { color: var(--gold-light); }
+.on-olive .label { color: var(--gold-light); }
 
 /* Small tracked label without the rule. */
 .label {
