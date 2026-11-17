@@ -1,30 +1,87 @@
 import React from 'react';
-import { SalonInfo } from '../types.ts';
-import { GoldArrow } from './Brand.tsx';
+import { SalonInfo, Stylist } from '../types.ts';
+import { GoldArrow, InstagramIcon, Logo, Sprig } from './Brand.tsx';
+import { mapsUrl } from '../utils/maps.ts';
 
-// The close is the poster: gold frame, logo, "By appointment only", the arrow.
-export const Footer: React.FC<{ salonInfo: SalonInfo; onMessage?: () => void }> = ({ salonInfo, onMessage }) => (
-  <footer className={`bg-paper pt-8 ${onMessage ? 'pb-28' : 'pb-16'} md:pb-16`}>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="border-2 border-gold px-6 py-14 sm:py-20 flex flex-col items-center text-center">
-        <img src="/haven-lofts-logo.png" alt="Haven Lofts" className="w-full max-w-[440px] h-auto" />
-        <p className="caps text-xl sm:text-3xl mt-8">By appointment only</p>
-        {onMessage && (
-          <button
-            type="button"
-            onClick={onMessage}
-            className="inline-flex items-center gap-4 h-14 px-8 mt-10 bg-ink hover:bg-black active:scale-[0.97] text-white text-lg font-semibold transition"
-          >
-            Message a stylist <GoldArrow className="w-9" />
-          </button>
-        )}
-        <address className="not-italic mt-12 text-lg leading-relaxed">
-          {salonInfo.street}, {salonInfo.suite}
-          <br />
-          {salonInfo.city}, MN {salonInfo.zip}
-        </address>
+const LINKS = [
+  { href: '#services', label: 'Services' },
+  { href: '#space', label: 'Space' },
+  { href: '#stylists', label: 'Stylists' },
+  { href: '#visit', label: 'Visit' },
+];
+
+// An asymmetric sign-off: a large italic line on the left, the logo set apart on the right,
+// then a framed strip of details.
+export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBook: () => void }> = ({ salonInfo, stylists, onBook }) => {
+  const socials = [
+    salonInfo.instagram && { handle: salonInfo.instagram, label: 'Haven Lofts on Instagram' },
+    ...stylists.map((s) => s.instagram && { handle: s.instagram, label: `${s.name} on Instagram` }),
+  ].filter(Boolean) as { handle: string; label: string }[];
+
+  return (
+    <footer className="bg-bg-alt pt-20 pb-28 sm:pb-14">
+      <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+          <div className="lg:col-span-7" data-reveal>
+            <p className="kicker">Until next time</p>
+            <p className="display text-[clamp(3rem,6vw,5.5rem)] mt-6">
+              Come sit <em>a while.</em>
+            </p>
+            <button type="button" onClick={onBook} data-cta className="btn btn-primary mt-9">
+              Book Appointment <GoldArrow className="w-9" />
+            </button>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9 lg:justify-self-end" data-reveal>
+            <Logo className="w-56 h-auto" />
+          </div>
+        </div>
+
+        <div className="double-frame mt-16">
+          <div className="double-frame-inner px-6 sm:px-10 py-9 grid grid-cols-1 sm:grid-cols-3 gap-9">
+            <nav aria-label="Footer">
+              <p className="label">Explore</p>
+              <ul className="mt-4 space-y-2 text-lg">
+                {LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="link-u">{l.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div>
+              <p className="label">Location</p>
+              <a href={mapsUrl(salonInfo)} target="_blank" rel="noopener noreferrer" className="block mt-4 text-lg leading-relaxed hover:text-cognac transition-colors duration-300">
+                {salonInfo.street}, {salonInfo.suite}
+                <br />
+                {salonInfo.city}, MN {salonInfo.zip}
+              </a>
+            </div>
+
+            <div>
+              <p className="label">Owners</p>
+              <p className="mt-4 text-lg">{salonInfo.coFounders}</p>
+              <p className="text-ink-soft">By appointment only</p>
+              {socials.length > 0 && (
+                <ul className="mt-5 flex gap-3">
+                  {socials.map((s) => (
+                    <li key={s.handle}>
+                      <a href={`https://instagram.com/${s.handle}`} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="icon-btn">
+                        <InstagramIcon />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-ink-soft text-sm">
+          <p>© {new Date().getFullYear()} Haven Lofts · Lakeville, Minnesota</p>
+          <Sprig className="w-32 text-gold" />
+        </div>
       </div>
-      <p className="mt-8 text-muted">© {new Date().getFullYear()} Haven Lofts, Lakeville, Minnesota</p>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};

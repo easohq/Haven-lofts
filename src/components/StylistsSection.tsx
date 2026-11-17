@@ -1,34 +1,96 @@
 import React from 'react';
 import { Stylist } from '../types.ts';
-import { smsHref } from '../utils/sms.ts';
-import { GoldArrow } from './Brand.tsx';
+import { GoldArrow, InstagramIcon } from './Brand.tsx';
 
-export const StylistsSection: React.FC<{ stylists: Stylist[] }> = ({ stylists }) => (
-  <section id="stylists" className="bg-green text-on-dark py-24 md:py-32 scroll-mt-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
-      <div className="lg:col-span-7">
-        <h2 className="caps text-xl sm:text-2xl">Your stylists</h2>
+interface StylistsSectionProps {
+  stylists: Stylist[];
+  onBook: (stylistId: string) => void;
+}
 
-        <div className="mt-10 md:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10">
-          {stylists.map((s) => (
-            <article key={s.id}>
-              <h3 className="font-display font-semibold text-[clamp(4.5rem,8vw,7rem)] leading-[0.9]">{s.name}</h3>
-              <p className="mt-4 text-lg text-on-dark/85">{s.role}</p>
-              {s.phoneRaw && (
-                <a
-                  href={smsHref(s)}
-                  className="inline-flex items-center gap-4 h-14 px-7 mt-8 bg-paper hover:bg-white active:scale-[0.97] text-ink text-lg font-semibold transition"
-                >
-                  Message {s.name} <GoldArrow className="w-8" />
-                </a>
-              )}
-            </article>
-          ))}
+/**
+ * Arched portrait. Set `photo: '/sarah.jpg'` in salonData.ts (file in /public) and it crops into this
+ * exact double arch, weighted toward the face; until then a gold italic initial holds the space.
+ */
+const Portrait: React.FC<{ stylist: Stylist }> = ({ stylist: s }) => (
+  <div className="double-frame arch glow">
+    <div className="double-frame-inner arch overflow-hidden aspect-[3/4] bg-olive-deep">
+      {s.photo ? (
+        <img
+          src={s.photo}
+          alt={`${s.name}, owner and stylist at Haven Lofts`}
+          loading="lazy"
+          className="w-full h-full object-cover object-[50%_25%] transition-transform duration-[1200ms] ease-[var(--ease)] group-hover:scale-[1.06]"
+        />
+      ) : (
+        <div
+          className="w-full h-full flex items-center justify-center font-display italic text-[9rem] leading-none text-gold-light/80 transition-transform duration-[1200ms] ease-[var(--ease)] group-hover:scale-[1.06]"
+          aria-hidden="true"
+        >
+          {s.name[0]}
         </div>
+      )}
+    </div>
+  </div>
+);
+
+// Two magazine spreads: Sarah's portrait left with her story beside it; Leah's mirrored and set lower.
+export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBook }) => (
+  <section id="stylists" className="on-olive bg-olive text-on-olive pt-24 pb-32 lg:pt-32 lg:pb-44 scroll-mt-16">
+    <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="lg:ml-[41.66%]">
+        <p className="kicker" data-reveal>The owners</p>
+        <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)] mt-7">
+          {stylists[0]?.name} <em>&amp;</em> {stylists[1]?.name}
+        </h2>
+        <p data-reveal className="mt-6 text-lg leading-[1.7] text-on-olive/80 max-w-lg">
+          Two longtime stylists with one shared idea: a salon that feels like coming home.
+        </p>
       </div>
 
-      <div className="hidden lg:block lg:col-span-5 border-2 border-gold p-2">
-        <img src="/salon-slat-wall.jpg" alt="" loading="lazy" className="block w-full h-[480px] object-cover" />
+      <div className="mt-20 lg:mt-28 flex flex-col gap-24 lg:gap-36">
+        {stylists.map((s, i) => {
+          const mirrored = i % 2 === 1;
+          return (
+            <article key={s.id} className="group grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 items-center">
+              <div
+                data-reveal="image"
+                className={`md:col-span-5 lg:col-span-4 max-w-[340px] w-full ${
+                  mirrored ? 'md:order-2 md:col-start-8 lg:col-start-8 justify-self-end' : 'lg:col-start-2'
+                }`}
+              >
+                <Portrait stylist={s} />
+              </div>
+
+              <div
+                data-reveal
+                style={{ '--delay': '140ms' } as React.CSSProperties}
+                className={`md:col-span-7 lg:col-span-5 ${mirrored ? 'md:order-1 lg:col-start-2' : 'lg:col-start-7'}`}
+              >
+                <p className="kicker">{s.role} &amp; stylist</p>
+                <h3 className="display text-[clamp(3.5rem,7vw,6rem)] mt-5">{s.name}</h3>
+                <p className="mt-6 text-lg leading-[1.75] text-on-olive/90 max-w-lg">{s.bio}</p>
+
+                <p className="label mt-8">Ask {s.name} about</p>
+                <ul className="star-list mt-3 font-display italic text-xl text-on-olive/95" aria-label={`${s.name}'s specialties`}>
+                  {s.specialties.map((spec) => (
+                    <li key={spec}>{spec}</li>
+                  ))}
+                </ul>
+
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <button type="button" onClick={() => onBook(s.id)} data-cta className="btn btn-gold">
+                    Book with {s.name} <GoldArrow className="w-8" />
+                  </button>
+                  {s.instagram && (
+                    <a href={`https://instagram.com/${s.instagram}`} target="_blank" rel="noopener noreferrer" aria-label={`${s.name} on Instagram`} className="icon-btn !w-14 !h-14">
+                      <InstagramIcon />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
