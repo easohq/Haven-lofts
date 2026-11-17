@@ -8,19 +8,21 @@ export const INITIAL_SALON_INFO: SalonInfo = {
   zip: '55044',
   street: '17685 Juniper Path',
   suite: 'Suite 204',
-  coFounders: 'Sara & Leah',
-  phone: '(952) 892-4110',
-  phoneRaw: '9528924110',
+  coFounders: 'Sarah & Leah',
+  phone: '',
+  phoneRaw: '',
 };
 
+// Phone numbers are left empty until the real ones are known. Filling in phoneRaw
+// (10 digits) brings back the Message and Call buttons for that stylist.
 export const INITIAL_STYLISTS: Stylist[] = [
   {
     id: 'sara',
-    name: 'Sara',
-    role: 'Co-Creator & Hair Stylist',
-    phone: '(952) 356-8214',
-    phoneRaw: '9523568214',
-    bio: 'Sara has been doing hair in the south metro for over 20 years. She loves easy-to-manage lived-in cuts, soft dimensional color, and catching up with her clients in a relaxed, comfortable chair. No rushing, no pressure—just good honest hair care.',
+    name: 'Sarah',
+    role: 'Owner',
+    phone: '',
+    phoneRaw: '',
+    bio: 'Sarah has been doing hair in the south metro for over 20 years. She loves easy-to-manage lived-in cuts, soft dimensional color, and catching up with her clients in a relaxed, comfortable chair. No rushing, no pressure—just good honest hair care.',
     specialties: ['Lived-In Cuts & Layers', 'Dimensional Color & Highlights', 'Easy Low-Maintenance Styles', 'Blowouts & Styling'],
     imageKey: 'stylist_sarah',
     schedule: [
@@ -36,9 +38,9 @@ export const INITIAL_STYLISTS: Stylist[] = [
   {
     id: 'leah',
     name: 'Leah',
-    role: 'Co-Creator & Hair Stylist',
-    phone: '(952) 356-8215',
-    phoneRaw: '9523568215',
+    role: 'Owner',
+    phone: '',
+    phoneRaw: '',
     bio: 'With over two decades behind the chair, Leah is known for her friendly, down-to-earth approach and great listening ear. She specializes in natural gray blending, soft dimensional blonding, and precision cuts that look great every morning without fuss.',
     specialties: ['Custom Blonding & Foiling', 'Gray Coverage & Blending', 'Textured Bobs & Soft Shags', 'Deep Conditioning Treatments'],
     imageKey: 'stylist_leah',
