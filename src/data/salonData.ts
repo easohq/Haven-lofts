@@ -15,8 +15,12 @@ export const INITIAL_SALON_INFO: SalonInfo = {
   parking: '',
 };
 
-// Phone numbers are left empty until the real ones are known. Filling in phoneRaw
-// (10 digits) brings back the Message and Call buttons for that stylist.
+// Contact details stay empty until the real ones are known; each button appears once its field is filled:
+//   phone / phoneRaw  '(952) 555-0100' / '9525550100'  -> Call, Text and Copy number
+//   bookingUrl        'https://...'                    -> Book online (GlossGenius, Vagaro, Square...)
+//   email             'sarah@example.com'              -> Email
+//   instagram         'handle' (no @)                  -> Instagram
+//   photo             '/sarah.jpg' (file in /public)   -> replaces the monogram inside the arched frame
 export const INITIAL_STYLISTS: Stylist[] = [
   {
     id: 'sara',
@@ -29,6 +33,8 @@ export const INITIAL_STYLISTS: Stylist[] = [
     imageKey: 'stylist_sarah',
     photo: '',
     instagram: '',
+    bookingUrl: '',
+    email: '',
     schedule: [
       { day: 'Monday', shortDay: 'Mon', hours: 'Closed / By Special Request', isClosed: true },
       { day: 'Tuesday', shortDay: 'Tue', hours: '9:00 AM – 6:00 PM' },
@@ -50,6 +56,8 @@ export const INITIAL_STYLISTS: Stylist[] = [
     imageKey: 'stylist_leah',
     photo: '',
     instagram: '',
+    bookingUrl: '',
+    email: '',
     schedule: [
       { day: 'Monday', shortDay: 'Mon', hours: '10:00 AM – 6:00 PM' },
       { day: 'Tuesday', shortDay: 'Tue', hours: '9:00 AM – 7:00 PM' },

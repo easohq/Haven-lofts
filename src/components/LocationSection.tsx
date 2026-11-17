@@ -23,7 +23,7 @@ export const LocationSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo 
           <iframe
             title={`Map of Haven Lofts at ${salonInfo.street}, ${salonInfo.city}`}
             src={mapEmbedUrl(salonInfo)}
-            className="absolute inset-0 w-full h-full border-0"
+            className="map-embed absolute inset-0 w-full h-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen

@@ -27,7 +27,8 @@ export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBo
             className="group double-frame bg-olive-deep glow"
           >
             <div className="double-frame-inner p-5 sm:p-8 lg:p-10 h-full flex flex-col sm:flex-row md:flex-col lg:flex-row gap-7">
-              {/* Arched headshot frame; a monogram holds the space until a photo is added. */}
+              {/* Arched headshot frame. Set `photo: '/sarah.jpg'` in salonData.ts (file in /public) and the portrait crops
+                  into this exact arch; until then the gold monogram holds the space. Any size works; 3:4 portrait is ideal. */}
               <div className="double-frame arch shrink-0 w-44 sm:w-48 md:w-44 lg:w-48 self-center sm:self-start md:self-center lg:self-start">
                 <div className="double-frame-inner arch overflow-hidden aspect-[3/4] bg-olive">
                   {s.photo ? (
@@ -35,7 +36,7 @@ export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBo
                       src={s.photo}
                       alt={`${s.name}, owner and stylist at Haven Lofts`}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="w-full h-full object-cover object-[50%_25%] transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center font-display italic text-8xl text-gold/80 transition-transform duration-700 ease-out group-hover:scale-105" aria-hidden="true">
@@ -62,6 +63,7 @@ export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBo
                   <button
                     type="button"
                     onClick={() => onBook(s.id)}
+                    data-cta
                     className="shimmer inline-flex items-center gap-3 h-12 px-6 rounded-full bg-gold text-[#1A1C15] font-semibold active:scale-[0.97] transition"
                   >
                     Book with {s.name} <GoldArrow className="w-7 !text-[#1A1C15]" />

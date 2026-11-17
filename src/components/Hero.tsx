@@ -13,7 +13,10 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
   <section id="top" className="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-10 lg:gap-16 items-center">
       <div className="md:col-span-6 lg:col-span-6">
-        <p className="label" data-reveal>Haven Lofts · Hair Salon · Lakeville, MN</p>
+        <p className="label" data-reveal>
+          <span className="whitespace-nowrap">Haven Lofts</span> · <span className="whitespace-nowrap">Hair Salon</span> ·{' '}
+          <span className="whitespace-nowrap">{salonInfo.city}, MN</span>
+        </p>
         <h1 data-reveal style={{ '--delay': '80ms' } as React.CSSProperties} className="font-display font-semibold text-[clamp(2.75rem,6vw,5.25rem)] leading-[0.98] tracking-[-0.01em] mt-5">
           Unhurried hair care, <em className="font-medium text-cognac">made cozy.</em>
         </h1>
@@ -26,6 +29,7 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
           <button
             type="button"
             onClick={onBook}
+            data-cta
             className="shimmer inline-flex items-center gap-4 h-14 px-8 rounded-full bg-btn text-btn-ink text-lg font-semibold active:scale-[0.97] transition"
           >
             Book Appointment <GoldArrow className="w-9" />
@@ -45,7 +49,10 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
         >
           <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" aria-hidden="true" />
           <span>
-            {salonInfo.street}, {salonInfo.suite}, {salonInfo.city}, MN {salonInfo.zip}
+            {salonInfo.street}, {salonInfo.suite},{' '}
+            <span className="whitespace-nowrap">
+              {salonInfo.city}, MN {salonInfo.zip}
+            </span>
           </span>
         </a>
       </div>

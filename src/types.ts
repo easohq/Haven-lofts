@@ -19,6 +19,10 @@ export interface Stylist {
   photo: string;
   /** Instagram handle without the @. Empty hides the link. */
   instagram: string;
+  /** Online booking page (GlossGenius, Vagaro, Square...). Empty hides the button. */
+  bookingUrl: string;
+  /** Email for booking questions. Empty hides the button. */
+  email: string;
 }
 
 export interface Service {

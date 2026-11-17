@@ -21,7 +21,7 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[] }> = (
         <div className="double-frame">
           <div className="double-frame-inner px-6 sm:px-10 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start">
             <div className="sm:col-span-2 lg:col-span-1">
-              <Logo className="w-48 h-auto" />
+              <Logo className="w-56 h-auto" />
             </div>
 
             <nav aria-label="Footer">

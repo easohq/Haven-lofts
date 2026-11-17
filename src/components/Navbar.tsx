@@ -25,6 +25,20 @@ function toggleTheme() {
   else apply();
 }
 
+/** Close the menu first, then scroll: closing shrinks the sticky header, which would otherwise throw off where the page lands. */
+function goTo(e: React.MouseEvent<HTMLAnchorElement>, close: () => void) {
+  const hash = e.currentTarget.getAttribute('href');
+  const target = hash && document.querySelector(hash);
+  if (!target) return;
+  e.preventDefault();
+  close();
+  requestAnimationFrame(() => {
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    history.replaceState(null, '', hash);
+  });
+}
+
 const ThemeToggle: React.FC = () => (
   <button
     type="button"
@@ -44,13 +58,13 @@ export const Navbar: React.FC<{ onBook: () => void }> = ({ onBook }) => {
   return (
     <header className="sticky top-0 z-40 bg-bg/90 backdrop-blur-md border-b border-gold/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[72px] flex items-center justify-between gap-4">
-        <a href="#top" className="shrink-0" aria-label="Haven Lofts, back to top">
-          <Logo alt="" className="h-11 sm:h-12 w-auto" />
+        <a href="#top" onClick={(e) => goTo(e, () => setOpen(false))} className="shrink-0" aria-label="Haven Lofts, back to top">
+          <Logo alt="" className="h-14 sm:h-[60px] w-auto -my-1" />
         </a>
 
         <nav aria-label="Main" className="hidden md:flex items-center gap-9">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="label !text-ink-soft hover:!text-ink transition-colors">
+            <a key={l.href} href={l.href} onClick={(e) => goTo(e, () => setOpen(false))} className="label !text-ink-soft hover:!text-ink transition-colors">
               {l.label}
             </a>
           ))}
@@ -81,7 +95,7 @@ export const Navbar: React.FC<{ onBook: () => void }> = ({ onBook }) => {
       {open && (
         <nav id="mobile-menu" aria-label="Mobile" className="md:hidden bg-bg-alt border-t border-gold/25 px-4 pb-6 pt-2 flex flex-col">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-3 font-display font-semibold text-3xl">
+            <a key={l.href} href={l.href} onClick={(e) => goTo(e, () => setOpen(false))} className="py-3 font-display font-semibold text-3xl">
               {l.label}
             </a>
           ))}

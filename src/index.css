@@ -88,6 +88,8 @@
 /* The logo PNG has black script; dark mode swaps in the cream version. */
 .logo-for-light { display: var(--logo-dark); }
 .logo-for-dark { display: var(--logo-light); }
+/* A soft glow lifts the cream script off the dark header at small sizes. */
+[data-theme='dark'] img.logo-for-dark { filter: drop-shadow(0 0 0.5px rgb(240 230 211 / 0.9)); }
 
 /* Tracked-out uppercase label. */
 .label {
@@ -141,6 +143,12 @@
 a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
 /* On the main button the arrow is gold on dark (light mode) and dark on gold (dark mode). */
 .bg-btn .arrow { color: var(--btn-arrow); }
+
+/* Dark mode: tone the bright Google map down to the evening palette; inverting then rotating hue
+   keeps water blue, parks green and the red pin red, and street names stay readable. */
+[data-theme='dark'] .map-embed {
+  filter: invert(0.9) hue-rotate(180deg) brightness(0.92) contrast(0.88) sepia(0.18);
+}
 
 /* Theme switch: a cross-fade where the browser supports view transitions. */
 ::view-transition-old(root),

@@ -18,6 +18,7 @@ export const Services: React.FC<{ services: Service[]; onBook: () => void }> = (
           type="button"
           onClick={onBook}
           data-reveal
+          data-cta
           className="shimmer inline-flex items-center gap-4 h-14 px-8 mt-8 rounded-full bg-btn text-btn-ink text-lg font-semibold active:scale-[0.97] transition"
         >
           Book Appointment <GoldArrow className="w-9" />
