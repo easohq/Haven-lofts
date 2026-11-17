@@ -63,7 +63,7 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
 
         <div className="relative max-w-[500px] mx-auto lg:mr-6 lg:ml-auto">
           <div className="double-frame arch glow" data-reveal="image" style={d(120)}>
-            <div className="double-frame-inner arch overflow-hidden">
+            <div className="double-frame-inner arch overflow-hidden bg-bg-alt">
               <img
                 src="/salon-lounge.jpg"
                 width={1312}
@@ -76,7 +76,7 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
 
           {/* The smaller arch overlapping the corner: a close-up of the slat wall and pendant. */}
           <div className="absolute -left-3 sm:-left-14 -bottom-12 sm:-bottom-16 w-32 sm:w-44 double-frame arch bg-bg" data-reveal style={d(420)}>
-            <div className="double-frame-inner arch overflow-hidden">
+            <div className="double-frame-inner arch overflow-hidden bg-bg-alt">
               <img src="/salon-slat-wall.jpg" alt="" loading="lazy" className="block w-full aspect-[3/4] object-cover" />
             </div>
           </div>

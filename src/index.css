@@ -96,7 +96,7 @@
   }
   [data-theme='dark'] body::after { opacity: 0.09; mix-blend-mode: soft-light; }
   a, button { touch-action: manipulation; }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
   ::selection { background: var(--olive); color: var(--on-olive); }
 }
 
@@ -342,7 +342,7 @@ dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
     width: 100%;
     height: auto;
     max-height: 92dvh;
-    border-radius: 28px 28px 0 0;
+    border-top: 1.5px solid var(--gold);
     box-shadow: 0 -30px 60px -30px rgb(0 0 0 / 0.45);
   }
   dialog.drawer.sheet[open] { animation-name: sheet-in; }

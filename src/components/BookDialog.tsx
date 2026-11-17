@@ -16,21 +16,27 @@ interface BookDialogProps {
 }
 
 const CopyNumber: React.FC<{ stylist: Stylist }> = ({ stylist }) => {
-  const [copied, setCopied] = useState(false);
+  const [state, setState] = useState<'idle' | 'copied' | 'failed'>('idle');
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(stylist.phone);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      setState('copied');
     } catch {
-      // Clipboard blocked (old browser, no permission): the number is still on screen to copy by hand.
+      // Clipboard blocked (older browser or no permission): say how to copy it by hand instead.
+      setState('failed');
     }
+    setTimeout(() => setState('idle'), 3500);
   };
   return (
-    <button type="button" onClick={copy} className="btn btn-ghost btn-sm !px-3" aria-live="polite">
-      {copied ? <Check className="w-4 h-4 text-gold" aria-hidden="true" /> : <Copy className="w-4 h-4 text-gold" aria-hidden="true" />}
-      {copied ? 'Copied' : 'Copy'}
-    </button>
+    <>
+      <button type="button" onClick={copy} className="btn btn-ghost btn-sm !px-3">
+        {state === 'copied' ? <Check className="w-4 h-4 text-gold" aria-hidden="true" /> : <Copy className="w-4 h-4 text-gold" aria-hidden="true" />}
+        {state === 'copied' ? 'Copied' : 'Copy'}
+      </button>
+      <p role="status" className="col-span-3 text-sm text-ink-soft empty:hidden">
+        {state === 'failed' && "Your browser didn't allow copying. Press and hold the number above to copy it."}
+      </p>
+    </>
   );
 };
 
@@ -170,7 +176,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({ open, onClose, stylists,
                 aria-selected={selected}
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(i)}
-                className={`group relative flex items-center gap-3 p-3 text-left rounded-2xl border transition-all duration-500 ${
+                className={`group relative flex items-center gap-3 p-3 text-left border transition-all duration-500 ${
                   selected
                     ? 'border-gold bg-surface shadow-[0_14px_30px_-20px_rgb(var(--shadow)/0.7)]'
                     : 'border-gold/25 hover:border-gold/60 hover:-translate-y-0.5'
