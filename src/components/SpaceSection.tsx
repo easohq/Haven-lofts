@@ -69,33 +69,28 @@ const SuiteDrawing: React.FC = () => (
 
 // Inside the lofts: the bright suites and the olive lounge, told side by side with an arched "mirror" frame.
 export const SpaceSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo }) => (
-  <section id="space" className="bg-surface pt-24 pb-28 lg:pt-32 lg:pb-40 scroll-mt-16">
+  <section id="space" className="bg-surface pt-32 pb-32 lg:pt-44 lg:pb-44 scroll-mt-16">
     <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-center">
       <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1">
-        <p className="kicker" data-reveal>Inside the lofts</p>
-        <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)] mt-7">
-          The <em>space</em>
+        <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)]">
+          The space
         </h2>
-        <p data-reveal className="mt-6 text-lg leading-[1.7] text-ink-soft max-w-lg">
+        <p data-reveal className="mt-6 text-lg leading-[1.6] max-w-lg">
           Haven Lofts is a set of private suites, each styled by the stylist who works in it, around a shared lounge.
           You'll find us in {salonInfo.suite}.
         </p>
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-12">
           <div data-reveal>
-            <span className="text-gold text-xs" aria-hidden="true">✦</span>
-            <h3 className="display text-4xl mt-3">The suites</h3>
-            <span className="block w-14 h-px bg-gold mt-5" aria-hidden="true" />
-            <p className="mt-5 text-lg leading-[1.7] text-ink-soft">
+            <h3 className="display text-4xl">The suites</h3>
+            <p className="mt-4 text-lg leading-[1.6]">
               Bright, quiet rooms with tall arched gold mirrors, black styling chairs, warm sconces and plenty of green.
               Just you and your stylist.
             </p>
           </div>
           <div data-reveal style={{ '--delay': '140ms' } as React.CSSProperties} className="sm:mt-20">
-            <span className="text-gold text-xs" aria-hidden="true">✦</span>
-            <h3 className="display text-4xl mt-3">The lounge</h3>
-            <span className="block w-14 h-px bg-gold mt-5" aria-hidden="true" />
-            <p className="mt-5 text-lg leading-[1.7] text-ink-soft">
+            <h3 className="display text-4xl">The lounge</h3>
+            <p className="mt-4 text-lg leading-[1.6]">
               Olive walls, a walnut slat wall, cognac leather chairs and a coffee bar for while you wait.
             </p>
           </div>
@@ -104,8 +99,8 @@ export const SpaceSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo }) 
 
       {/* Arched like the suite's own mirror. A real photo replaces the drawing once salonData.ts has one. */}
       <div className="lg:col-span-5 lg:col-start-1 lg:row-start-1 max-w-[420px] w-full mx-auto lg:mx-0" data-reveal="image">
-        <div className="double-frame arch glow">
-          <div className="double-frame-inner arch overflow-hidden aspect-[4/5] bg-bg">
+        <div>
+          <div className="arch overflow-hidden aspect-[4/5] bg-bg">
             {salonInfo.suitePhoto ? (
               <img
                 src={salonInfo.suitePhoto}
@@ -120,7 +115,7 @@ export const SpaceSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo }) 
             )}
           </div>
         </div>
-        <p className="label !text-ink-soft mt-5 text-center">A suite at Haven Lofts</p>
+        <p className="mt-4 text-ink-soft text-center">A suite at Haven Lofts</p>
       </div>
     </div>
   </section>

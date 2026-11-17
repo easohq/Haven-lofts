@@ -13,7 +13,6 @@ import { LocationSection } from './components/LocationSection.tsx';
 import { Footer } from './components/Footer.tsx';
 import { BookDialog } from './components/BookDialog.tsx';
 import { MobileBottomBar } from './components/MobileBottomBar.tsx';
-import { Wave } from './components/Brand.tsx';
 import { INITIAL_SALON_INFO as salonInfo, INITIAL_STYLISTS as stylists, SERVICES } from './data/salonData.ts';
 
 /** Fade-up reveal as sections scroll into view. Without the script, everything simply shows. */
@@ -42,20 +41,15 @@ export default function App() {
   useReveal();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-svh flex flex-col">
       <Navbar salonInfo={salonInfo} onBook={() => book()} />
       <main className="flex-1">
         <Hero salonInfo={salonInfo} onBook={() => book()} />
-        <Wave top="bg-bg" fill="text-bg-alt" />
         <Services services={SERVICES} onBook={() => book()} />
-        <Wave top="bg-bg-alt" fill="text-surface" flip />
         <SpaceSection salonInfo={salonInfo} />
-        <Wave top="bg-surface" fill="text-olive" />
         <StylistsSection stylists={stylists} onBook={book} />
-        <Wave top="bg-olive" fill="text-bg" />
         <LocationSection salonInfo={salonInfo} />
       </main>
-      <Wave top="bg-bg" fill="text-bg-alt" flip />
       <Footer salonInfo={salonInfo} stylists={stylists} onBook={() => book()} />
       <BookDialog
         open={booking.open}

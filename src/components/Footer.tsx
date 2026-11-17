@@ -1,6 +1,6 @@
 import React from 'react';
 import { SalonInfo, Stylist } from '../types.ts';
-import { GoldArrow, InstagramIcon, Logo, Sprig } from './Brand.tsx';
+import { GoldArrow, InstagramIcon, Logo } from './Brand.tsx';
 import { mapsUrl } from '../utils/maps.ts';
 
 const LINKS = [
@@ -19,14 +19,11 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
   ].filter(Boolean) as { handle: string; label: string }[];
 
   return (
-    <footer className="bg-bg-alt pt-20 pb-28 sm:pb-14">
+    <footer className="bg-bg-alt pt-32 pb-28 sm:pb-14">
       <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7" data-reveal>
-            <p className="kicker">Until next time</p>
-            <p className="display text-[clamp(3rem,6vw,5.5rem)] mt-6">
-              Come sit <em>a while.</em>
-            </p>
+            <h2 className="display text-[clamp(3rem,6vw,5.5rem)]">Come sit a while.</h2>
             <button type="button" onClick={onBook} data-cta className="btn btn-primary mt-9">
               Book Appointment <GoldArrow className="w-9" />
             </button>
@@ -36,8 +33,8 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
           </div>
         </div>
 
-        <div className="double-frame mt-16">
-          <div className="double-frame-inner px-6 sm:px-10 py-9 grid grid-cols-1 sm:grid-cols-3 gap-9">
+        <div className="mt-16 bg-bg">
+          <div className="px-6 sm:px-10 py-9 grid grid-cols-1 sm:grid-cols-3 gap-9">
             <nav aria-label="Footer">
               <p className="label">Explore</p>
               <ul className="mt-4 space-y-2 text-lg">
@@ -77,10 +74,7 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-ink-soft text-sm">
-          <p>© {new Date().getFullYear()} Haven Lofts · Lakeville, Minnesota</p>
-          <Sprig className="w-32 text-gold" />
-        </div>
+        <p className="mt-8 text-ink-soft text-sm">© {new Date().getFullYear()} Haven Lofts · Lakeville, Minnesota</p>
       </div>
     </footer>
   );

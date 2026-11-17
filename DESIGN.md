@@ -21,25 +21,25 @@ soft light. Editorial and unhurried, like a print magazine spread, never like a 
 | Alternate | sand `#EADFCB` | espresso `#241F19` | Services, footer |
 | Ink | espresso `#2B211C` | champagne `#F0E6D3` | text |
 | Olive | `#4F5638` | `#2C3122` | the owners section |
-| **Gold (the one accent)** | `#B8893B` | `#D4AA5E` | lines, frames, arrows, the gold button |
-| Cognac | `#9A4F2E` | `#D9946A` | italic accent words only, never buttons |
+| **Gold (the one accent)** | `#B8893B` | `#D4AA5E` | arrows, labels, the round seal, the gold button |
+| Cognac | `#9A4F2E` | `#D9946A` | prices and link hovers, never buttons |
 
 Never use purple, blue, neon or gradients as decoration.
 
 ## Type
 
-- Headings: Cormorant Garamond, `.display` class, weight 500. One accent word per heading in italic (`<em>`), which turns cognac.
-- Body: Albert Sans, 18px, line height 1.7.
-- Small labels: `.kicker` (tracked capitals on a short gold rule) above a heading, or `.label` without the rule.
+- Headings: Cormorant Garamond, `.display` class, weight 500. One face and one colour per heading: no italic or coloured accent word. The words carry the emphasis.
+- Body: Albert Sans, 18px, line height 1.6, in the full ink colour (soft ink only for small notes).
+- Small labels: `.label`, sentence case at 15px in gold, placed under or beside a heading, never above it. No tracked capitals, no eyebrow labels, no star or sprig ornaments.
 - No Inter, no emoji, no all-caps sentences.
 
 ## Shapes: three, and only three
 
 1. **Pill or circle** (`999px`): buttons, icon buttons, the round seal.
 2. **Arch** (`.arch`): photos and portraits.
-3. **Square**: frames, cards, drawers, the map.
+3. **Square**: cards, drawers, the map.
 
-Gold frames are the double rule `.double-frame` > `.double-frame-inner`. No other corner radius.
+Surfaces are told apart by a step in background colour (bg, bg-alt, surface, olive), never by gold outlines, hairline rules, shadows or wavy dividers. Shadows only on drawers, which really float. No other corner radius.
 
 ## Spacing
 
@@ -49,7 +49,7 @@ asymmetrically (offset headers, staggered columns, overlapping images); avoid ro
 ## Components
 
 - Buttons: `.btn` plus `.btn-primary` (main action), `.btn-gold` (on olive) or `.btn-ghost`; `.btn-sm` for small.
-  A main action carries `<GoldArrow />`. Hover lifts the button and runs gold light around its border.
+  A main action carries `<GoldArrow />`. Hover lifts the button; buttons are flat, one fill colour, no gradients or glows.
 - Every in-page "Book" button gets `data-cta`, so the phone's sticky bar hides while it's visible.
 - Drawers use `<Drawer>` (booking concierge, phone menu).
 
