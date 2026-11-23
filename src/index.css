@@ -498,3 +498,13 @@ dialog.viewer::backdrop { background: transparent; }
 }
 .viewer-btn:hover { background: rgb(240 230 211 / 0.22); }
 .viewer-btn:active { scale: 0.92; }
+
+/* The photo strip in The space scrolls sideways without a visible bar. */
+.suite-strip { scrollbar-width: none; scroll-padding-inline: 1.25rem; }
+.suite-strip::-webkit-scrollbar { display: none; }
+@media (min-width: 640px) { .suite-strip { scroll-padding-inline: 2rem; } }
+@media (min-width: 1024px) { .suite-strip { scroll-padding-inline: 3rem; } }
+
+/* A text link on the green and dark surfaces: light gold underline. */
+.link-light { text-decoration-color: var(--gold-light); }
+.link-light:hover { color: var(--gold-light); text-decoration-color: var(--gold-light); }

@@ -1,8 +1,64 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SalonInfo } from '../types.ts';
 import { GoldArrow } from './Brand.tsx';
 import { Candles, Ivy } from './Decor.tsx';
-import { Photo } from './Photo.tsx';
+import { OpenPhoto, Photo } from './Photo.tsx';
+import { PHOTO_ORDER, PhotoId } from '../data/photos.ts';
+
+/** A walk around the lofts, in the order you'd see it. Wide shots get a wider frame. */
+const ROOMS: { id: PhotoId; caption: string; wide?: boolean }[] = [
+  { id: 'lounge-coffee', caption: 'The lounge and coffee bar', wide: true },
+  { id: 'entry-mirror', caption: 'Our mirror, by the door' },
+  { id: 'gallery-wall', caption: 'A gallery-wall suite' },
+  { id: 'suite-slat', caption: 'Walnut slats and a wash chair', wide: true },
+  { id: 'suite-velvet', caption: 'Mustard velvet and a styling chair' },
+  { id: 'shampoo', caption: 'The wash bowls' },
+  { id: 'suite-macrame', caption: 'A bright suite' },
+  { id: 'lounge-wide', caption: 'Room to sit and wait', wide: true },
+  { id: 'entry-hall', caption: 'The floral hallway' },
+  { id: 'suite-window', caption: 'A quiet room with a big window' },
+];
+
+/** The photos of the salon as a strip you swipe (phones) or step through with the arrows (desktop). */
+const RoomStrip: React.FC = () => {
+  const open = useContext(OpenPhoto);
+  const strip = useRef<HTMLUListElement>(null);
+  const step = (dir: 1 | -1) => {
+    const el = strip.current;
+    if (!el) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: reduce ? 'auto' : 'smooth' });
+  };
+  return (
+    <div className="relative mt-28 lg:mt-40">
+      <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 flex flex-wrap items-end justify-between gap-x-8 gap-y-4 mb-10">
+        <h3 data-reveal className="display text-[clamp(2.5rem,4.5vw,3.75rem)]">
+          Take a look around
+        </h3>
+        <div className="flex items-center gap-3" data-reveal>
+          <button type="button" onClick={() => open(PHOTO_ORDER[0])} className="link-u text-lg font-semibold mr-3">
+            See all {PHOTO_ORDER.length} photos
+          </button>
+          <button type="button" onClick={() => step(-1)} aria-label="Previous photos" className="icon-btn !w-12 !h-12 hidden sm:flex">
+            <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+          </button>
+          <button type="button" onClick={() => step(1)} aria-label="More photos" className="icon-btn !w-12 !h-12 hidden sm:flex">
+            <ChevronRight className="w-5 h-5" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+      <ul ref={strip} className="suite-strip flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory overscroll-x-contain px-5 sm:px-8 lg:px-12 pb-2" aria-label="Photos of the salon">
+        {ROOMS.map((r, i) => (
+          <li key={r.id} className={`snap-start shrink-0 ${r.wide ? 'w-[86vw] sm:w-[60vw] lg:w-[42vw]' : 'w-[66vw] sm:w-[38vw] lg:w-[23vw]'}`} data-reveal style={{ '--delay': `${(i % 4) * 90}ms` } as React.CSSProperties}>
+            <Photo id={r.id} sizes="(min-width:1024px) 42vw, 86vw" drift={false} className="w-full h-[min(62vh,560px)] min-h-[340px]" />
+            <p className="mt-3 text-ink-soft">{r.caption}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 // Inside the lofts: the suites and the lounge beside an arched "mirror", then the spray tan room,
 // lit by its neon sign against the floral wall.
@@ -46,6 +102,8 @@ export const SpaceSection: React.FC<{ salonInfo: SalonInfo; onBook: () => void }
         <p className="mt-5 text-ink-soft text-center">A suite at Haven Lofts, with its tall arched mirror</p>
       </div>
     </div>
+
+    <RoomStrip />
 
     {/* The spray tan room: the floral wall, the neon sign, a tent each. */}
     <div id="spray-tan" className="relative mt-32 lg:mt-44 bg-olive-deep text-on-olive on-olive overflow-hidden scroll-mt-16" data-reveal>

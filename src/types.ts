@@ -17,6 +17,8 @@ export interface Stylist {
   imageKey: string;
   /** Headshot path in /public, e.g. '/sarah.jpg'. Empty shows a monogram. */
   photo: string;
+  /** Time behind the chair, from the bio, e.g. '20+ years'. */
+  experience: string;
   /** Instagram handle without the @. Empty hides the link. */
   instagram: string;
   /** Online booking page (GlossGenius, Vagaro, Square...). Empty hides the button. */
