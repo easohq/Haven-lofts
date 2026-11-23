@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-22T00:00:00-06:00",
+  "title": "Design System: Haven Lofts",
+  "extensions": {
+    "colorMeta": {
+      "mustard": { "role": "primary", "displayName": "Mustard Velvet", "canonical": "#D4A62A", "dark": "#C99A22", "tonalRamp": ["#3A2C08", "#5C460E", "#7E6114", "#A27D1C", "#D4A62A", "#E2BE5C", "#EDD592", "#F7EBC8"] },
+      "olive": { "role": "secondary", "displayName": "Olive Wall", "canonical": "#4B5236", "dark": "#3A4029", "tonalRamp": ["#1E2116", "#2D3220", "#3A4029", "#4B5236", "#646C4C", "#848B6C", "#A9AE95", "#D2D5C4"] },
+      "olive-deep": { "role": "secondary", "displayName": "Olive Deep", "canonical": "#3A4029", "dark": "#2D3220", "tonalRamp": ["#1A1D12", "#24281A", "#2D3220", "#3A4029", "#4B5236", "#6A7152", "#959B80", "#C6CAB6"] },
+      "walnut": { "role": "secondary", "displayName": "Walnut", "canonical": "#5E3A20", "dark": "#4A2E19", "tonalRamp": ["#22150B", "#352112", "#4A2E19", "#5E3A20", "#7C5435", "#9E7B5E", "#C2A68E", "#E6D7C8"] },
+      "cognac": { "role": "tertiary", "displayName": "Cognac Leather", "canonical": "#9C4422", "dark": "#E08A5C (accent) / #7E361A (field)", "tonalRamp": ["#33160A", "#53230F", "#7E361A", "#9C4422", "#BE6440", "#E08A5C", "#EDB79A", "#F8E2D5"] },
+      "cognac-stripe": { "role": "tertiary", "displayName": "Cognac Stripe", "canonical": "#B4522A", "tonalRamp": ["#3A1A0C", "#5E2A14", "#86391B", "#B4522A", "#C9734D", "#DA9674", "#E9BCA3", "#F7E3D8"] },
+      "cream": { "role": "neutral", "displayName": "Cream", "canonical": "#F4E8CC", "tonalRamp": ["#4A4231", "#6E6450", "#948870", "#B9AD92", "#D8CBAE", "#EBD9AE", "#F4E8CC", "#FAF1DC"] },
+      "cream-deep": { "role": "neutral", "displayName": "Cream Deep", "canonical": "#EBD9AE", "dark": "#2A1E12", "tonalRamp": ["#463B22", "#6A5B39", "#8F7D55", "#B4A072", "#D2BF91", "#EBD9AE", "#F4E8CC", "#FAF1DC"] },
+      "cream-surface": { "role": "neutral", "displayName": "Cream Surface", "canonical": "#FAF1DC", "dark": "#33251A", "tonalRamp": ["#4E473A", "#736A58", "#999079", "#BEB59D", "#DCD2B9", "#EEE4CB", "#FAF1DC", "#FDF9EE"] },
+      "espresso": { "role": "neutral", "displayName": "Espresso", "canonical": "#24180F", "dark": "#1C140C (page)", "tonalRamp": ["#120C07", "#1C140C", "#24180F", "#3A2A1D", "#5A4330", "#7E664F", "#A69078", "#D2C1AA"] },
+      "espresso-soft": { "role": "neutral", "displayName": "Espresso Soft", "canonical": "#5A4330", "dark": "#D8C29A", "tonalRamp": ["#1E160F", "#2F2318", "#433223", "#5A4330", "#76604B", "#968069", "#B9A68F", "#DDD0BE"] },
+      "gold-ink": { "role": "neutral", "displayName": "Gold Ink", "canonical": "#6E4A12", "dark": "#F0CF6E", "tonalRamp": ["#2A1C07", "#46300B", "#6E4A12", "#8F651E", "#B08534", "#CCA655", "#E2C686", "#F3E4BE"] },
+      "gold-light": { "role": "neutral", "displayName": "Gold Light", "canonical": "#F0CF6E", "tonalRamp": ["#4A3A0E", "#735B18", "#9C7D25", "#C4A03A", "#DDB954", "#F0CF6E", "#F6E0A0", "#FBF0D0"] },
+      "vinyl": { "role": "neutral", "displayName": "Vinyl", "canonical": "#120C07", "tonalRamp": ["#080503", "#120C07", "#1A120B", "#241A12", "#3A2C20", "#574636", "#7D6A57", "#A8957F"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The hero's two-line Haven / Lofts only." },
+      "headline": { "displayName": "Headline", "purpose": "One per section; balanced wrapping." },
+      "title": { "displayName": "Title", "purpose": "Service names, stylist names, drawer titles, the phone number." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs; 1.0625rem base, 1.125 to 1.25rem lead." },
+      "label": { "displayName": "Label", "purpose": "Small sentence-case labels inside a section; never a kicker above a heading." }
+    },
+    "shadows": [
+      { "name": "sleeve-rim", "value": "0 0 0 10px var(--rim)", "purpose": "Cream frame on every large photo; 6px in the room strip." },
+      { "name": "nav-scrolled", "value": "0 10px 24px -18px rgb(0 0 0 / 0.5)", "purpose": "Nav lift once the page scrolls." },
+      { "name": "drawer", "value": "-40px 0 80px -40px rgb(0 0 0 / 0.45)", "purpose": "Booking drawer and menu from the right." },
+      { "name": "sheet", "value": "0 -30px 60px -30px rgb(0 0 0 / 0.45)", "purpose": "Drawer as a bottom sheet under 640px." },
+      { "name": "nav-material", "value": "background: rgb(var(--mustard-rgb) / 0.94); backdrop-filter: blur(20px) saturate(140%)", "purpose": "Translucent mustard nav; solid mustard with reduced transparency." }
+    ],
+    "motion": [
+      { "name": "ease-house", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "All travel: buttons, reveals, drawers, record." },
+      { "name": "ease-exit", "value": "cubic-bezier(0.55, 0, 0.75, 0.2)", "purpose": "Drawer closing (380ms)." },
+      { "name": "button-lift", "value": "transform 550ms ease-house; translateY(-2px) hover, scale(0.97) active 90ms", "purpose": "Pill feedback." },
+      { "name": "reveal", "value": "opacity + translateY(22px), 900ms ease-house, staggered by --delay", "purpose": "Scroll reveal; content visible without JS." },
+      { "name": "record-out", "value": "translateX(-38%) to 0, 1400ms ease-house, 300ms delay; then rotate 360deg every 14s linear", "purpose": "Hero signature." },
+      { "name": "record-peek", "value": "translateX(34%), 700ms ease-house on hover/focus, or when the sleeve snaps into place on touch", "purpose": "Room strip signature." },
+      { "name": "drawer-in", "value": "translateX(100%) to 0, 600ms ease-house", "purpose": "Booking drawer and menu; sheet rises from below on phones." },
+      { "name": "theme-fade", "value": "view transition 600ms; colours 500ms ease", "purpose": "Light/dark switch." },
+      { "name": "reduced-motion", "value": "no travel; opacity-only fades 200 to 400ms; record still, half out", "purpose": "prefers-reduced-motion: reduce." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Espresso pill with the gold arrow; the main Book call. Carries data-cta.",
+      "html": "<button class=\"ds-btn ds-btn-primary\" data-cta>Book with Sara <svg class=\"ds-arrow\" viewBox=\"0 0 80 16\" aria-hidden=\"true\"><rect x=\"0\" y=\"6.5\" width=\"66\" height=\"3\" fill=\"currentColor\"/><path d=\"M62 0 L80 8 L62 16 Z\" fill=\"currentColor\"/></svg></button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.8rem; height: 3.5rem; padding: 0 1.9rem; border: 0; border-radius: 999px; font: 700 1.125rem 'Albert Sans', system-ui, sans-serif; cursor: pointer; transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1), background-color 300ms ease; } .ds-btn:hover { transform: translateY(-2px); } .ds-btn:hover .ds-arrow { transform: translateX(5px); } .ds-btn:active { transform: scale(0.97); transition-duration: 90ms; } .ds-btn:focus-visible { outline: 2px solid #6E4A12; outline-offset: 4px; } .ds-arrow { width: 2rem; transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary { background: #24180F; color: #F4E8CC; }"
+    },
+    {
+      "name": "Olive Button",
+      "kind": "button",
+      "refersTo": "button-olive",
+      "description": "Olive pill beside the primary, for the second stylist.",
+      "html": "<button class=\"ds-btn-olive\" data-cta>Book with Leah</button>",
+      "css": ".ds-btn-olive { display: inline-flex; align-items: center; height: 3.5rem; padding: 0 1.9rem; border: 0; border-radius: 999px; background: #4B5236; color: #F4E8CC; font: 700 1.125rem 'Albert Sans', system-ui, sans-serif; cursor: pointer; transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-olive:hover { transform: translateY(-2px); } .ds-btn-olive:active { transform: scale(0.97); } .ds-btn-olive:focus-visible { outline: 2px solid #6E4A12; outline-offset: 4px; }"
+    },
+    {
+      "name": "Gold Button",
+      "kind": "button",
+      "refersTo": "button-gold",
+      "description": "Mustard pill with espresso text; the call on dark fields.",
+      "html": "<div class=\"ds-field-walnut\"><button class=\"ds-btn-gold\" data-cta>Book a visit</button></div>",
+      "css": ".ds-field-walnut { background: #5E3A20; padding: 32px; } .ds-btn-gold { display: inline-flex; align-items: center; height: 3.5rem; padding: 0 1.9rem; border: 0; border-radius: 999px; background: #D4A62A; color: #24180F; font: 700 1rem 'Albert Sans', system-ui, sans-serif; cursor: pointer; transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-gold:hover { transform: translateY(-2px); } .ds-btn-gold:active { transform: scale(0.97); } .ds-btn-gold:focus-visible { outline: 2px solid #F0CF6E; outline-offset: 4px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-small",
+      "description": "Small tinted pill for secondary drawer actions.",
+      "html": "<button class=\"ds-btn-ghost\">Text</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; height: 3rem; padding: 0 1.4rem; border: 0; border-radius: 999px; background: color-mix(in srgb, #24180F 9%, transparent); color: #24180F; font: 700 1rem 'Albert Sans', system-ui, sans-serif; cursor: pointer; transition: background-color 300ms ease, transform 550ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-ghost:hover { background: color-mix(in srgb, #24180F 15%, transparent); transform: translateY(-2px); } .ds-btn-ghost:focus-visible { outline: 2px solid #6E4A12; outline-offset: 4px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-material",
+      "description": "Sticky translucent mustard bar with growing underline links.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-logo\">Haven Lofts</span><a class=\"ds-nav-link\" href=\"#\" aria-current=\"true\">The space</a><a class=\"ds-nav-link\" href=\"#\">Services</a><a class=\"ds-nav-link\" href=\"#\">Stylists</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 40px; height: 72px; padding: 0 48px; background: rgb(212 166 42 / 0.94); backdrop-filter: blur(20px) saturate(140%); color: #24180F; font: 700 1rem 'Albert Sans', system-ui, sans-serif; } .ds-nav-logo { font-family: Gloock, Georgia, serif; font-weight: 400; font-size: 1.5rem; margin-right: auto; } .ds-nav-link { position: relative; color: inherit; text-decoration: none; } .ds-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; border-radius: 3px; background: #24180F; transform: scaleX(0); transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav-link:hover::after { transform: scaleX(0.4); } .ds-nav-link[aria-current]::after { transform: scaleX(1); } .ds-nav-link:focus-visible { outline: 2px solid #24180F; outline-offset: 4px; }"
+    },
+    {
+      "name": "Stylist Card",
+      "kind": "card",
+      "refersTo": "stylist-card-walnut",
+      "description": "Walnut or olive card, 28px corners, cream text, cream pill at the foot.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-face\"></div><h3 class=\"ds-card-name\">Sara</h3><p class=\"ds-card-label\">Owner and stylist</p><p class=\"ds-card-body\">Colour, cuts and lived-in blondes.</p><button class=\"ds-card-btn\" data-cta>Book with Sara</button></article>",
+      "css": ".ds-card { max-width: 420px; background: #5E3A20; color: #F4E8CC; border-radius: 28px; padding: 40px; font-family: 'Albert Sans', system-ui, sans-serif; } .ds-card-face { width: 96px; height: 96px; border-radius: 50%; background: #4B5236; } .ds-card-name { font: 400 3rem/1 Gloock, Georgia, serif; letter-spacing: -0.01em; margin: 20px 0 0; } .ds-card-label { font-weight: 700; font-size: 0.9375rem; color: #F0CF6E; margin: 12px 0 0; } .ds-card-body { font-size: 1.125rem; line-height: 1.6; } .ds-card-btn { height: 3.5rem; padding: 0 1.9rem; border: 0; border-radius: 999px; background: #F4E8CC; color: #24180F; font-weight: 700; cursor: pointer; transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-card-btn:hover { transform: translateY(-2px); } .ds-card-btn:focus-visible { outline: 2px solid #F0CF6E; outline-offset: 4px; }"
+    },
+    {
+      "name": "Sleeve with Record",
+      "kind": "custom",
+      "refersTo": "sleeve",
+      "description": "A photo set as an album sleeve with a cream rim; the record peeks out on hover.",
+      "html": "<div class=\"ds-peek\" tabindex=\"0\"><div class=\"ds-record\"></div><div class=\"ds-sleeve\"></div></div>",
+      "css": ".ds-peek { position: relative; width: 240px; margin: 24px; } .ds-sleeve { position: relative; aspect-ratio: 4 / 5; border-radius: 28px; box-shadow: 0 0 0 10px #F4E8CC; background: linear-gradient(160deg, #9C4422, #5E3A20); } .ds-record { position: absolute; top: 12%; right: 3%; width: 76%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #D4A62A 0 15%, #120c07 15.5% 17%, transparent 17.5%), repeating-radial-gradient(circle, #1a120b 0 2px, #241a12 2px 3px); box-shadow: inset 0 0 0 2px #120c07; transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-peek:hover .ds-record, .ds-peek:focus-visible .ds-record { transform: translateX(34%); } .ds-peek:focus-visible { outline: 2px solid #6E4A12; outline-offset: 16px; border-radius: 28px; }"
+    },
+    {
+      "name": "Stripes",
+      "kind": "custom",
+      "refersTo": "stripes",
+      "description": "The signature: cognac, walnut, olive bands with thin cream rules; once per section, never a border.",
+      "html": "<div class=\"ds-field-mustard\"><div class=\"ds-stripes\"></div></div>",
+      "css": ".ds-field-mustard { background: #D4A62A; padding: 32px 0; } .ds-stripes { height: 96px; border-block: 3px solid #F4E8CC; background: linear-gradient(#B4522A 0 calc(33.33% - 1.5px), #F4E8CC calc(33.33% - 1.5px) calc(33.33% + 1.5px), #5E3A20 calc(33.33% + 1.5px) calc(66.66% - 1.5px), #F4E8CC calc(66.66% - 1.5px) calc(66.66% + 1.5px), #4B5236 calc(66.66% + 1.5px) 100%); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Living Room Sleeve",
+    "overview": "Haven Lofts is drawn as its own 1970s living room, built from the salon's real materials laid down as big flat fields: mustard velvet, olive wall, walnut, cognac leather. Each section of the page is one of those fields, edge to edge, and the real salon photos sit on them like album covers in rounded sleeves with a cream rim. A black record with a mustard label is the one decorative object; it slides out of the hero sleeve and peeks out of the room sleeves.\n\nDensity is low and the scale is big: one huge Gloock headline per section, a short paragraph, pills. Nothing is drawn on top of the rooms; the real photos and the flat colour carry the mood. The system rejects the cream-and-serif salon template and the darkened-photo \"BOOK NOW\" hero.\n\nLight and dark both ship. In the evening theme the cream rooms go espresso while the mustard, olive and walnut fields stay themselves, a shade deeper.",
+    "keyCharacteristics": [
+      "Whole sections are flat colour fields: mustard (hero, stylists, visit), olive (the space), cognac (services), walnut (spray tan), espresso (footer).",
+      "Photos are sleeves: 28px corners and a 10px cream rim.",
+      "One signature stripe (cognac, walnut, olive with thin cream rules) placed once inside each major section.",
+      "One display face, one text face; pills for every action.",
+      "Real salon photos only."
+    ],
+    "rules": [
+      { "name": "The Field Rule", "body": "A section is one flat field of one material colour, edge to edge. Do not tint, gradient or overlay a field.", "section": "colors" },
+      { "name": "The Espresso On Mustard Rule", "body": "Anything set on mustard (labels, nav links, icons, focus rings) uses espresso ink. Walnut text on mustard failed contrast.", "section": "colors" },
+      { "name": "The Cream Price Rule", "body": "On the cognac services field, prices and body text are cream (5.29:1 light, 7.10:1 dark). Gold-light on cognac is 4.25:1 and fails; never use it for text there.", "section": "colors" },
+      { "name": "The Two Faces Rule", "body": "Gloock for display, Albert Sans for everything else, nothing else.", "section": "typography" },
+      { "name": "The Sentence-Case Label Rule", "body": "Labels are sentence case, never tracked capitals, and never sit above a heading as a kicker.", "section": "typography" },
+      { "name": "The Stripe Placement Rule", "body": "The stripe runs once per major section, inside it (behind a sleeve, or bleeding off one side), never as a section border or divider.", "section": "layout" },
+      { "name": "The Flat Field Rule", "body": "Cards, buttons and fields carry no drop shadow. Only the nav (once scrolled) and the drawers lift.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do fill whole sections with one material colour (mustard, olive, walnut, cognac, espresso) and keep mustard on at least a third of the page.",
+      "Do set every photo as a sleeve: 28px corners and the 10px cream rim.",
+      "Do use espresso ink for all text and focus rings on mustard, and cream for text and prices on the cognac field.",
+      "Do spell the owner's name \"Sara\", never \"Sarah\".",
+      "Do use only the salon's real photos from `public/photos/`.",
+      "Do put `data-cta` on every Book button and route every booking through the booking drawer (call, text, or the stylist's own booking link).",
+      "Do ship both themes, and honour reduced motion (no travel, record still and half out), reduced transparency (solid mustard nav) and higher contrast (outlined ghost and icon buttons, ruled nav).",
+      "Do use the house ease `cubic-bezier(0.22, 1, 0.36, 1)` for movement."
+    ],
+    "donts": [
+      "Don't use renders or AI images, and never show the bathroom.",
+      "Don't invent hours, prices or reviews.",
+      "Don't set gold-light text on the cognac field (4.25:1), or walnut text on mustard.",
+      "Don't use any face besides Gloock and Albert Sans.",
+      "Don't use the stripe more than once per section or as a border or divider.",
+      "Don't put tracked uppercase kickers or eyebrows above headings.",
+      "Don't draw decoration over the rooms (ivy, pendants, candles, neon script); the real photos and the fields carry the mood.",
+      "Don't darken a photo behind a headline for the hero."
+    ]
+  }
+}

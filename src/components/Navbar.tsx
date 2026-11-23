@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { SalonInfo } from '../types.ts';
-import { GoldArrow, Logo } from './Brand.tsx';
+import { GoldArrow } from './Brand.tsx';
 import { Drawer } from './Drawer.tsx';
 import { toggleTheme } from '../utils/theme.ts';
 import { mapsUrl } from '../utils/maps.ts';
 
 const LINKS = [
+  { href: '#space', label: 'The rooms' },
   { href: '#services', label: 'Services' },
-  { href: '#space', label: 'Space' },
+  { href: '#stylists', label: 'Sara & Leah' },
   { href: '#spray-tan', label: 'Spray tan' },
-  { href: '#stylists', label: 'Stylists' },
   { href: '#visit', label: 'Visit' },
 ];
 
@@ -65,10 +65,10 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
   }, []);
 
   return (
-    <header className="nav-material sticky top-0 z-40" data-scrolled={scrolled || undefined}>
+    <header className="on-mustard nav-material sticky top-0 z-40 text-on-mustard" data-scrolled={scrolled || undefined}>
       <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 h-[72px] flex items-center justify-between gap-6">
         <a href="#top" onClick={(e) => goTo(e)} className="shrink-0" aria-label="Haven Lofts, back to top">
-          <Logo alt="" className="h-14 sm:h-[60px] w-auto -my-1" />
+          <img src="/haven-lofts-logo.png" alt="" className="h-14 sm:h-[60px] w-auto -my-1" />
         </a>
 
         <nav aria-label="Main" className="hidden lg:flex items-center gap-10 ml-auto mr-4">
@@ -78,7 +78,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
               href={l.href}
               onClick={(e) => goTo(e)}
               aria-current={current === l.href ? 'location' : undefined}
-              className="nav-link font-semibold text-ink-soft hover:text-ink"
+              className="nav-link font-bold"
             >
               {l.label}
             </a>

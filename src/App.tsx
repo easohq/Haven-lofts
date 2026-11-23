@@ -11,6 +11,7 @@ import { Hero } from './components/Hero.tsx';
 import { Services } from './components/Services.tsx';
 import { StylistsSection } from './components/StylistsSection.tsx';
 import { SpaceSection } from './components/SpaceSection.tsx';
+import { SprayTan } from './components/SprayTan.tsx';
 import { LocationSection } from './components/LocationSection.tsx';
 import { Footer } from './components/Footer.tsx';
 import { BookDialog } from './components/BookDialog.tsx';
@@ -49,10 +50,11 @@ export default function App() {
     <div className="min-h-svh flex flex-col">
       <Navbar salonInfo={salonInfo} onBook={() => book()} />
       <main className="flex-1">
-        <Hero salonInfo={salonInfo} onBook={() => book()} />
+        <Hero salonInfo={salonInfo} stylists={stylists} onBook={book} />
+        <SpaceSection salonInfo={salonInfo} />
         <Services services={SERVICES} onBook={() => book()} />
-        <SpaceSection salonInfo={salonInfo} onBook={() => book()} />
         <StylistsSection stylists={stylists} onBook={book} />
+        <SprayTan onBook={() => book()} />
         <LocationSection salonInfo={salonInfo} />
       </main>
       <Footer salonInfo={salonInfo} stylists={stylists} onBook={() => book()} />

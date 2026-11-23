@@ -1,53 +1,100 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Service } from '../types.ts';
-import { GoldArrow } from './Brand.tsx';
-import { Ivy, Pendant, SlatWall } from './Decor.tsx';
+import { GoldArrow, Stripes } from './Brand.tsx';
+import { Photo } from './Photo.tsx';
+import { PhotoId } from '../data/photos.ts';
 
-// Editorial menu: a header weighted to the left with its intro pushed to the far right, then a
-// two-column list whose right column hangs lower, like a magazine spread.
-export const Services: React.FC<{ services: Service[]; onBook: () => void }> = ({ services, onBook }) => (
-  <section id="services" className="relative overflow-hidden bg-bg-alt pt-32 pb-28 lg:pt-44 lg:pb-32 scroll-mt-16">
-    <SlatWall className="top-0 right-0 h-[55%] w-full lg:w-1/2" />
-    <Pendant cord={70} className="hidden md:block right-[12%] w-28 lg:w-32" />
-    <Ivy length={2} flip className="right-[4%]" delay={0.8} />
-    <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-8 items-end">
-        <div className="lg:col-span-7">
-          <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)]">
-            Our services
+/** The room each service happens in. Services added later fall back to the lounge. */
+const ROOM: Record<string, PhotoId> = {
+  'Cuts & Styling': 'suite-macrame',
+  'Dimensional Color & Balayage': 'suite-arch-mirror',
+  'Blonding & Gray Blending': 'suite-velvet',
+  'Gloss & Treatments': 'shampoo',
+  'Spray Tans': 'tan-room',
+};
+const roomFor = (s: Service): PhotoId => ROOM[s.name] ?? 'lounge';
+
+// The menu reads like the back of a record sleeve: a track list, each line with its price set flush right.
+// On wide screens the mustard panel beside it holds the room for whichever service you're on.
+export const Services: React.FC<{ services: Service[]; onBook: () => void }> = ({ services, onBook }) => {
+  const [active, setActive] = useState(0);
+  const rows = useRef<(HTMLLIElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(Number((e.target as HTMLElement).dataset.i))),
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    rows.current.forEach((r) => r && io.observe(r));
+    return () => io.disconnect();
+  }, [services.length]);
+
+  return (
+    <section id="services" className="on-dark relative overflow-x-clip bg-cognac-field text-on-olive pt-24 pb-24 lg:pt-36 lg:pb-36 scroll-mt-16">
+      <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-12">
+        <div className="order-1 lg:order-none lg:col-span-5">
+          <div className="lg:sticky lg:top-[calc(72px+2.5rem)] bg-mustard rounded-[28px] p-5 sm:p-8 aspect-[4/3] lg:aspect-auto lg:h-[calc(100vh-72px-5rem)] max-h-[720px]">
+            <div className="relative w-full h-full">
+              {services.map((s, i) => (
+                <div
+                  key={s.name}
+                  className="absolute inset-0 transition-opacity duration-700"
+                  style={{ opacity: i === active ? 1 : 0 }}
+                  inert={i !== active}
+                >
+                  <Photo id={roomFor(s)} sizes="38vw" className="sleeve-sm w-full h-full" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="order-2 lg:order-none lg:col-span-7">
+          <h2 data-reveal className="display text-[clamp(3.25rem,7vw,6rem)]">
+            Services
           </h2>
-        </div>
-        <div className="lg:col-span-4 lg:col-start-9" data-reveal>
-          <p className="relative z-10 text-lg leading-[1.6] bg-bg-alt/90 p-5 -m-5">
-            Every appointment begins with a conversation: your hair, your routine, and how much time you'd like to
-            spend on it each morning.
+          <p data-reveal className="mt-6 text-lg leading-[1.6] max-w-lg">
+            Every appointment starts with a conversation: your hair, your routine, and how much time you'd like to
+            spend on it each morning. Prices are set at that consultation.
           </p>
+          <Stripes className="mt-10 h-14 sm:h-16 mr-[calc(50%-50vw)]" />
+
+          <ul className="mt-12 lg:mt-16">
+            {services.map((s, i) => (
+              <li
+                key={s.name}
+                ref={(el) => {
+                  rows.current[i] = el;
+                }}
+                data-i={i}
+                data-reveal
+                onPointerEnter={() => setActive(i)}
+                className={`py-7 lg:py-9 transition-opacity duration-500 ${i === active ? '' : 'lg:opacity-55'}`}
+              >
+                <div className="flex items-baseline gap-4">
+                  <h3 className="display text-[2rem] sm:text-[2.5rem]">{s.name}</h3>
+                  {s.price && (
+                    <>
+                      <span className="flex-1 border-b-2 border-dotted border-on-olive/35 translate-y-[-0.35em] hidden sm:block" aria-hidden="true" />
+                      <p className="font-bold shrink-0 hidden sm:block text-on-olive">{s.price}</p>
+                    </>
+                  )}
+                </div>
+                {s.price && <p className="sm:hidden mt-2 font-bold text-on-olive">{s.price}</p>}
+                <p className="mt-3 text-lg leading-[1.6] max-w-xl text-on-olive/90">{s.description}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5" data-reveal>
+            <p className="display text-3xl">Not sure where to start? We'll talk it through.</p>
+            <button type="button" onClick={onBook} data-cta className="btn btn-gold shrink-0 self-start sm:self-auto sm:ml-auto">
+              Book a visit <GoldArrow className="w-8" />
+            </button>
+          </div>
         </div>
       </div>
-
-      <ul className="mt-20 lg:mt-28 grid grid-cols-1 md:grid-cols-2 gap-x-16 lg:gap-x-28 gap-y-16 lg:gap-y-20">
-        {services.map((s, i) => (
-          <li
-            key={s.name}
-            data-reveal
-            style={{ '--delay': `${(i % 2) * 140}ms` } as React.CSSProperties}
-            className="md:[&:nth-child(even)]:relative md:[&:nth-child(even)]:top-24"
-          >
-            <h3 className="display text-4xl sm:text-[2.75rem]">{s.name}</h3>
-            <p className={`mt-3 font-semibold ${s.price ? 'text-cognac' : 'text-gold-ink'}`}>
-              {s.price || 'Priced at consultation'}
-            </p>
-            <p className="mt-4 text-lg leading-[1.6] max-w-md">{s.description}</p>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-28 lg:mt-40 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10" data-reveal>
-        <p className="display text-3xl sm:text-4xl max-w-md">Not sure where to start? We'll talk it through.</p>
-        <button type="button" onClick={onBook} data-cta className="btn btn-primary text-lg shrink-0 self-start lg:self-auto">
-          Book Appointment <GoldArrow className="w-9" />
-        </button>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};

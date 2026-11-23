@@ -1,75 +1,65 @@
 @import "tailwindcss";
 
-/* Haven Lofts design system: boho modern vintage.
-   Cream and sand, deep olive, cognac leather, brushed gold, walnut. Every color is a variable,
-   so light and dark mode swap in one place. */
+/* Haven Lofts: the salon's own 1970s living room. Mustard velvet, walnut, olive wall and cognac leather
+   fill whole sections; photos sit in rounded "sleeves" like album covers. Every colour is a variable so
+   light and dark swap in one place. */
 :root {
-  --bg: #F6EFE4;
-  --bg-rgb: 246 239 228;
-  --bg-alt-rgb: 234 223 203;
-  --bg-alt: #EADFCB;
-  --surface: #FBF7F0;
-  --ink: #2B211C;
-  --ink-soft: #5C4D42;
-  --olive: #4F5638;
-  --olive-deep: #3E442C;
-  --on-olive: #F3ECDF;
-  --cognac: #9A4F2E;
-  --gold: #B8893B;
-  --gold-ink: #7C5B1F;
-  --gold-light: #E9CF95;
-  --btn: #2B211C;
-  --btn-ink: #F6EFE4;
-  --btn-arrow: #B8893B;
-  --shadow: 74 52 30;
-  /* Decor: the salon's own materials. */
-  --glow: #E9B45F;
-  --glow-rgb: 233 180 95;
-  --leaf: #6B7A55;
-  --leaf-light: #8A9870;
-  --leaf-dark: #4F5638;
-  --bloom: #FBF7F0;
-  --rattan: #D9B27A;
-  --rattan-dark: #9C7440;
-  --walnut: #7A5134;
-  --walnut-light: #946543;
-  --candle: #F3ECDF;
+  /* Page and text */
+  --bg: #F4E8CC;
+  --bg-rgb: 244 232 204;
+  --bg-alt: #EBD9AE;
+  --bg-alt-rgb: 235 217 174;
+  --surface: #FAF1DC;
+  --ink: #24180F;
+  --ink-soft: #5A4330;
+  /* The four fields */
+  --mustard: #D4A62A;
+  --mustard-rgb: 212 166 42;
+  --on-mustard: #24180F;
+  --olive: #4B5236;
+  --olive-deep: #3A4029;
+  --on-olive: #F4E8CC;
+  --walnut: #5E3A20;
+  --on-walnut: #F4E8CC;
+  --cognac: #9C4422;
+  --cognac-field: #9C4422;
+  --stripe-1: #B4522A;
+  --stripe-2: #5E3A20;
+  --stripe-3: #4B5236;
+  /* Accents */
+  --gold: #D4A62A;
+  --gold-ink: #6E4A12;
+  --gold-light: #F0CF6E;
+  --btn: #24180F;
+  --btn-ink: #F4E8CC;
+  --rim: #F4E8CC;
   --logo-dark: block;
   --logo-light: none;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
+/* Evening: the cream rooms go espresso; the mustard, olive and walnut fields stay themselves, a shade deeper. */
 [data-theme='dark'] {
-  --bg: #1A1C15;
-  --bg-rgb: 26 28 21;
-  --bg-alt-rgb: 36 31 25;
-  --bg-alt: #241F19;
-  --surface: #2A2620;
-  --ink: #F0E6D3;
-  --ink-soft: #CBBDA6;
-  --olive: #2C3122;
-  --olive-deep: #22261A;
-  --on-olive: #F0E6D3;
-  --cognac: #D9946A;
-  --gold: #D4AA5E;
-  --gold-ink: #E0BC74;
-  --gold-light: #F3DDA8;
-  --btn: #D4AA5E;
-  --btn-ink: #1A1C15;
-  --btn-arrow: #1A1C15;
-  --shadow: 0 0 0;
-  --glow: #F4C77D;
-  --glow-rgb: 244 199 125;
-  --leaf: #55623F;
-  --leaf-light: #6E7D52;
-  --leaf-dark: #3B4230;
-  --bloom: #D9CFB8;
-  --rattan: #C99A5B;
-  --rattan-dark: #7C5528;
-  --walnut: #4A3020;
-  --walnut-light: #5C3C27;
-  --candle: #E8DFCB;
+  --bg: #1C140C;
+  --bg-rgb: 28 20 12;
+  --bg-alt: #2A1E12;
+  --bg-alt-rgb: 42 30 18;
+  --surface: #33251A;
+  --ink: #F4E8CC;
+  --ink-soft: #D8C29A;
+  --mustard: #C99A22;
+  --mustard-rgb: 201 154 34;
+  --olive: #3A4029;
+  --olive-deep: #2D3220;
+  --walnut: #4A2E19;
+  --cognac: #E08A5C;
+  --cognac-field: #7E361A;
+  --gold: #D9A93B;
+  --gold-ink: #F0CF6E;
+  --btn: #F0CF6E;
+  --btn-ink: #24180F;
+  --rim: #E8D9B5;
   --logo-dark: none;
   --logo-light: block;
   color-scheme: dark;
@@ -81,16 +71,21 @@
   --color-surface: var(--surface);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
+  --color-mustard: var(--mustard);
+  --color-on-mustard: var(--on-mustard);
   --color-olive: var(--olive);
   --color-olive-deep: var(--olive-deep);
   --color-on-olive: var(--on-olive);
+  --color-walnut: var(--walnut);
+  --color-on-walnut: var(--on-walnut);
   --color-cognac: var(--cognac);
+  --color-cognac-field: var(--cognac-field);
   --color-gold: var(--gold);
   --color-gold-ink: var(--gold-ink);
   --color-gold-light: var(--gold-light);
   --color-btn: var(--btn);
   --color-btn-ink: var(--btn-ink);
-  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Gloock', Georgia, serif;
   --font-sans: 'Albert Sans', system-ui, -apple-system, sans-serif;
 }
 
@@ -99,97 +94,105 @@
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     -webkit-tap-highlight-color: transparent;
+    scrollbar-color: var(--walnut) var(--bg-alt);
   }
-  /* A drawer is open: the page behind it stays put. */
   html:has(dialog[open]) { overflow: hidden; }
   body {
     font-family: var(--font-sans);
+    font-size: 1.0625rem;
     background-color: var(--bg);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    caret-color: var(--cognac);
   }
-  /* Paper grain: a faint printed texture over everything, like a letterpress card. */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 60;
-    opacity: 0.06;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0 0.15 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  [data-theme='dark'] body::after { opacity: 0.09; mix-blend-mode: soft-light; }
   a, button { touch-action: manipulation; }
   :focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 4px; }
-  /* On the green and dark surfaces the outline switches to light gold, so it always stands out. */
-  .on-olive :focus-visible, dialog.viewer :focus-visible { outline-color: var(--gold-light); }
-  ::selection { background: var(--olive); color: var(--on-olive); }
+  /* On the coloured fields the outline switches so it always stands out. */
+  .on-mustard :focus-visible { outline-color: var(--on-mustard); }
+  .on-dark :focus-visible, dialog.viewer :focus-visible { outline-color: var(--gold-light); }
+  ::selection { background: var(--mustard); color: var(--on-mustard); }
 }
 
-/* Component classes live in the components layer so Tailwind utilities (hidden, md:flex...) can override them. */
 @layer components {
-/* ---------- Type ---------- */
+/* ---------- Type: one display face, one text face ---------- */
 
-/* Editorial display serif, one face and one colour per heading: the words carry the emphasis. */
 .display {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 0.96;
+  line-height: 0.92;
   text-wrap: balance;
 }
-/* Tracking follows size: the big headings tighten, small display lines open back up toward zero. */
-h1.display, h2.display { letter-spacing: -0.028em; }
-h3.display { letter-spacing: -0.012em; line-height: 1.04; }
+h3.display { letter-spacing: -0.01em; line-height: 1; }
 p { text-wrap: pretty; }
 
-/* Small label: sentence case at a readable size, never tracked capitals. */
+/* Small label: sentence case, never tracked capitals, never above a heading. */
 .label {
   font-family: var(--font-sans);
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--gold-ink);
 }
-.on-olive .label { color: var(--gold-light); }
+.on-mustard .label { color: var(--on-mustard); }
+.on-dark .label { color: var(--gold-light); }
 
-/* Logo: the PNG has black script; dark mode swaps in the cream version. */
 .logo-for-light { display: var(--logo-dark); }
 .logo-for-dark { display: var(--logo-light); }
 
-.arch { border-radius: 999px 999px 0 0; }
+/* ---------- The world's shapes ---------- */
+
+/* A photo set like an album sleeve: soft square corners and a cream rim. */
+.sleeve { border-radius: 28px; box-shadow: 0 0 0 10px var(--rim); }
+.sleeve-sm { border-radius: 20px; }
+
+/* The three warm stripes, once per major section. */
+.stripes {
+  /* Thin cream lines between and around the bands keep all three legible on a field of the same colour. */
+  background: linear-gradient(
+    var(--stripe-1) 0 calc(33.33% - 1.5px),
+    var(--rim) calc(33.33% - 1.5px) calc(33.33% + 1.5px),
+    var(--stripe-2) calc(33.33% + 1.5px) calc(66.66% - 1.5px),
+    var(--rim) calc(66.66% - 1.5px) calc(66.66% + 1.5px),
+    var(--stripe-3) calc(66.66% + 1.5px) 100%
+  );
+  border-block: 3px solid var(--rim);
+}
+
+/* The record: black vinyl with fine grooves and a mustard label. */
+.record {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--mustard) 0 15%, #120c07 15.5% 17%, transparent 17.5%),
+    repeating-radial-gradient(circle, #1a120b 0 2px, #241a12 2px 3px);
+  box-shadow: inset 0 0 0 2px #120c07;
+}
 
 /* ---------- Buttons ---------- */
 
 .btn {
   position: relative;
-  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.9rem;
+  gap: 0.8rem;
   height: 3.5rem;
-  padding: 0 2rem;
+  padding: 0 1.9rem;
   border-radius: 999px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  transition:
-    transform 550ms var(--ease),
-    background-color 400ms ease,
-    color 400ms ease;
+  font-weight: 700;
+  transition: transform 550ms var(--ease), background-color 300ms ease, color 300ms ease;
 }
 .btn:hover { transform: translateY(-2px); }
-/* Feedback lands on the press itself, instantly; the lift only eases in on hover. */
 .btn:active { transform: scale(0.97); transition-duration: 90ms; }
 .btn-primary { background: var(--btn); color: var(--btn-ink); }
-.btn-gold { background: var(--gold); color: #1A1C15; }
-.btn-ghost { background: color-mix(in srgb, var(--gold) 14%, transparent); }
-.btn-ghost:hover { background: color-mix(in srgb, var(--gold) 24%, transparent); }
+.btn-olive { background: var(--olive); color: var(--on-olive); }
+.btn-gold { background: var(--mustard); color: var(--on-mustard); }
+.btn-cream { background: var(--rim); color: #24180F; }
+.btn-ghost { background: color-mix(in srgb, var(--ink) 9%, transparent); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--ink) 15%, transparent); }
 .btn-sm { height: 3rem; padding: 0 1.4rem; gap: 0.6rem; }
 
-/* Icon-only round button (theme, menu, close, Instagram). */
 .icon-btn {
   display: flex;
   align-items: center;
@@ -197,178 +200,110 @@ p { text-wrap: pretty; }
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--gold) 14%, transparent);
-  color: var(--gold-ink);
-  transition: transform 450ms var(--ease), color 300ms ease, background-color 300ms ease;
+  background: color-mix(in srgb, var(--ink) 9%, transparent);
+  color: var(--ink);
+  transition: transform 450ms var(--ease), background-color 300ms ease;
 }
-.icon-btn:hover { color: var(--ink); transform: translateY(-1px); background: color-mix(in srgb, var(--gold) 26%, transparent); }
-.on-olive .icon-btn { color: var(--gold-light); }
-.on-olive .icon-btn:hover { color: var(--on-olive); }
+.icon-btn:hover { transform: translateY(-1px); background: color-mix(in srgb, var(--ink) 16%, transparent); }
+.on-mustard .icon-btn { background: rgb(36 24 15 / 0.1); color: var(--on-mustard); }
+.on-dark .icon-btn { background: rgb(244 232 204 / 0.14); color: var(--on-olive); }
 .icon-btn:active { transform: scale(0.92); transition-duration: 90ms; }
 
-/* ---------- Navigation material ---------- */
+/* ---------- Navigation ---------- */
 
-/* The bar is a translucent layer the page scrolls under. Its soft edge only appears once
-   something is actually beneath it, instead of a permanent divider line. */
 .nav-material {
-  background: rgb(var(--bg-rgb) / 0.9);
-  backdrop-filter: blur(28px) saturate(140%);
-  -webkit-backdrop-filter: blur(28px) saturate(140%);
-  transition: box-shadow 400ms ease, background-color 400ms ease;
+  background: rgb(var(--mustard-rgb) / 0.94);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  transition: box-shadow 400ms ease;
 }
-.nav-material[data-scrolled] { box-shadow: 0 10px 24px -18px rgb(0 0 0 / 0.45); } /* taste-skill-ignore: floating bar */
-.sheet-bar { background: rgb(var(--bg-alt-rgb) / 0.86); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%); }
+.nav-material[data-scrolled] { box-shadow: 0 10px 24px -18px rgb(0 0 0 / 0.5); }
+.sheet-bar { background: rgb(var(--mustard-rgb) / 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 
-/* Where am I: the current section's link sits in full ink with a gold underline. */
-.nav-link { position: relative; transition: color 300ms ease; }
+.nav-link { position: relative; }
 .nav-link::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: -6px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--gold);
+  height: 3px;
+  border-radius: 3px;
+  background: var(--on-mustard);
   transform: scaleX(0);
   transition: transform 450ms var(--ease);
 }
-.nav-link[aria-current] { color: var(--ink); }
+.nav-link:hover::after { transform: scaleX(0.4); }
 .nav-link[aria-current]::after { transform: scaleX(1); }
 
-/* The gold arrow nudges forward on hover. On the main button it's gold-on-dark (light) / dark-on-gold (dark). */
 .arrow { transition: transform 450ms var(--ease); }
 a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
 
-/* Text link: a plain gold underline that turns cognac on hover. */
 .link-u {
   text-decoration: underline;
-  text-decoration-color: var(--gold);
+  text-decoration-color: currentColor;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.3em;
-  transition: color 300ms ease, text-decoration-color 300ms ease;
+  transition: text-decoration-color 300ms ease, color 300ms ease;
 }
-.link-u:hover { color: var(--cognac); text-decoration-color: var(--cognac); }
-
-/* Specialties read as a sentence: commas between them, no ornaments. */
-.spec-list li { display: inline; }
-.spec-list li:not(:last-child)::after { content: ', '; }
-
+.link-u:hover { text-decoration-color: var(--cognac); }
+.on-dark .link-u:hover { text-decoration-color: var(--gold-light); }
 }
 
-/* Outside the components layer on purpose: these must beat the arrow's own text-gold utility. */
-.btn-primary .arrow { color: var(--btn-arrow); }
-.btn-gold .arrow { color: #1A1C15; }
+.btn-primary .arrow, .btn-olive .arrow, .btn-cream .arrow { color: inherit; }
+.btn-gold .arrow { color: var(--on-mustard); }
 
-/* ---------- Decor: the salon's light and greenery ---------- */
+/* ---------- Photos ---------- */
 
-/* Backlit arch, like the salon's mirrors: a thin warm rim and the light spilling past it. */
-.arch-glow { position: relative; isolation: isolate; }
-.arch-glow::before {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  z-index: -1;
-  border-radius: 999px 999px 0 0;
-  background: var(--glow);
-  box-shadow: 0 0 22px 4px rgb(var(--glow-rgb) / 0.55), 0 0 70px 10px rgb(var(--glow-rgb) / 0.22);
-}
-:root:not([data-theme='dark']) .arch-glow::before { box-shadow: 0 0 18px 2px rgb(var(--glow-rgb) / 0.45); }
+.photo-img { transition: scale 1200ms var(--ease); }
+.photo:hover .photo-img { scale: 1.04; }
+.photo:focus-visible { outline-offset: 6px; }
 
-/* The pool of light under a rattan pendant. */
-.pendant-light {
-  top: 62%;
-  width: 340%;
-  aspect-ratio: 1;
-  background: radial-gradient(closest-side, rgb(var(--glow-rgb) / 0.32), rgb(var(--glow-rgb) / 0.1) 45%, transparent);
-  z-index: 0;
-}
-.bulb { filter: drop-shadow(0 0 8px var(--glow)); }
+/* The photo strip scrolls sideways without a visible bar. */
+.suite-strip { scrollbar-width: none; scroll-padding-inline: 1.25rem; }
+.suite-strip::-webkit-scrollbar { display: none; }
+@media (min-width: 640px) { .suite-strip { scroll-padding-inline: 2rem; } }
+@media (min-width: 1024px) { .suite-strip { scroll-padding-inline: 3rem; } }
 
-/* Slat wall: lit from above, fading out at the edges into the room. */
-.slat-wall { opacity: 0.55; mask-image: radial-gradient(ellipse 70% 80% at 60% 30%, #000 30%, transparent 80%); }
-[data-theme='dark'] .slat-wall { opacity: 0.8; }
+/* The spray tan band sits on the salon's real floral wallpaper, darkened so the words stay clear. */
+.wallpaper-bg { background: url('/photos/wallpaper-1280.webp') center 30% / cover; }
 
-/* Neon script sign, like the spray tan room's. */
-.neon {
-  font-family: 'Sacramento', cursive;
-  font-weight: 400;
-  line-height: 1;
-  color: #FFF4DE;
-  text-shadow:
-    0 0 2px #FFF4DE,
-    0 0 10px rgb(var(--glow-rgb) / 0.9),
-    0 0 26px rgb(var(--glow-rgb) / 0.75),
-    0 0 60px rgb(var(--glow-rgb) / 0.5);
-}
+/* ---------- Motion: one signature, the record ---------- */
 
-/* ---------- Motion ---------- */
-
-@media (prefers-reduced-motion: no-preference) {
-  /* Ivy and pendants sway as if a door just opened. */
-  .sway { transform-origin: 50% 0; animation: sway 7s ease-in-out var(--sway-delay, 0s) infinite alternate; }
-  .sway-slow { transform-origin: 50% 0; animation: sway-small 9s ease-in-out infinite alternate; }
-  .flame { transform-origin: 50% 100%; animation: flicker 2.4s ease-in-out infinite; }
-  .flame-halo { transform-origin: 50% 50%; animation: halo 2.4s ease-in-out infinite; }
-  .pendant-light { animation: breathe 6s ease-in-out infinite alternate; }
-  .arch-glow::before { animation: arch-breathe 6s ease-in-out infinite alternate; }
-  /* The signature moment: the neon sign buzzes on when it scrolls into view. */
-  .js .neon { opacity: 0.12; }
-  .js .is-in .neon, .js .neon.is-in { animation: neon-on 1.6s steps(1, end) forwards; }
-}
-@keyframes sway { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
-@keyframes sway-small { from { transform: rotate(-0.9deg); } to { transform: rotate(0.9deg); } }
-@keyframes flicker {
-  0%, 100% { transform: scale(1, 1) skewX(0deg); opacity: 1; }
-  25% { transform: scale(0.94, 1.06) skewX(2deg); opacity: 0.92; }
-  50% { transform: scale(1.04, 0.95) skewX(-2deg); }
-  75% { transform: scale(0.97, 1.03) skewX(1deg); opacity: 0.96; }
-}
-@keyframes halo { 0%, 100% { opacity: 0.18; transform: scale(1); } 50% { opacity: 0.26; transform: scale(1.1); } }
-@keyframes breathe { from { opacity: 0.8; } to { opacity: 1; } }
-@keyframes arch-breathe { from { opacity: 0.85; } to { opacity: 1; } }
-@keyframes neon-on {
-  0% { opacity: 0.12; }
-  12% { opacity: 1; }
-  18% { opacity: 0.2; }
-  30% { opacity: 1; }
-  36% { opacity: 0.35; }
-  44%, 100% { opacity: 1; }
-}
-
-/* Scroll reveal: visible by default; only hidden once the script has marked the page (`js`). */
+/* Scroll reveal: visible by default; hidden only once the script has marked the page (`js`). */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 1000ms var(--ease), transform 1000ms var(--ease);
+  transform: translateY(22px);
+  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
   transition-delay: var(--delay, 0ms);
 }
-.js [data-reveal='image'] { transform: scale(1.04); }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 
-/* Theme switch: a velvety cross-fade of the whole page where view transitions exist... */
+@media (prefers-reduced-motion: no-preference) {
+  /* The record slides out of the hero sleeve, then turns slowly. */
+  .record-out { animation: record-out 1400ms var(--ease) 300ms both; }
+  .record-spin { animation: spin 14s linear infinite; }
+  /* In the photo strip each sleeve's record peeks out under the pointer. */
+  .peek .record { transition: transform 700ms var(--ease); }
+  .peek:hover .record, .peek:focus-within .record { transform: translateX(34%); }
+  /* Phones have no hover: the sleeve snapped into place shows its record instead. */
+  @media (hover: none) { .peek.is-active .record { transform: translateX(34%); } }
+}
+@keyframes record-out { from { transform: translateX(-38%); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
 ::view-transition-old(root),
-::view-transition-new(root) { animation-duration: 650ms; animation-timing-function: ease; }
-/* ...and a color fade of every element where they don't. */
+::view-transition-new(root) { animation-duration: 600ms; animation-timing-function: ease; }
 .theme-fading *,
 .theme-fading *::before,
 .theme-fading *::after {
-  transition:
-    background-color 600ms ease,
-    color 600ms ease,
-    border-color 600ms ease,
-    fill 600ms ease,
-    stroke 600ms ease,
-    filter 600ms ease,
-    box-shadow 600ms ease !important;
+  transition: background-color 500ms ease, color 500ms ease, border-color 500ms ease, fill 500ms ease, box-shadow 500ms ease !important;
 }
 
-/* Dark mode: tone the bright Google map down to the evening palette. Inverting then rotating
-   the hue keeps water blue, parks green and the pin red; street names stay readable. */
 .map-embed { transition: filter 600ms ease; }
-[data-theme='dark'] .map-embed { filter: invert(0.9) hue-rotate(180deg) brightness(0.92) contrast(0.88) sepia(0.18); }
+[data-theme='dark'] .map-embed { filter: invert(0.9) hue-rotate(180deg) brightness(0.92) contrast(0.88) sepia(0.2); }
 
-/* ---------- Drawers (booking concierge, phone menu) ---------- */
+/* ---------- Drawers (booking, phone menu) ---------- */
 
 dialog.drawer {
   margin: 0 0 0 auto;
@@ -381,18 +316,14 @@ dialog.drawer {
   border: 0;
   background: var(--bg);
   color: var(--ink);
-  box-shadow: -40px 0 80px -40px rgb(0 0 0 / 0.45); /* taste-skill-ignore: a drawer really floats */
+  box-shadow: -40px 0 80px -40px rgb(0 0 0 / 0.45);
   overflow: hidden;
 }
 dialog.drawer[open] { animation: drawer-in 600ms var(--ease) both; }
 dialog.drawer.closing { animation: drawer-out 380ms cubic-bezier(0.55, 0, 0.75, 0.2) both; }
-dialog.drawer::backdrop {
-  background: rgb(30 22 14 / 0.55);
-  animation: fade-in 500ms ease both;
-}
+dialog.drawer::backdrop { background: rgb(30 22 14 / 0.55); animation: fade-in 500ms ease both; }
 dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
 
-/* On phones the booking drawer rises as a bottom sheet. */
 @media (max-width: 639px) {
   dialog.drawer.sheet {
     margin: auto 0 0 0;
@@ -400,7 +331,8 @@ dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
     width: 100%;
     height: auto;
     max-height: 92dvh;
-    box-shadow: 0 -30px 60px -30px rgb(0 0 0 / 0.45); /* taste-skill-ignore: the sheet really floats */
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -30px 60px -30px rgb(0 0 0 / 0.45);
   }
   dialog.drawer.sheet[open] { animation-name: sheet-in; }
   dialog.drawer.sheet.closing { animation-name: sheet-out; }
@@ -413,61 +345,7 @@ dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes fade-out { to { opacity: 0; } }
 
-/* Reduced motion keeps the feedback but drops the travel: gentle cross-fades instead of slides. */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .js [data-reveal] { transform: none; transition: opacity 400ms ease; transition-delay: 0ms; }
-  .btn, .icon-btn, .arrow, .link-u, .map-embed { transition: background-color 200ms ease, color 200ms ease; }
-  .btn:hover, .btn:active, .icon-btn:hover, .icon-btn:active, a:hover .arrow, button:hover .arrow { transform: none; }
-  .nav-link::after { transition: none; }
-  dialog.drawer[open], dialog.drawer.sheet[open] { animation: fade-in 240ms ease both; }
-  dialog.drawer.closing, dialog.drawer.sheet.closing { animation: fade-out 200ms ease both; }
-  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 300ms; }
-}
-
-/* Reduced transparency: the frosted bars become solid. */
-@media (prefers-reduced-transparency: reduce) {
-  .nav-material { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .sheet-bar { background: var(--bg-alt); backdrop-filter: none; -webkit-backdrop-filter: none; }
-}
-
-/* More contrast: solid bars with a defined edge, and ghost buttons get an outline. */
-@media (prefers-contrast: more) {
-  .nav-material { background: var(--bg); backdrop-filter: none; box-shadow: inset 0 -2px 0 var(--ink); }
-  .btn-ghost, .icon-btn { box-shadow: inset 0 0 0 2px var(--gold); }
-  .slat-wall, .decor { opacity: 0.35; }
-}
-
-/* ---------- Photos (the owners section's salon photo and the full-screen viewer) ---------- */
-
-/* Photos zoom a touch under the pointer; scale, so it never fights the scroll drift's transform. */
-.photo-img { transition: scale 1200ms var(--ease); }
-.photo:hover .photo-img { scale: 1.035; }
-.photo:focus-visible { outline-offset: 3px; }
-
-/* The spray tan band sits on a photo of the salon's own floral wallpaper, darkened so the words stay clear. */
-.wallpaper-bg { background: url('/photos/wallpaper-1280.webp') center 30% / cover; opacity: 0.85; }
-
-/* Reveal: a soft upward wipe while the photo settles from a slight zoom. */
-.js [data-reveal='photo'] { transform: none; clip-path: inset(18% 0 0 0); transition-property: opacity, clip-path; transition-duration: 1400ms; }
-.js [data-reveal='photo'] .photo-img { scale: 1.12; transition: scale 1800ms var(--ease); }
-.js [data-reveal='photo'].is-in { clip-path: inset(0 0 0 0); }
-.js [data-reveal='photo'].is-in .photo-img { scale: 1; }
-.js [data-reveal='photo'].is-in .photo:hover .photo-img { scale: 1.035; }
-
-@media (prefers-reduced-motion: no-preference) {
-  /* The photo drifts a little slower than the page; its own scale(1.1) gives the drift room. */
-  @supports (animation-timeline: view()) {
-    .drift { animation: drift linear both; animation-timeline: view(); }
-  }
-}
-@keyframes drift { from { transform: translateY(-4%) scale(1.1); } to { transform: translateY(4%) scale(1.1); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .js [data-reveal='photo'] { clip-path: none; }
-  .js [data-reveal] .photo-img, .photo:hover .photo-img, .js [data-reveal].is-in .photo:hover .photo-img { scale: 1; }
-}
-
+/* Full-screen photo viewer. */
 dialog.viewer {
   position: fixed;
   inset: 0;
@@ -478,13 +356,13 @@ dialog.viewer {
   margin: 0;
   padding: 0;
   border: 0;
-  background: rgb(14 12 9 / 0.96);
+  background: rgb(20 14 9 / 0.96);
   overscroll-behavior: contain;
   touch-action: pan-y;
 }
 dialog.viewer[open] { animation: fade-in 300ms ease both; }
 dialog.viewer::backdrop { background: transparent; }
-.viewer-img { animation: fade-in 450ms ease both; }
+.viewer-img { border-radius: 20px; animation: fade-in 450ms ease both; }
 .viewer-btn {
   display: flex;
   align-items: center;
@@ -492,27 +370,29 @@ dialog.viewer::backdrop { background: transparent; }
   width: 3rem;
   height: 3rem;
   border-radius: 999px;
-  color: #F0E6D3;
-  background: rgb(240 230 211 / 0.12);
+  color: #F4E8CC;
+  background: rgb(244 232 204 / 0.14);
   transition: background-color 300ms ease;
 }
-.viewer-btn:hover { background: rgb(240 230 211 / 0.22); }
+.viewer-btn:hover { background: rgb(244 232 204 / 0.24); }
 .viewer-btn:active { scale: 0.92; }
 
-/* The photo strip in The space scrolls sideways without a visible bar. */
-.suite-strip { scrollbar-width: none; scroll-padding-inline: 1.25rem; }
-.suite-strip::-webkit-scrollbar { display: none; }
-@media (min-width: 640px) { .suite-strip { scroll-padding-inline: 2rem; } }
-@media (min-width: 1024px) { .suite-strip { scroll-padding-inline: 3rem; } }
-
-/* A text link on the green and dark surfaces: light gold underline. */
-.link-light { text-decoration-color: var(--gold-light); }
-.link-light:hover { color: var(--gold-light); text-decoration-color: var(--gold-light); }
-
-/* Front page photo: a soft darkening only along the bottom, where the name sits. */
-.hero-scrim { background: linear-gradient(to top, rgb(18 14 9 / 0.7) 0%, rgb(18 14 9 / 0.3) 30%, rgb(18 14 9 / 0) 55%); }
-@media (prefers-reduced-motion: no-preference) {
-  /* The photo settles in, like your eyes adjusting as you step inside. */
-  .hero-photo img { animation: settle 2400ms var(--ease) both; }
+/* Reduced motion keeps the feedback but drops the travel. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal] { transform: none; transition: opacity 400ms ease; transition-delay: 0ms; }
+  .btn, .icon-btn, .arrow, .link-u, .map-embed, .photo-img { transition: background-color 200ms ease, color 200ms ease; }
+  .btn:hover, .btn:active, .icon-btn:hover, .icon-btn:active, a:hover .arrow, button:hover .arrow { transform: none; }
+  .photo:hover .photo-img { scale: 1; }
+  dialog.drawer[open], dialog.drawer.sheet[open] { animation: fade-in 240ms ease both; }
+  dialog.drawer.closing, dialog.drawer.sheet.closing { animation: fade-out 200ms ease both; }
 }
-@keyframes settle { from { transform: scale(1.08); } }
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav-material, .sheet-bar { background: var(--mustard); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+
+@media (prefers-contrast: more) {
+  .nav-material { box-shadow: inset 0 -2px 0 var(--on-mustard); }
+  .btn-ghost, .icon-btn { box-shadow: inset 0 0 0 2px currentColor; }
+}

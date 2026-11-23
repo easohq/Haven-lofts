@@ -24,9 +24,8 @@ export const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'w
   </svg>
 );
 
-/** Round "By appointment only" seal: a filled gold disc, readable at a glance. */
-export const AppointmentSeal: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div className={`rounded-full bg-gold text-[#1A1C15] flex items-center justify-center text-center p-3 ${className}`}>
-    <span className="text-[0.8125rem] sm:text-[0.9375rem] font-semibold leading-tight">By appointment only</span>
-  </div>
+
+/** The world's signature: three warm stripes (cognac, walnut, olive), placed once inside a section, never on its edge. */
+export const Stripes: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <div className={`stripes pointer-events-none ${className}`} aria-hidden="true" />
 );
