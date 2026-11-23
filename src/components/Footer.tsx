@@ -2,11 +2,11 @@ import React from 'react';
 import { SalonInfo, Stylist } from '../types.ts';
 import { GoldArrow, InstagramIcon, Logo } from './Brand.tsx';
 import { mapsUrl } from '../utils/maps.ts';
-import { Ivy } from './Decor.tsx';
+import { Photo } from './Photo.tsx';
 
 const LINKS = [
+  { href: '#space', label: 'The space' },
   { href: '#services', label: 'Services' },
-  { href: '#space', label: 'Space' },
   { href: '#spray-tan', label: 'Spray tan' },
   { href: '#stylists', label: 'Stylists' },
   { href: '#visit', label: 'Visit' },
@@ -22,7 +22,6 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
 
   return (
     <footer className="relative overflow-hidden bg-bg-alt pt-32 pb-28 sm:pb-14">
-      <Ivy length={2} className="left-[45%] hidden lg:block" delay={1.1} />
       <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7" data-reveal>
@@ -31,12 +30,13 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
               Book Appointment <GoldArrow className="w-9" />
             </button>
           </div>
-          <div className="lg:col-span-4 lg:col-start-9 lg:justify-self-end" data-reveal>
-            <Logo className="w-56 h-auto" />
+          <div className="lg:col-span-4 lg:col-start-9 w-full max-w-sm lg:justify-self-end" data-reveal="photo">
+            <Photo id="lounge" sizes="(min-width:1024px) 30vw, 90vw" className="arch w-full aspect-[4/5]" />
           </div>
         </div>
+        <Logo className="w-48 h-auto mt-16" />
 
-        <div className="mt-16 bg-bg">
+        <div className="mt-10 bg-bg">
           <div className="px-6 sm:px-10 py-9 grid grid-cols-1 sm:grid-cols-3 gap-9">
             <nav aria-label="Footer">
               <p className="label">Explore</p>

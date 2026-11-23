@@ -1,7 +1,6 @@
 import React from 'react';
 import { Stylist } from '../types.ts';
 import { GoldArrow, InstagramIcon } from './Brand.tsx';
-import { Ivy } from './Decor.tsx';
 
 interface StylistsSectionProps {
   stylists: Stylist[];
@@ -13,7 +12,7 @@ interface StylistsSectionProps {
  * exact double arch, weighted toward the face; until then a gold italic initial holds the space.
  */
 const Portrait: React.FC<{ stylist: Stylist }> = ({ stylist: s }) => (
-  <div className="arch-glow">
+  <div>
     <div className="arch overflow-hidden aspect-[3/4] bg-olive-deep">
       {s.photo ? (
         <img
@@ -37,8 +36,6 @@ const Portrait: React.FC<{ stylist: Stylist }> = ({ stylist: s }) => (
 // Two magazine spreads: Sarah's portrait left with her story beside it; Leah's mirrored and set lower.
 export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBook }) => (
   <section id="stylists" className="relative overflow-hidden on-olive bg-olive text-on-olive pt-24 pb-32 lg:pt-32 lg:pb-44 scroll-mt-16">
-    <Ivy length={2} className="hidden md:block left-[4%]" delay={0.6} />
-    <Ivy length={3} flip className="right-[3%]" delay={1.8} />
     <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12">
       <div className="lg:ml-[41.66%]">
         <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)]">
@@ -56,7 +53,7 @@ export const StylistsSection: React.FC<StylistsSectionProps> = ({ stylists, onBo
             <article key={s.id} className="group grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 items-center">
               <div
                 data-reveal="image"
-                className={`md:col-span-5 lg:col-span-4 max-w-[340px] w-full ${
+                className={`md:col-span-5 lg:col-span-4 max-w-[220px] md:max-w-[340px] w-full ${
                   mirrored ? 'md:order-2 md:col-start-8 lg:col-start-8 justify-self-end' : 'lg:col-start-2'
                 }`}
               >

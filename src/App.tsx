@@ -3,7 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { SprayTan } from './components/SprayTan.tsx';
+import { OpenPhoto, PhotoViewer } from './components/Photo.tsx';
+import { PHOTO_ORDER, PhotoId } from './data/photos.ts';
 import { Navbar } from './components/Navbar.tsx';
 import { Hero } from './components/Hero.tsx';
 import { Services } from './components/Services.tsx';
@@ -38,15 +41,19 @@ function useReveal() {
 export default function App() {
   const [booking, setBooking] = useState<{ open: boolean; stylistId: string | null }>({ open: false, stylistId: null });
   const book = (stylistId: string | null = null) => setBooking({ open: true, stylistId });
+  const [viewer, setViewer] = useState<number | null>(null);
+  const openPhoto = useCallback((id: PhotoId) => setViewer(PHOTO_ORDER.indexOf(id)), []);
   useReveal();
 
   return (
+    <OpenPhoto.Provider value={openPhoto}>
     <div className="min-h-svh flex flex-col">
       <Navbar salonInfo={salonInfo} onBook={() => book()} />
       <main className="flex-1">
         <Hero salonInfo={salonInfo} onBook={() => book()} />
+        <SpaceSection salonInfo={salonInfo} />
         <Services services={SERVICES} onBook={() => book()} />
-        <SpaceSection salonInfo={salonInfo} onBook={() => book()} />
+        <SprayTan onBook={() => book()} />
         <StylistsSection stylists={stylists} onBook={book} />
         <LocationSection salonInfo={salonInfo} />
       </main>
@@ -59,6 +66,8 @@ export default function App() {
         stylistId={booking.stylistId}
       />
       <MobileBottomBar onBook={() => book()} />
+      <PhotoViewer index={viewer} onIndex={setViewer} onClose={() => setViewer(null)} />
     </div>
+    </OpenPhoto.Provider>
   );
 }

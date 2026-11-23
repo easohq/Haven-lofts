@@ -22,18 +22,7 @@
   --btn-ink: #F6EFE4;
   --btn-arrow: #B8893B;
   --shadow: 74 52 30;
-  /* Decor: the salon's own materials. */
-  --glow: #E9B45F;
-  --glow-rgb: 233 180 95;
-  --leaf: #6B7A55;
-  --leaf-light: #8A9870;
-  --leaf-dark: #4F5638;
-  --bloom: #FBF7F0;
-  --rattan: #D9B27A;
-  --rattan-dark: #9C7440;
-  --walnut: #7A5134;
-  --walnut-light: #946543;
-  --candle: #F3ECDF;
+  --noir: #17181A;
   --logo-dark: block;
   --logo-light: none;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -59,17 +48,7 @@
   --btn-ink: #1A1C15;
   --btn-arrow: #1A1C15;
   --shadow: 0 0 0;
-  --glow: #F4C77D;
-  --glow-rgb: 244 199 125;
-  --leaf: #55623F;
-  --leaf-light: #6E7D52;
-  --leaf-dark: #3B4230;
-  --bloom: #D9CFB8;
-  --rattan: #C99A5B;
-  --rattan-dark: #7C5528;
-  --walnut: #4A3020;
-  --walnut-light: #5C3C27;
-  --candle: #E8DFCB;
+  --noir: #121310;
   --logo-dark: none;
   --logo-light: block;
   color-scheme: dark;
@@ -90,6 +69,7 @@
   --color-gold-light: var(--gold-light);
   --color-btn: var(--btn);
   --color-btn-ink: var(--btn-ink);
+  --color-noir: var(--noir);
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Albert Sans', system-ui, -apple-system, sans-serif;
 }
@@ -258,81 +238,86 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
 .btn-primary .arrow { color: var(--btn-arrow); }
 .btn-gold .arrow { color: #1A1C15; }
 
-/* ---------- Decor: the salon's light and greenery ---------- */
+/* ---------- Photography ---------- */
 
-/* Backlit arch, like the salon's mirrors: a thin warm rim and the light spilling past it. */
-.arch-glow { position: relative; isolation: isolate; }
-.arch-glow::before {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  z-index: -1;
-  border-radius: 999px 999px 0 0;
-  background: var(--glow);
-  box-shadow: 0 0 22px 4px rgb(var(--glow-rgb) / 0.55), 0 0 70px 10px rgb(var(--glow-rgb) / 0.22);
+/* Hero: a scrim only where the words sit, so the room stays bright everywhere else. */
+.hero-scrim {
+  background:
+    linear-gradient(to top, rgb(18 14 9 / 0.82) 0%, rgb(18 14 9 / 0.55) 32%, rgb(18 14 9 / 0) 62%),
+    linear-gradient(to right, rgb(18 14 9 / 0.35), rgb(18 14 9 / 0) 55%);
 }
-:root:not([data-theme='dark']) .arch-glow::before { box-shadow: 0 0 18px 2px rgb(var(--glow-rgb) / 0.45); }
+.link-light { text-decoration-color: #E9CF95; }
+.link-light:hover { color: #E9CF95; text-decoration-color: #E9CF95; }
 
-/* The pool of light under a rattan pendant. */
-.pendant-light {
-  top: 62%;
-  width: 340%;
-  aspect-ratio: 1;
-  background: radial-gradient(closest-side, rgb(var(--glow-rgb) / 0.32), rgb(var(--glow-rgb) / 0.1) 45%, transparent);
-  z-index: 0;
-}
-.bulb { filter: drop-shadow(0 0 8px var(--glow)); }
+/* Photos zoom a touch under the pointer; scale, so it never fights the scroll drift's translate. */
+.photo-img { transition: scale 1200ms var(--ease); }
+.photo:hover .photo-img { scale: 1.035; }
+.photo:focus-visible { outline-offset: 3px; }
 
-/* Slat wall: lit from above, fading out at the edges into the room. */
-.slat-wall { opacity: 0.55; mask-image: radial-gradient(ellipse 70% 80% at 60% 30%, #000 30%, transparent 80%); }
-[data-theme='dark'] .slat-wall { opacity: 0.8; }
-
-/* Neon script sign, like the spray tan room's. */
-.neon {
-  font-family: 'Sacramento', cursive;
-  font-weight: 400;
-  line-height: 1;
-  color: #FFF4DE;
-  text-shadow:
-    0 0 2px #FFF4DE,
-    0 0 10px rgb(var(--glow-rgb) / 0.9),
-    0 0 26px rgb(var(--glow-rgb) / 0.75),
-    0 0 60px rgb(var(--glow-rgb) / 0.5);
+/* Services: the stage cross-fades between rooms; the other rows step back on wide screens. */
+.service-stage { opacity: 0; transition: opacity 900ms var(--ease); }
+.service-stage[data-on] { opacity: 1; }
+@media (min-width: 1024px) {
+  .service-row { transition: opacity 600ms ease; }
+  .service-row:not([data-on]) { opacity: 0.45; }
+  .service-row:not([data-on]):hover { opacity: 0.8; }
 }
 
-/* ---------- Motion ---------- */
+/* The suites strip scrolls sideways without a visible bar. */
+.suite-strip { scrollbar-width: none; scroll-padding-inline: 1.25rem; }
+.suite-strip::-webkit-scrollbar { display: none; }
+@media (min-width: 640px) { .suite-strip { scroll-padding-inline: 2rem; } }
+@media (min-width: 1024px) { .suite-strip { scroll-padding-inline: 3rem; } }
+
+/* The hallway's floral wallpaper, as a strip that fades into the spray tan room's dark walls. */
+.wallpaper-strip {
+  background: url('/photos/wallpaper-1280.webp') center 30% / cover;
+  mask-image: linear-gradient(to bottom, #000 30%, transparent);
+  opacity: 0.7;
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  /* Ivy and pendants sway as if a door just opened. */
-  .sway { transform-origin: 50% 0; animation: sway 7s ease-in-out var(--sway-delay, 0s) infinite alternate; }
-  .sway-slow { transform-origin: 50% 0; animation: sway-small 9s ease-in-out infinite alternate; }
-  .flame { transform-origin: 50% 100%; animation: flicker 2.4s ease-in-out infinite; }
-  .flame-halo { transform-origin: 50% 50%; animation: halo 2.4s ease-in-out infinite; }
-  .pendant-light { animation: breathe 6s ease-in-out infinite alternate; }
-  .arch-glow::before { animation: arch-breathe 6s ease-in-out infinite alternate; }
-  /* The signature moment: the neon sign buzzes on when it scrolls into view. */
-  .js .neon { opacity: 0.12; }
-  .js .is-in .neon, .js .neon.is-in { animation: neon-on 1.6s steps(1, end) forwards; }
+  /* The hero settles in, like your eyes adjusting as you step inside. */
+  .hero-photo img { animation: settle 2400ms var(--ease) both; }
+  /* Big photos drift slower than the page, for a little depth. Its own scale(1.1) gives the drift room; hover and reveal scale on top of it. */
+  @supports (animation-timeline: view()) {
+    .drift { animation: drift linear both; animation-timeline: view(); }
+  }
 }
-@keyframes sway { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
-@keyframes sway-small { from { transform: rotate(-0.9deg); } to { transform: rotate(0.9deg); } }
-@keyframes flicker {
-  0%, 100% { transform: scale(1, 1) skewX(0deg); opacity: 1; }
-  25% { transform: scale(0.94, 1.06) skewX(2deg); opacity: 0.92; }
-  50% { transform: scale(1.04, 0.95) skewX(-2deg); }
-  75% { transform: scale(0.97, 1.03) skewX(1deg); opacity: 0.96; }
+@keyframes settle { from { transform: scale(1.08); } }
+@keyframes drift { from { transform: translateY(-4%) scale(1.1); } to { transform: translateY(4%) scale(1.1); } }
+
+/* Full-screen photo viewer. */
+dialog.viewer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  max-width: 100%;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(14 12 9 / 0.96);
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
-@keyframes halo { 0%, 100% { opacity: 0.18; transform: scale(1); } 50% { opacity: 0.26; transform: scale(1.1); } }
-@keyframes breathe { from { opacity: 0.8; } to { opacity: 1; } }
-@keyframes arch-breathe { from { opacity: 0.85; } to { opacity: 1; } }
-@keyframes neon-on {
-  0% { opacity: 0.12; }
-  12% { opacity: 1; }
-  18% { opacity: 0.2; }
-  30% { opacity: 1; }
-  36% { opacity: 0.35; }
-  44%, 100% { opacity: 1; }
+dialog.viewer[open] { animation: fade-in 300ms ease both; }
+dialog.viewer::backdrop { background: transparent; }
+.viewer-img { animation: fade-in 450ms ease both; }
+.viewer-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  color: #F0E6D3;
+  background: rgb(240 230 211 / 0.12);
+  transition: background-color 300ms ease;
 }
+.viewer-btn:hover { background: rgb(240 230 211 / 0.22); }
+.viewer-btn:active { scale: 0.92; }
 
 /* Scroll reveal: visible by default; only hidden once the script has marked the page (`js`). */
 .js [data-reveal] {
@@ -341,7 +326,11 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
   transition: opacity 1000ms var(--ease), transform 1000ms var(--ease);
   transition-delay: var(--delay, 0ms);
 }
-.js [data-reveal='image'] { transform: scale(1.04); }
+.js [data-reveal='photo'] { transform: none; clip-path: inset(18% 0 0 0); transition-property: opacity, clip-path; transition-duration: 1400ms; }
+.js [data-reveal='photo'] .photo-img { scale: 1.12; transition: scale 1800ms var(--ease); }
+.js [data-reveal='photo'].is-in { clip-path: inset(0 0 0 0); }
+.js [data-reveal='photo'].is-in .photo-img { scale: 1; }
+.js [data-reveal='photo'].is-in .photo:hover .photo-img { scale: 1.035; }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 
 /* Theme switch: a velvety cross-fade of the whole page where view transitions exist... */
@@ -414,7 +403,9 @@ dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
 /* Reduced motion keeps the feedback but drops the travel: gentle cross-fades instead of slides. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js [data-reveal] { transform: none; transition: opacity 400ms ease; transition-delay: 0ms; }
+  .js [data-reveal] { transform: none; clip-path: none; transition: opacity 400ms ease; transition-delay: 0ms; }
+  .js [data-reveal] .photo-img, .photo:hover .photo-img, .js [data-reveal].is-in .photo:hover .photo-img { scale: 1; }
+  .service-stage, .service-row { transition: opacity 200ms ease; }
   .btn, .icon-btn, .arrow, .link-u, .map-embed { transition: background-color 200ms ease, color 200ms ease; }
   .btn:hover, .btn:active, .icon-btn:hover, .icon-btn:active, a:hover .arrow, button:hover .arrow { transform: none; }
   .nav-link::after { transition: none; }
@@ -433,5 +424,4 @@ dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
 @media (prefers-contrast: more) {
   .nav-material { background: var(--bg); backdrop-filter: none; box-shadow: inset 0 -2px 0 var(--ink); }
   .btn-ghost, .icon-btn { box-shadow: inset 0 0 0 2px var(--gold); }
-  .slat-wall, .decor { opacity: 0.35; }
 }
