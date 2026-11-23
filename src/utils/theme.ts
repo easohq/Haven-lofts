@@ -4,6 +4,10 @@ export function toggleTheme() {
   const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
   const apply = () => {
     root.dataset.theme = next;
+    // Keep the phone status bar the colour of the top bar after a manual switch.
+    document
+      .querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')
+      .forEach((m) => (m.content = next === 'dark' ? '#1B1A17' : '#F2EFEA'));
     try {
       localStorage.setItem('haven-theme', next);
     } catch {

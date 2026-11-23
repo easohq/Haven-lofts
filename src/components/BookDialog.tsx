@@ -142,7 +142,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({ open, onClose, stylists,
 
   return (
     <Drawer open={open} onClose={onClose} labelledBy="book-title" sheet>
-      <div className="min-h-full flex flex-col px-6 sm:px-9 pt-6 sm:pt-8 pb-8">
+      <div className="min-h-full flex flex-col px-6 sm:px-9 pt-6 sm:pt-8 pb-[calc(2rem+env(safe-area-inset-bottom,0px))]">
         {/* On phones the whole top of the sheet is a grab area: drag it down, or flick it away. */}
         <div data-sheet-grab className="-mx-6 -mt-6 px-6 pt-3 pb-1 touch-none sm:touch-auto sm:m-0 sm:p-0">
           <div className="sm:hidden mx-auto mb-5 h-1.5 w-11 rounded-full bg-brass/45" aria-hidden="true" />

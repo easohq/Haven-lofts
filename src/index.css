@@ -84,6 +84,9 @@
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     -webkit-tap-highlight-color: transparent;
+    /* No font inflation when a phone turns to landscape. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     scrollbar-color: var(--walnut-1) var(--bg-alt);
   }
   html:has(dialog[open]) { overflow: hidden; }
@@ -97,7 +100,16 @@
     text-rendering: optimizeLegibility;
     caret-color: var(--cognac);
   }
-  a, button { touch-action: manipulation; }
+  /* No double-tap-zoom wait on anything tappable. */
+  a, button, [role="button"], [role="tab"] { touch-action: manipulation; }
+  /* Controls are not content: a long press shouldn't select their label or pop the callout. Text and addresses stay selectable. */
+  button, [role="button"], [role="tab"], .btn, .icon-btn, .nav-link, .photo {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  /* Landscape phones: keep content clear of the notch. */
+  body { padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px); }
   :focus-visible { outline: 2px solid var(--brass-ink); outline-offset: 4px; }
   /* On the coloured fields the outline switches so it always stands out. */
   .on-dark :focus-visible, dialog.viewer :focus-visible { outline-color: var(--brass-light); }
@@ -152,14 +164,14 @@ p { text-wrap: pretty; }
   font-weight: 700;
   transition: transform 550ms var(--ease), background-color 300ms ease, color 300ms ease;
 }
-.btn:hover { transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { transform: translateY(-2px); } }
 .btn:active { transform: scale(0.97); transition-duration: 90ms; }
 .btn-primary { background: var(--btn); color: var(--btn-ink); }
 .btn-forest { background: var(--forest); color: var(--on-forest); }
 .btn-brass { background: var(--brass); color: #1D1B18; }
 .btn-cream { background: var(--rim); color: #1D1B18; }
 .btn-ghost { background: color-mix(in srgb, var(--ink) 9%, transparent); }
-.btn-ghost:hover { background: color-mix(in srgb, var(--ink) 15%, transparent); }
+@media (hover: hover) and (pointer: fine) { .btn-ghost:hover { background: color-mix(in srgb, var(--ink) 15%, transparent); } }
 .btn-sm { height: 3rem; padding: 0 1.4rem; gap: 0.6rem; }
 
 .icon-btn {
@@ -173,13 +185,14 @@ p { text-wrap: pretty; }
   color: var(--ink);
   transition: transform 450ms var(--ease), background-color 300ms ease;
 }
-.icon-btn:hover { transform: translateY(-1px); background: color-mix(in srgb, var(--ink) 16%, transparent); }
+@media (hover: hover) and (pointer: fine) { .icon-btn:hover { transform: translateY(-1px); background: color-mix(in srgb, var(--ink) 16%, transparent); } }
 .on-dark .icon-btn { background: rgb(243 238 230 / 0.14); color: var(--on-forest); }
 .icon-btn:active { transform: scale(0.92); transition-duration: 90ms; }
 
 /* ---------- Navigation ---------- */
 
 .nav-material {
+  padding-top: env(safe-area-inset-top, 0px);
   background: var(--bg);
   transition: box-shadow 400ms ease;
 }
@@ -199,11 +212,11 @@ p { text-wrap: pretty; }
   transform: scaleX(0);
   transition: transform 450ms var(--ease);
 }
-.nav-link:hover::after { transform: scaleX(0.4); }
+@media (hover: hover) and (pointer: fine) { .nav-link:hover::after { transform: scaleX(0.4); } }
 .nav-link[aria-current]::after { transform: scaleX(1); }
 
 .arrow { transition: transform 450ms var(--ease); }
-a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
+@media (hover: hover) and (pointer: fine) { a:hover .arrow, button:hover .arrow { transform: translateX(5px); } }
 
 .link-u {
   text-decoration: underline;
@@ -212,8 +225,10 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
   text-underline-offset: 0.3em;
   transition: text-decoration-color 300ms ease, color 300ms ease;
 }
-.link-u:hover { text-decoration-color: var(--cognac); }
-.on-dark .link-u:hover { text-decoration-color: var(--brass-light); }
+@media (hover: hover) and (pointer: fine) {
+  .link-u:hover { text-decoration-color: var(--cognac); }
+  .on-dark .link-u:hover { text-decoration-color: var(--brass-light); }
+}
 }
 
 .btn-primary .arrow, .btn-forest .arrow, .btn-cream .arrow, .btn-brass .arrow { color: inherit; }
@@ -221,7 +236,9 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
 /* ---------- Photos ---------- */
 
 .photo-img { transition: scale 1200ms var(--ease); }
-.photo:hover .photo-img { scale: 1.04; }
+@media (hover: hover) and (pointer: fine) { .photo:hover .photo-img { scale: 1.04; } }
+/* Touch gets its feedback on the press instead. */
+.photo:active .photo-img { scale: 0.985; transition-duration: 120ms; }
 .photo:focus-visible { outline-offset: 6px; }
 
 
@@ -330,7 +347,7 @@ dialog.viewer::backdrop { background: transparent; }
   background: rgb(244 232 204 / 0.14);
   transition: background-color 300ms ease;
 }
-.viewer-btn:hover { background: rgb(244 232 204 / 0.24); }
+@media (hover: hover) and (pointer: fine) { .viewer-btn:hover { background: rgb(244 232 204 / 0.24); } }
 .viewer-btn:active { scale: 0.92; }
 
 /* Reduced motion keeps the feedback but drops the travel. */

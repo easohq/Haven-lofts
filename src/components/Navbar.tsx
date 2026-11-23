@@ -97,7 +97,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
       </div>
 
       <Drawer open={open} onClose={() => setOpen(false)} labelledBy="menu-title">
-        <div className="min-h-full flex flex-col px-7 pt-6 pb-8">
+        <div className="min-h-full flex flex-col px-7 pt-[calc(1.5rem+env(safe-area-inset-top,0px))] pb-[calc(2rem+env(safe-area-inset-bottom,0px))]">
           <div className="flex items-center justify-between">
             <h2 id="menu-title" className="display text-3xl">Menu</h2>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close menu" className="icon-btn">
