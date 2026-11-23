@@ -34,6 +34,8 @@ A by-appointment-only salon run by its two owners, each with about twenty years 
 
 - Sections: services, the space, the two stylists, location with map and directions, and a booking drawer per stylist.
 - **Spray tans:** Sara and Leah each have their own spray tan tent, so spray tanning is offered alongside hair. Not yet on the site.
+- **Whose suite is whose** (from the owners): Leah's suite has the gallery wall over the mustard velvet sofa (photos gallery-wall, suite-velvet, suite-slat); Sara's suite is the quiet white room with the big window (photo suite-window).
+- **The house style comes from the lounge, the coffee bar and the mirror wall by the door**: warm white walls, one deep green feature wall, a black wall with brass sconces and a gold mirror, cognac leather, walnut slats, rattan shades and sage velvet. The owners found mustard and orange blocks too loud.
 - **Coffee bar:** a simple coffee bar in the lounge, worth mentioning as part of the visit. Do not invent a drink menu or prices.
 - Contact details (each stylist's phone, booking link, email, Instagram), service prices, the suite photo and headshots live in `src/data/salonData.ts`. A button or line appears only once its field is filled.
 - **Undecided / missing:** both stylists' real phone numbers, Instagram handles, prices, headshots and a photo of a suite. Until the phone numbers exist, the booking drawer shows a "booking line is almost ready" state.

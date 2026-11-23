@@ -30,7 +30,7 @@ const CopyNumber: React.FC<{ stylist: Stylist }> = ({ stylist }) => {
   return (
     <>
       <button type="button" onClick={copy} className="btn btn-ghost btn-sm !px-3">
-        {state === 'copied' ? <Check className="w-4 h-4 text-gold-ink" aria-hidden="true" /> : <Copy className="w-4 h-4 text-gold-ink" aria-hidden="true" />}
+        {state === 'copied' ? <Check className="w-4 h-4 text-brass-ink" aria-hidden="true" /> : <Copy className="w-4 h-4 text-brass-ink" aria-hidden="true" />}
         {state === 'copied' ? 'Copied' : 'Copy'}
       </button>
       <p role="status" className="col-span-3 text-sm text-ink-soft empty:hidden">
@@ -43,11 +43,11 @@ const CopyNumber: React.FC<{ stylist: Stylist }> = ({ stylist }) => {
 /** Small portrait with sleeve corners; the photo crops into it, or the initial stands in. */
 const MiniArch: React.FC<{ stylist: Stylist }> = ({ stylist }) => (
   <div className="w-12 shrink-0">
-    <div className="rounded-[14px] overflow-hidden aspect-[3/4] bg-olive flex items-center justify-center">
+    <div className="rounded-[14px] overflow-hidden aspect-[3/4] bg-forest flex items-center justify-center">
       {stylist.photo ? (
         <img src={stylist.photo} alt="" className="w-full h-full object-cover object-[50%_25%]" />
       ) : (
-        <span className="font-display text-2xl text-gold-light" aria-hidden="true">
+        <span className="font-display text-2xl text-brass-light" aria-hidden="true">
           {stylist.name[0]}
         </span>
       )}
@@ -69,7 +69,7 @@ const StylistPanel: React.FC<{ stylist: Stylist; salonInfo: SalonInfo }> = ({ st
           {s.name} are being set up.
         </p>
         <a href={directionsUrl(salonInfo)} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm mt-5">
-          <Navigation className="w-4 h-4 text-gold-ink" aria-hidden="true" /> Get directions
+          <Navigation className="w-4 h-4 text-brass-ink" aria-hidden="true" /> Get directions
         </a>
       </div>
     );
@@ -94,7 +94,7 @@ const StylistPanel: React.FC<{ stylist: Stylist; salonInfo: SalonInfo }> = ({ st
               <Phone className="w-4 h-4" aria-hidden="true" /> Call
             </a>
             <a href={smsHref(s)} className="btn btn-ghost btn-sm !px-3">
-              <MessageSquare className="w-4 h-4 text-gold-ink" aria-hidden="true" /> Text
+              <MessageSquare className="w-4 h-4 text-brass-ink" aria-hidden="true" /> Text
             </a>
             <CopyNumber stylist={s} />
           </div>
@@ -105,12 +105,12 @@ const StylistPanel: React.FC<{ stylist: Stylist; salonInfo: SalonInfo }> = ({ st
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {s.email && (
             <a href={`mailto:${s.email}?subject=${encodeURIComponent('Appointment at Haven Lofts')}`} className="btn btn-ghost btn-sm">
-              <Mail className="w-4 h-4 text-gold-ink" aria-hidden="true" /> Email {s.name}
+              <Mail className="w-4 h-4 text-brass-ink" aria-hidden="true" /> Email {s.name}
             </a>
           )}
           {s.instagram && (
             <a href={`https://instagram.com/${s.instagram}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">
-              <InstagramIcon className="w-4 h-4 text-gold-ink" /> @{s.instagram}
+              <InstagramIcon className="w-4 h-4 text-brass-ink" /> @{s.instagram}
             </a>
           )}
         </div>
@@ -145,7 +145,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({ open, onClose, stylists,
       <div className="min-h-full flex flex-col px-6 sm:px-9 pt-6 sm:pt-8 pb-8">
         {/* On phones the whole top of the sheet is a grab area: drag it down, or flick it away. */}
         <div data-sheet-grab className="-mx-6 -mt-6 px-6 pt-3 pb-1 touch-none sm:touch-auto sm:m-0 sm:p-0">
-          <div className="sm:hidden mx-auto mb-5 h-1.5 w-11 rounded-full bg-gold/45" aria-hidden="true" />
+          <div className="sm:hidden mx-auto mb-5 h-1.5 w-11 rounded-full bg-brass/45" aria-hidden="true" />
 
           <div className="flex items-start justify-between gap-4">
             <h2 id="book-title" className="display text-5xl sm:text-6xl">
@@ -177,7 +177,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({ open, onClose, stylists,
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(i)}
                 className={`flex items-center gap-3 p-3 text-left transition-[transform,background-color] duration-500 ${
-                  selected ? 'bg-gold/25' : 'bg-bg-alt hover:bg-gold/15 hover:-translate-y-0.5'
+                  selected ? 'bg-brass/25' : 'bg-bg-alt hover:bg-brass/15 hover:-translate-y-0.5'
                 }`}
               >
                 <MiniArch stylist={s} />

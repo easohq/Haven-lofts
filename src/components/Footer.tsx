@@ -11,7 +11,7 @@ const LINKS = [
   { href: '#visit', label: 'Visit' },
 ];
 
-// The sign-off: the three stripes, then the espresso back cover with the logo, one last invitation and the details.
+// The sign-off: the black back cover with the logo, one last invitation and the details.
 export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBook: () => void }> = ({ salonInfo, stylists, onBook }) => {
   const socials = [
     salonInfo.instagram && { handle: salonInfo.instagram, label: 'Haven Lofts on Instagram' },
@@ -19,12 +19,12 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
   ].filter(Boolean) as { handle: string; label: string }[];
 
   return (
-    <footer className="on-dark relative bg-[#24180F] text-[#F4E8CC]">
+    <footer className="on-dark relative bg-noir text-on-noir">
       <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 pt-20 pb-28 sm:pb-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7" data-reveal>
-            <h2 className="display text-[clamp(3rem,6.5vw,5.75rem)]">Come sit a while.</h2>
-            <button type="button" onClick={onBook} data-cta className="btn btn-gold mt-9">
+            <h2 className="display text-[clamp(3.25rem,7vw,6rem)]">Come sit a while.</h2>
+            <button type="button" onClick={onBook} data-cta className="btn btn-brass mt-9">
               Book a visit <GoldArrow className="w-8" />
             </button>
           </div>
@@ -55,7 +55,7 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
           <div>
             <p className="label">Owners</p>
             <p className="mt-4 text-lg">{salonInfo.coFounders}</p>
-            <p className="text-[#F4E8CC]/80">By appointment only</p>
+            <p className="text-on-noir/80">By appointment only</p>
             {socials.length > 0 && (
               <ul className="mt-5 flex gap-3">
                 {socials.map((s) => (
@@ -70,7 +70,7 @@ export const Footer: React.FC<{ salonInfo: SalonInfo; stylists: Stylist[]; onBoo
           </div>
         </div>
 
-        <p className="mt-14 text-sm text-[#F4E8CC]/75">© {new Date().getFullYear()} Haven Lofts · Lakeville, Minnesota</p>
+        <p className="mt-14 text-[0.9375rem] text-on-noir/75">© {new Date().getFullYear()} Haven Lofts · Lakeville, Minnesota</p>
       </div>
     </footer>
   );

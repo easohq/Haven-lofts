@@ -34,7 +34,7 @@ export const Photo: React.FC<PhotoProps> = ({ id, sizes, className = '', imgClas
     <button
       type="button"
       onClick={() => open(id)}
-      className={`photo group relative block overflow-hidden bg-olive-deep cursor-zoom-in ${className}`}
+      className={`photo group relative block overflow-hidden bg-forest-deep cursor-zoom-in ${className}`}
     >
       <img
         src={src(id, 1280)}

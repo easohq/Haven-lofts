@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Service } from '../types.ts';
-import { GoldArrow, Stripes } from './Brand.tsx';
+import { GoldArrow } from './Brand.tsx';
 import { Photo } from './Photo.tsx';
 import { PhotoId } from '../data/photos.ts';
 
@@ -14,8 +14,8 @@ const ROOM: Record<string, PhotoId> = {
 };
 const roomFor = (s: Service): PhotoId => ROOM[s.name] ?? 'lounge';
 
-// The menu reads like the back of a record sleeve: a track list, each line with its price set flush right.
-// On wide screens the mustard panel beside it holds the room for whichever service you're on.
+// The menu as a plain list, each line with its price set flush right when there is one.
+// On wide screens the green panel beside it holds the room for whichever service you're on.
 export const Services: React.FC<{ services: Service[]; onBook: () => void }> = ({ services, onBook }) => {
   const [active, setActive] = useState(0);
   const rows = useRef<(HTMLLIElement | null)[]>([]);
@@ -31,10 +31,10 @@ export const Services: React.FC<{ services: Service[]; onBook: () => void }> = (
   }, [services.length]);
 
   return (
-    <section id="services" className="on-dark relative overflow-x-clip bg-cognac-field text-on-olive pt-24 pb-24 lg:pt-36 lg:pb-36 scroll-mt-16">
+    <section id="services" className="on-dark relative overflow-x-clip bg-noir text-on-noir pt-24 pb-24 lg:pt-36 lg:pb-36 scroll-mt-16">
       <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-12">
         <div className="order-1 lg:order-none lg:col-span-5">
-          <div className="lg:sticky lg:top-[calc(72px+2.5rem)] bg-mustard rounded-[28px] p-5 sm:p-8 aspect-[4/3] lg:aspect-auto lg:h-[calc(100vh-72px-5rem)] max-h-[720px]">
+          <div className="lg:sticky lg:top-[calc(72px+2.5rem)] bg-forest rounded-[28px] p-5 sm:p-8 aspect-[4/3] lg:aspect-auto lg:h-[calc(100vh-72px-5rem)] max-h-[720px]">
             <div className="relative w-full h-full">
               {services.map((s, i) => (
                 <div
@@ -58,7 +58,6 @@ export const Services: React.FC<{ services: Service[]; onBook: () => void }> = (
             Every appointment starts with a conversation: your hair, your routine, and how much time you'd like to
             spend on it each morning. Prices are set at that consultation.
           </p>
-          <Stripes className="mt-10 h-14 sm:h-16 mr-[calc(50%-50vw)]" />
 
           <ul className="mt-12 lg:mt-16">
             {services.map((s, i) => (
@@ -76,20 +75,20 @@ export const Services: React.FC<{ services: Service[]; onBook: () => void }> = (
                   <h3 className="display text-[2rem] sm:text-[2.5rem]">{s.name}</h3>
                   {s.price && (
                     <>
-                      <span className="flex-1 border-b-2 border-dotted border-on-olive/35 translate-y-[-0.35em] hidden sm:block" aria-hidden="true" />
-                      <p className="font-bold shrink-0 hidden sm:block text-on-olive">{s.price}</p>
+                      <span className="flex-1 border-b-2 border-dotted border-on-noir/35 translate-y-[-0.35em] hidden sm:block" aria-hidden="true" />
+                      <p className="font-bold shrink-0 hidden sm:block text-on-noir">{s.price}</p>
                     </>
                   )}
                 </div>
-                {s.price && <p className="sm:hidden mt-2 font-bold text-on-olive">{s.price}</p>}
-                <p className="mt-3 text-lg leading-[1.6] max-w-xl text-on-olive/90">{s.description}</p>
+                {s.price && <p className="sm:hidden mt-2 font-bold text-on-noir">{s.price}</p>}
+                <p className="mt-3 text-lg leading-[1.6] max-w-xl text-on-noir/85">{s.description}</p>
               </li>
             ))}
           </ul>
 
           <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5" data-reveal>
             <p className="display text-3xl">Not sure where to start? We'll talk it through.</p>
-            <button type="button" onClick={onBook} data-cta className="btn btn-gold shrink-0 self-start sm:self-auto sm:ml-auto">
+            <button type="button" onClick={onBook} data-cta className="btn btn-brass shrink-0 self-start sm:self-auto sm:ml-auto">
               Book a visit <GoldArrow className="w-8" />
             </button>
           </div>

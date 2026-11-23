@@ -1,65 +1,57 @@
 @import "tailwindcss";
 
-/* Haven Lofts: the salon's own 1970s living room. Mustard velvet, walnut, olive wall and cognac leather
-   fill whole sections; photos sit in rounded "sleeves" like album covers. Every colour is a variable so
-   light and dark swap in one place. */
+/* Haven Lofts, styled after the salon itself: warm white walls, the lounge's deep green feature wall, the black
+   mirror wall by the door with its brass sconces and gold mirror, cognac leather chairs, walnut slats, rattan
+   shades and sage velvet. Mostly white, green and black; brass, cognac and walnut are the details.
+   Photos sit in rounded "sleeves". Every colour is a variable so light and dark swap in one place. */
 :root {
-  /* Page and text */
-  --bg: #F4E8CC;
-  --bg-rgb: 244 232 204;
-  --bg-alt: #EBD9AE;
-  --bg-alt-rgb: 235 217 174;
-  --surface: #FAF1DC;
-  --ink: #24180F;
-  --ink-soft: #5A4330;
-  /* The four fields */
-  --mustard: #D4A62A;
-  --mustard-rgb: 212 166 42;
-  --on-mustard: #24180F;
-  --olive: #4B5236;
-  --olive-deep: #3A4029;
-  --on-olive: #F4E8CC;
-  --walnut: #5E3A20;
-  --on-walnut: #F4E8CC;
-  --cognac: #9C4422;
-  --cognac-field: #9C4422;
-  --stripe-1: #B4522A;
-  --stripe-2: #5E3A20;
-  --stripe-3: #4B5236;
-  /* Accents */
-  --gold: #D4A62A;
-  --gold-ink: #6E4A12;
-  --gold-light: #F0CF6E;
-  --btn: #24180F;
-  --btn-ink: #F4E8CC;
-  --rim: #F4E8CC;
+  /* Walls and text */
+  --bg: #F2EFEA;
+  --bg-rgb: 242 239 234;
+  --bg-alt: #E7DFD1;
+  --surface: #FBF8F3;
+  --ink: #1D1B18;
+  --ink-soft: #4F4A42;
+  /* The lounge's green wall and the black mirror wall */
+  --forest: #3E4A37;
+  --forest-deep: #2F3829;
+  --on-forest: #F2EFEA;
+  --noir: #1D1B18;
+  --on-noir: #F2EFEA;
+  /* Details */
+  --brass: #B08A50;
+  --brass-ink: #765726;
+  --brass-light: #D8BC86;
+  --cognac: #8A4A26;
+  --sage: #8A8F6E;
+  --walnut-1: #7A5333;
+  --walnut-2: #9A6C42;
+  --walnut-3: #5B3C24;
+  --btn: #1D1B18;
+  --btn-ink: #F2EFEA;
+  --rim: #F2EFEA;
   --logo-dark: block;
   --logo-light: none;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
-/* Evening: the cream rooms go espresso; the mustard, olive and walnut fields stay themselves, a shade deeper. */
+/* Evening: the white walls go near-black, the green wall and brass stay. */
 [data-theme='dark'] {
-  --bg: #1C140C;
-  --bg-rgb: 28 20 12;
-  --bg-alt: #2A1E12;
-  --bg-alt-rgb: 42 30 18;
-  --surface: #33251A;
-  --ink: #F4E8CC;
-  --ink-soft: #D8C29A;
-  --mustard: #C99A22;
-  --mustard-rgb: 201 154 34;
-  --olive: #3A4029;
-  --olive-deep: #2D3220;
-  --walnut: #4A2E19;
-  --cognac: #E08A5C;
-  --cognac-field: #7E361A;
-  --gold: #D9A93B;
-  --gold-ink: #F0CF6E;
-  --btn: #F0CF6E;
-  --btn-ink: #24180F;
-  --rim: #E8D9B5;
+  --bg: #1B1A17;
+  --bg-rgb: 27 26 23;
+  --bg-alt: #24221E;
+  --surface: #2C2924;
+  --ink: #F2EFEA;
+  --ink-soft: #CFC6B6;
+  --forest: #34402F;
+  --forest-deep: #29321F;
+  --noir: #121110;
+  --brass-ink: #D8BC86;
+  --cognac: #D99A6E;
+  --btn: #D8BC86;
+  --btn-ink: #1D1B18;
+  --rim: #E8E0D2;
   --logo-dark: none;
   --logo-light: block;
   color-scheme: dark;
@@ -71,18 +63,16 @@
   --color-surface: var(--surface);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
-  --color-mustard: var(--mustard);
-  --color-on-mustard: var(--on-mustard);
-  --color-olive: var(--olive);
-  --color-olive-deep: var(--olive-deep);
-  --color-on-olive: var(--on-olive);
-  --color-walnut: var(--walnut);
-  --color-on-walnut: var(--on-walnut);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-on-forest: var(--on-forest);
+  --color-noir: var(--noir);
+  --color-on-noir: var(--on-noir);
+  --color-brass: var(--brass);
+  --color-brass-ink: var(--brass-ink);
+  --color-brass-light: var(--brass-light);
   --color-cognac: var(--cognac);
-  --color-cognac-field: var(--cognac-field);
-  --color-gold: var(--gold);
-  --color-gold-ink: var(--gold-ink);
-  --color-gold-light: var(--gold-light);
+  --color-sage: var(--sage);
   --color-btn: var(--btn);
   --color-btn-ink: var(--btn-ink);
   --font-display: 'Gloock', Georgia, serif;
@@ -94,12 +84,12 @@
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     -webkit-tap-highlight-color: transparent;
-    scrollbar-color: var(--walnut) var(--bg-alt);
+    scrollbar-color: var(--walnut-1) var(--bg-alt);
   }
   html:has(dialog[open]) { overflow: hidden; }
   body {
     font-family: var(--font-sans);
-    font-size: 1.0625rem;
+    font-size: 1.125rem;
     background-color: var(--bg);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
@@ -108,11 +98,10 @@
     caret-color: var(--cognac);
   }
   a, button { touch-action: manipulation; }
-  :focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 4px; }
+  :focus-visible { outline: 2px solid var(--brass-ink); outline-offset: 4px; }
   /* On the coloured fields the outline switches so it always stands out. */
-  .on-mustard :focus-visible { outline-color: var(--on-mustard); }
-  .on-dark :focus-visible, dialog.viewer :focus-visible { outline-color: var(--gold-light); }
-  ::selection { background: var(--mustard); color: var(--on-mustard); }
+  .on-dark :focus-visible, dialog.viewer :focus-visible { outline-color: var(--brass-light); }
+  ::selection { background: var(--forest); color: var(--on-forest); }
 }
 
 @layer components {
@@ -133,10 +122,9 @@ p { text-wrap: pretty; }
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   font-weight: 700;
-  color: var(--gold-ink);
+  color: var(--brass-ink);
 }
-.on-mustard .label { color: var(--on-mustard); }
-.on-dark .label { color: var(--gold-light); }
+.on-dark .label { color: var(--brass-light); }
 
 .logo-for-light { display: var(--logo-dark); }
 .logo-for-dark { display: var(--logo-light); }
@@ -144,30 +132,11 @@ p { text-wrap: pretty; }
 /* ---------- The world's shapes ---------- */
 
 /* A photo set like an album sleeve: soft square corners and a cream rim. */
-.sleeve { border-radius: 28px; box-shadow: 0 0 0 10px var(--rim); }
+.sleeve { border-radius: 28px; outline: 10px solid var(--rim); }
+.sleeve-thin { outline-width: 6px; }
 .sleeve-sm { border-radius: 20px; }
 
-/* The three warm stripes, once per major section. */
-.stripes {
-  /* Thin cream lines between and around the bands keep all three legible on a field of the same colour. */
-  background: linear-gradient(
-    var(--stripe-1) 0 calc(33.33% - 1.5px),
-    var(--rim) calc(33.33% - 1.5px) calc(33.33% + 1.5px),
-    var(--stripe-2) calc(33.33% + 1.5px) calc(66.66% - 1.5px),
-    var(--rim) calc(66.66% - 1.5px) calc(66.66% + 1.5px),
-    var(--stripe-3) calc(66.66% + 1.5px) 100%
-  );
-  border-block: 3px solid var(--rim);
-}
 
-/* The record: black vinyl with fine grooves and a mustard label. */
-.record {
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, var(--mustard) 0 15%, #120c07 15.5% 17%, transparent 17.5%),
-    repeating-radial-gradient(circle, #1a120b 0 2px, #241a12 2px 3px);
-  box-shadow: inset 0 0 0 2px #120c07;
-}
 
 /* ---------- Buttons ---------- */
 
@@ -186,9 +155,9 @@ p { text-wrap: pretty; }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: scale(0.97); transition-duration: 90ms; }
 .btn-primary { background: var(--btn); color: var(--btn-ink); }
-.btn-olive { background: var(--olive); color: var(--on-olive); }
-.btn-gold { background: var(--mustard); color: var(--on-mustard); }
-.btn-cream { background: var(--rim); color: #24180F; }
+.btn-forest { background: var(--forest); color: var(--on-forest); }
+.btn-brass { background: var(--brass); color: #1D1B18; }
+.btn-cream { background: var(--rim); color: #1D1B18; }
 .btn-ghost { background: color-mix(in srgb, var(--ink) 9%, transparent); }
 .btn-ghost:hover { background: color-mix(in srgb, var(--ink) 15%, transparent); }
 .btn-sm { height: 3rem; padding: 0 1.4rem; gap: 0.6rem; }
@@ -205,20 +174,17 @@ p { text-wrap: pretty; }
   transition: transform 450ms var(--ease), background-color 300ms ease;
 }
 .icon-btn:hover { transform: translateY(-1px); background: color-mix(in srgb, var(--ink) 16%, transparent); }
-.on-mustard .icon-btn { background: rgb(36 24 15 / 0.1); color: var(--on-mustard); }
-.on-dark .icon-btn { background: rgb(244 232 204 / 0.14); color: var(--on-olive); }
+.on-dark .icon-btn { background: rgb(243 238 230 / 0.14); color: var(--on-forest); }
 .icon-btn:active { transform: scale(0.92); transition-duration: 90ms; }
 
 /* ---------- Navigation ---------- */
 
 .nav-material {
-  background: rgb(var(--mustard-rgb) / 0.94);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  background: var(--bg);
   transition: box-shadow 400ms ease;
 }
-.nav-material[data-scrolled] { box-shadow: 0 10px 24px -18px rgb(0 0 0 / 0.5); }
-.sheet-bar { background: rgb(var(--mustard-rgb) / 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.nav-material[data-scrolled] { box-shadow: 0 10px 24px -18px rgb(0 0 0 / 0.5); } /* taste-skill-ignore: the sticky bar really floats over the page */
+.sheet-bar { background: var(--bg); }
 
 .nav-link { position: relative; }
 .nav-link::after {
@@ -229,7 +195,7 @@ p { text-wrap: pretty; }
   bottom: -6px;
   height: 3px;
   border-radius: 3px;
-  background: var(--on-mustard);
+  background: var(--brass);
   transform: scaleX(0);
   transition: transform 450ms var(--ease);
 }
@@ -247,11 +213,10 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
   transition: text-decoration-color 300ms ease, color 300ms ease;
 }
 .link-u:hover { text-decoration-color: var(--cognac); }
-.on-dark .link-u:hover { text-decoration-color: var(--gold-light); }
+.on-dark .link-u:hover { text-decoration-color: var(--brass-light); }
 }
 
-.btn-primary .arrow, .btn-olive .arrow, .btn-cream .arrow { color: inherit; }
-.btn-gold .arrow { color: var(--on-mustard); }
+.btn-primary .arrow, .btn-forest .arrow, .btn-cream .arrow, .btn-brass .arrow { color: inherit; }
 
 /* ---------- Photos ---------- */
 
@@ -259,16 +224,11 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
 .photo:hover .photo-img { scale: 1.04; }
 .photo:focus-visible { outline-offset: 6px; }
 
-/* The photo strip scrolls sideways without a visible bar. */
-.suite-strip { scrollbar-width: none; scroll-padding-inline: 1.25rem; }
-.suite-strip::-webkit-scrollbar { display: none; }
-@media (min-width: 640px) { .suite-strip { scroll-padding-inline: 2rem; } }
-@media (min-width: 1024px) { .suite-strip { scroll-padding-inline: 3rem; } }
 
 /* The spray tan band sits on the salon's real floral wallpaper, darkened so the words stay clear. */
 .wallpaper-bg { background: url('/photos/wallpaper-1280.webp') center 30% / cover; }
 
-/* ---------- Motion: one signature, the record ---------- */
+/* ---------- Motion: one signature, the lounge photo settling in ---------- */
 
 /* Scroll reveal: visible by default; hidden only once the script has marked the page (`js`). */
 .js [data-reveal] {
@@ -280,17 +240,13 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* The record slides out of the hero sleeve, then turns slowly. */
-  .record-out { animation: record-out 1400ms var(--ease) 300ms both; }
-  .record-spin { animation: spin 14s linear infinite; }
-  /* In the photo strip each sleeve's record peeks out under the pointer. */
-  .peek .record { transition: transform 700ms var(--ease); }
-  .peek:hover .record, .peek:focus-within .record { transform: translateX(34%); }
-  /* Phones have no hover: the sleeve snapped into place shows its record instead. */
-  @media (hover: none) { .peek.is-active .record { transform: translateX(34%); } }
 }
-@keyframes record-out { from { transform: translateX(-38%); } }
-@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The lounge photo settles into place on load, like your eyes adjusting as you walk in. */
+  .hero-settle .photo-img { animation: settle 2200ms var(--ease) 100ms both; }
+}
+@keyframes settle { from { transform: scale(1.1); } }
 
 ::view-transition-old(root),
 ::view-transition-new(root) { animation-duration: 600ms; animation-timing-function: ease; }
@@ -316,7 +272,7 @@ dialog.drawer {
   border: 0;
   background: var(--bg);
   color: var(--ink);
-  box-shadow: -40px 0 80px -40px rgb(0 0 0 / 0.45);
+  box-shadow: -40px 0 80px -40px rgb(0 0 0 / 0.45); /* taste-skill-ignore: a drawer really floats */
   overflow: hidden;
 }
 dialog.drawer[open] { animation: drawer-in 600ms var(--ease) both; }
@@ -332,7 +288,7 @@ dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
     height: auto;
     max-height: 92dvh;
     border-radius: 28px 28px 0 0;
-    box-shadow: 0 -30px 60px -30px rgb(0 0 0 / 0.45);
+    box-shadow: 0 -30px 60px -30px rgb(0 0 0 / 0.45); /* taste-skill-ignore: the sheet really floats */
   }
   dialog.drawer.sheet[open] { animation-name: sheet-in; }
   dialog.drawer.sheet.closing { animation-name: sheet-out; }
@@ -388,11 +344,8 @@ dialog.viewer::backdrop { background: transparent; }
   dialog.drawer.closing, dialog.drawer.sheet.closing { animation: fade-out 200ms ease both; }
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .nav-material, .sheet-bar { background: var(--mustard); backdrop-filter: none; -webkit-backdrop-filter: none; }
-}
 
 @media (prefers-contrast: more) {
-  .nav-material { box-shadow: inset 0 -2px 0 var(--on-mustard); }
-  .btn-ghost, .icon-btn { box-shadow: inset 0 0 0 2px currentColor; }
+  .nav-material { box-shadow: inset 0 -2px 0 var(--ink); } /* taste-skill-ignore: higher-contrast edge */
+  .btn-ghost, .icon-btn { outline: 2px solid currentColor; outline-offset: -2px; }
 }

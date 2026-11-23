@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { GoldArrow } from './Brand.tsx';
 
-// Sticky phone bar. It steps aside whenever another Book button ([data-cta]) is on screen,
-// so two identical buttons never stack.
+// Sticky phone bar, behaving like a phone's own toolbar: it slides away while you scroll down to read, so it
+// never sits over a heading, and comes back when you scroll up or reach the bottom. It also steps aside
+// whenever another Book button ([data-cta]) is on screen, so two identical buttons never stack.
 export const MobileBottomBar: React.FC<{ onBook: () => void }> = ({ onBook }) => {
-  const [hidden, setHidden] = useState(true); // the hero's button is on screen at load
+  const [ctaVisible, setCtaVisible] = useState(true); // the hero's buttons are on screen at load
+  const [scrollingDown, setScrollingDown] = useState(false);
 
   useEffect(() => {
     const ctas = document.querySelectorAll('[data-cta]');
-    if (!('IntersectionObserver' in window) || !ctas.length) return setHidden(false);
+    if (!('IntersectionObserver' in window) || !ctas.length) return setCtaVisible(false);
     const visible = new Set<Element>();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
-      setHidden(visible.size > 0);
+      setCtaVisible(visible.size > 0);
     });
     ctas.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
+
+  useEffect(() => {
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const atEnd = y + innerHeight >= document.documentElement.scrollHeight - 8;
+      if (Math.abs(y - last) > 6) setScrollingDown(y > last && !atEnd);
+      if (atEnd) setScrollingDown(false);
+      last = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const hidden = ctaVisible || scrollingDown;
 
   return (
     <div
