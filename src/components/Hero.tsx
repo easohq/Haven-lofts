@@ -4,6 +4,7 @@ import { SalonInfo } from '../types.ts';
 import { AppointmentSeal, GoldArrow } from './Brand.tsx';
 import { Candles, Ivy, Pendant } from './Decor.tsx';
 import { mapsUrl } from '../utils/maps.ts';
+import { Photo } from './Photo.tsx';
 
 interface HeroProps {
   salonInfo: SalonInfo;
@@ -62,23 +63,14 @@ export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
         <div className="relative max-w-[560px] mx-auto lg:mr-0 lg:ml-auto">
           {/* Backlit like the salon's arched mirrors. */}
           <div className="arch-glow" data-reveal="image" style={d(120)}>
-            <div className="arch overflow-hidden bg-bg-alt">
-              <img
-                src="/salon-lounge.jpg"
-                width={1312}
-                height={1199}
-                alt="The lounge at Haven Lofts: a walnut slat wall on olive green, a woven pendant light, two cognac leather chairs and a coffee bar"
-                className="block w-full aspect-[4/5] object-cover object-[60%_50%]"
-              />
-            </div>
+            {/* The real lounge: the first thing on the page loads first. */}
+            <Photo id="lounge" priority drift={false} sizes="(min-width:1024px) 560px, 92vw" className="arch w-full aspect-[4/5]" imgClassName="object-[50%_60%]" />
           </div>
           <Candles className="absolute -bottom-2 right-3 sm:right-6 z-10" />
 
-          {/* The smaller arch overlapping the corner: a close-up of the slat wall and pendant. */}
+          {/* The smaller arch overlapping the corner: the hallway's floral wallpaper panel. */}
           <div className="absolute -left-3 sm:-left-14 -bottom-12 sm:-bottom-16 w-32 sm:w-44 arch bg-bg p-2 z-10" data-reveal style={d(420)}>
-            <div className="arch overflow-hidden bg-bg-alt">
-              <img src="/salon-slat-wall.jpg" alt="" loading="lazy" className="block w-full aspect-[3/4] object-cover" />
-            </div>
+            <Photo id="floral-panel" drift={false} sizes="176px" className="arch w-full aspect-[3/4]" imgClassName="object-[50%_35%]" />
           </div>
 
           <AppointmentSeal className="z-10 absolute -right-2 sm:-right-8 top-[16%] w-24 h-24 sm:w-32 sm:h-32" />

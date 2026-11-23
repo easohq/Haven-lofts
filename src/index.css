@@ -16,7 +16,7 @@
   --on-olive: #F3ECDF;
   --cognac: #9A4F2E;
   --gold: #B8893B;
-  --gold-ink: #8A6526;
+  --gold-ink: #7C5B1F;
   --gold-light: #E9CF95;
   --btn: #2B211C;
   --btn-ink: #F6EFE4;
@@ -123,7 +123,9 @@
   }
   [data-theme='dark'] body::after { opacity: 0.09; mix-blend-mode: soft-light; }
   a, button { touch-action: manipulation; }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  :focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 4px; }
+  /* On the green and dark surfaces the outline switches to light gold, so it always stands out. */
+  .on-olive :focus-visible, dialog.viewer :focus-visible { outline-color: var(--gold-light); }
   ::selection { background: var(--olive); color: var(--on-olive); }
 }
 
@@ -442,6 +444,9 @@ dialog.drawer.closing::backdrop { animation: fade-out 380ms ease both; }
 .photo-img { transition: scale 1200ms var(--ease); }
 .photo:hover .photo-img { scale: 1.035; }
 .photo:focus-visible { outline-offset: 3px; }
+
+/* The spray tan band sits on a photo of the salon's own floral wallpaper, darkened so the words stay clear. */
+.wallpaper-bg { background: url('/photos/wallpaper-1280.webp') center 30% / cover; opacity: 0.85; }
 
 /* Reveal: a soft upward wipe while the photo settles from a slight zoom. */
 .js [data-reveal='photo'] { transform: none; clip-path: inset(18% 0 0 0); transition-property: opacity, clip-path; transition-duration: 1400ms; }

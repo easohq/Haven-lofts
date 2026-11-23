@@ -5,13 +5,13 @@ Read this before changing the site, whether you're a person or an AI. It keeps e
 ## The idea
 
 A boho modern vintage salon in Lakeville, Minnesota, owned by Sara and Leah. By appointment only.
-The site should feel like the lounge in `public/salon-lounge.jpg`: warm walnut, cognac leather, olive walls,
+The site should feel like the real lounge (`public/photos/lounge-*.webp`): warm walnut, cognac leather, olive walls,
 soft light. Editorial and unhurried, like a print magazine spread, never like a software template.
 
 ## Reference
 
 - The salon poster (`public/haven-lofts-poster.jpg`): script logo, gold ring, gold arrow.
-- The lounge photo: the palette and the mood.
+- The salon photos in `public/photos/` (listed in `src/data/photos.ts`): the palette, the mood, and every picture on the page. Never use renders or AI images.
 - The owners' concept renders of the space (kept outside the repo, never shown on the site): arched mirrors
   backlit in warm light, woven rattan dome pendants, olive walls, walnut slat walls, trailing ivy, white
   hydrangeas, candles, a floral accent wall and a "Spray Tan" neon sign. The decor below is drawn from them.
@@ -78,7 +78,7 @@ tokens in `src/index.css` (`--glow`, `--leaf*`, `--bloom`, `--rattan*`, `--walnu
   strands at the edges away from the copy show.
 - `<Pendant>`: a woven rattan dome with its pool of warm light (the one place a radial gradient is allowed).
 - `<SlatWall>`: walnut slats behind the upper part of Services, faded at the edges, never behind body text.
-- `<FloralWall>`: the hydrangea accent wall, used only behind the spray tan band.
+- The spray tan band sits on a photo of the real floral wallpaper (`.wallpaper-bg`), darkened to 80% olive so text passes contrast.
 - `<Candles>`: small flickering candles, at most one cluster per screen.
 - `.arch-glow`: the warm rim of light around arched photos and portraits, like the backlit mirrors.
 - `.neon`: the Sacramento script neon sign, used once, for "Spray Tan". Its glow is the one text shadow allowed.

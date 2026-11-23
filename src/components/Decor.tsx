@@ -77,39 +77,6 @@ export const Pendant: React.FC<Pos & { cord?: number }> = ({ className = '', sty
   );
 };
 
-/** The floral accent wall: pale five-petal blooms and leaves, as a repeating background. */
-export const FloralWall: React.FC<Pos> = ({ className = '', style }) => (
-  <div aria-hidden="true" className={`decor pointer-events-none absolute ${className}`} style={style}>
-    <svg className="block w-full h-full">
-      <defs>
-        {/* Hydrangea-like bloom: two rings of soft rounded petals around a warm centre. */}
-        <g id="bloom">
-          {[0, 60, 120, 180, 240, 300].map((r) => (
-            <path key={r} d="M0 0 C -9 -6, -8 -20, 0 -22 C 8 -20, 9 -6, 0 0Z" transform={`rotate(${r})`} fill="var(--bloom)" />
-          ))}
-          {[30, 90, 150, 210, 270, 330].map((r) => (
-            <path key={r} d="M0 0 C -5 -4, -5 -12, 0 -13 C 5 -12, 5 -4, 0 0Z" transform={`rotate(${r})`} fill="var(--bloom)" opacity="0.7" />
-          ))}
-          <circle r="3.6" fill="var(--glow)" />
-        </g>
-        <path id="leaf" d="M0 0 C 8 -12, 26 -13, 34 0 C 26 13, 8 12, 0 0Z" fill="var(--leaf-light)" />
-        <pattern id="florals" width="220" height="220" patternUnits="userSpaceOnUse">
-          <use href="#leaf" transform="translate(30 70) rotate(-35)" />
-          <use href="#leaf" transform="translate(80 40) rotate(205)" />
-          <use href="#bloom" transform="translate(60 60) scale(1.3)" />
-          <use href="#leaf" transform="translate(140 170) rotate(15)" />
-          <use href="#leaf" transform="translate(190 150) rotate(160)" />
-          <use href="#bloom" transform="translate(166 160) scale(1.05)" />
-          <use href="#leaf" transform="translate(165 40) rotate(75)" />
-          <use href="#bloom" transform="translate(40 180) scale(0.8)" />
-          <use href="#leaf" transform="translate(95 200) rotate(-120)" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#florals)" />
-    </svg>
-  </div>
-);
-
 /** The walnut slat wall: horizontal boards of uneven length, warmly lit. */
 export const SlatWall: React.FC<Pos> = ({ className = '', style }) => (
   <div aria-hidden="true" className={`decor slat-wall pointer-events-none absolute ${className}`} style={style}>

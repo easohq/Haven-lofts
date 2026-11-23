@@ -18,7 +18,7 @@ export const Services: React.FC<{ services: Service[]; onBook: () => void }> = (
           </h2>
         </div>
         <div className="lg:col-span-4 lg:col-start-9" data-reveal>
-          <p className="text-lg leading-[1.6]">
+          <p className="relative z-10 text-lg leading-[1.6] bg-bg-alt/90 p-5 -m-5">
             Every appointment begins with a conversation: your hair, your routine, and how much time you'd like to
             spend on it each morning.
           </p>
