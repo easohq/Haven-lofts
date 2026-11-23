@@ -8,7 +8,7 @@ export const INITIAL_SALON_INFO: SalonInfo = {
   zip: '55044',
   street: '17685 Juniper Path',
   suite: 'Suite 204',
-  coFounders: 'Sarah & Leah',
+  coFounders: 'Sara & Leah',
   phone: '',
   phoneRaw: '',
   instagram: '',
@@ -25,11 +25,11 @@ export const INITIAL_SALON_INFO: SalonInfo = {
 export const INITIAL_STYLISTS: Stylist[] = [
   {
     id: 'sara',
-    name: 'Sarah',
+    name: 'Sara',
     role: 'Owner',
     phone: '',
     phoneRaw: '',
-    bio: 'Sarah has been doing hair in the south metro for over 20 years. She loves easy-to-manage lived-in cuts, soft dimensional color, and catching up with her clients in a relaxed, comfortable chair. No rushing, no pressure, just good honest hair care.',
+    bio: 'Sara has been doing hair in the south metro for over 20 years. She loves easy-to-manage lived-in cuts, soft dimensional color, and catching up with her clients in a relaxed, comfortable chair. No rushing, no pressure, just good honest hair care.',
     specialties: ['lived-in cuts and layers', 'dimensional color and highlights', 'easy low-maintenance styles', 'blowouts'],
     imageKey: 'stylist_sarah',
     photo: '',
@@ -95,7 +95,7 @@ export const SERVICES: Service[] = [
   },
   {
     name: 'Spray Tans',
-    description: 'An even, natural-looking tan in Sarah or Leah’s own private spray tan tent.',
+    description: 'An even, natural-looking tan in Sara or Leah’s own private spray tan tent.',
     price: '',
   },
 ];

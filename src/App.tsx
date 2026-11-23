@@ -4,7 +4,6 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { SprayTan } from './components/SprayTan.tsx';
 import { OpenPhoto, PhotoViewer } from './components/Photo.tsx';
 import { PHOTO_ORDER, PhotoId } from './data/photos.ts';
 import { Navbar } from './components/Navbar.tsx';
@@ -51,9 +50,8 @@ export default function App() {
       <Navbar salonInfo={salonInfo} onBook={() => book()} />
       <main className="flex-1">
         <Hero salonInfo={salonInfo} onBook={() => book()} />
-        <SpaceSection salonInfo={salonInfo} />
         <Services services={SERVICES} onBook={() => book()} />
-        <SprayTan onBook={() => book()} />
+        <SpaceSection salonInfo={salonInfo} onBook={() => book()} />
         <StylistsSection stylists={stylists} onBook={book} />
         <LocationSection salonInfo={salonInfo} />
       </main>

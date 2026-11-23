@@ -11,7 +11,7 @@ interface BookDialogProps {
   onClose: () => void;
   stylists: Stylist[];
   salonInfo: SalonInfo;
-  /** Which stylist is selected first ("Book with Sarah" passes Sarah). */
+  /** Which stylist is selected first ("Book with Sara" passes Sara). */
   stylistId: string | null;
 }
 

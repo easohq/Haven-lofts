@@ -2,67 +2,88 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 import { SalonInfo } from '../types.ts';
 import { AppointmentSeal, GoldArrow } from './Brand.tsx';
+import { Candles, Ivy, Pendant } from './Decor.tsx';
 import { mapsUrl } from '../utils/maps.ts';
-import { PHOTOS } from '../data/photos.ts';
+
+interface HeroProps {
+  salonInfo: SalonInfo;
+  onBook: () => void;
+}
 
 const d = (ms: number) => ({ '--delay': `${ms}ms` }) as React.CSSProperties;
 
-// The first thing you see is the room itself: the lounge, full-bleed, with the words set into its
-// darker lower edge. Phones get the upright shot of the same corner.
-export const Hero: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({ salonInfo, onBook }) => (
-  <section id="top" className="relative h-[calc(100svh-72px)] min-h-[600px] max-h-[1100px] overflow-hidden bg-olive-deep text-[#F6EFE4]">
-    <picture className="hero-photo absolute inset-0">
-      <source
-        media="(max-width: 767px)"
-        srcSet="/photos/lounge-640.webp 640w, /photos/lounge-1280.webp 1280w"
-        sizes="100vw"
-      />
-      <img
-        src="/photos/lounge-coffee-1280.webp"
-        srcSet="/photos/lounge-coffee-1280.webp 1706w, /photos/lounge-coffee-2048.webp 2730w"
-        sizes="100vw"
-        alt={PHOTOS['lounge-coffee'].alt}
-        fetchPriority="high"
-        className="w-full h-full object-cover object-[50%_40%]"
-      />
-    </picture>
-    <div className="hero-scrim absolute inset-0" aria-hidden="true" />
+// Off-center editorial hero: type sits left, the arched lounge photo stands right,
+// and a smaller arch of the slat wall overlaps its corner.
+export const Hero: React.FC<HeroProps> = ({ salonInfo, onBook }) => (
+  <section id="top" className="relative overflow-hidden pt-12 pb-28 md:pt-16 lg:pt-20 lg:pb-40">
+    <Ivy length={3} className="hidden lg:block left-[47%]" />
+    <Ivy length={1} flip className="hidden lg:block left-[52%]" delay={1.5} />
+    <Pendant cord={40} className="hidden lg:block right-[28%] w-32 xl:w-36 z-20" />
+    <div className="relative max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-center">
+      <div className="lg:col-span-6 relative z-10">
+        <h1 data-reveal className="display text-[clamp(3.5rem,7.5vw,7.25rem)]">
+          Unhurried hair,
+          <br />
+          made cozy.
+        </h1>
+        <p data-reveal style={d(90)} className="text-lg sm:text-xl leading-[1.6] mt-8 max-w-md">
+          A boho, vintage-modern salon in {salonInfo.city}, Minnesota, owned by stylists {salonInfo.coFounders}. Warm
+          walnut, cognac leather, soft light and a cup of coffee while you settle in.
+        </p>
 
-    <div className="relative h-full max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col justify-end pb-14 sm:pb-16 lg:pb-20">
-      <h1 data-reveal className="display text-[clamp(3.25rem,8vw,7.75rem)]">
-        Unhurried hair,
-        <br />
-        made cozy.
-      </h1>
-      <p data-reveal style={d(90)} className="text-lg sm:text-xl leading-[1.6] mt-6 max-w-lg text-[#F6EFE4]/90">
-        A boho, vintage-modern salon in {salonInfo.city}, Minnesota, owned by stylists {salonInfo.coFounders}.
-        Pull up a leather chair, pour a coffee, stay a while.
-      </p>
+        <div data-reveal style={d(180)} className="flex flex-wrap items-center gap-x-8 gap-y-5 mt-11">
+          <button type="button" onClick={onBook} data-cta className="btn btn-primary text-lg">
+            Book Appointment <GoldArrow className="w-9" />
+          </button>
+          <a href="#services" className="link-u text-lg font-semibold">
+            View services
+          </a>
+        </div>
 
-      <div data-reveal style={d(180)} className="flex flex-wrap items-center gap-x-8 gap-y-5 mt-9">
-        <button type="button" onClick={onBook} data-cta className="btn btn-gold text-lg">
-          Book Appointment <GoldArrow className="w-9" />
-        </button>
-        <a href="#space" className="link-u link-light text-lg font-semibold">
-          Take a look inside
+        <a
+          href={mapsUrl(salonInfo)}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-reveal
+          style={d(270)}
+          className="group inline-flex items-start gap-3 mt-12 text-ink-soft hover:text-ink transition-colors duration-300"
+        >
+          <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5 transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden="true" />
+          <span>
+            {salonInfo.street}, {salonInfo.suite},{' '}
+            <span className="whitespace-nowrap">
+              {salonInfo.city}, MN {salonInfo.zip}
+            </span>
+          </span>
         </a>
       </div>
 
-      <a
-        href={mapsUrl(salonInfo)}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-reveal
-        style={d(270)}
-        className="group hidden sm:inline-flex items-start gap-3 mt-10 text-[#F6EFE4]/80 hover:text-[#F6EFE4] transition-colors duration-300 self-start"
-      >
-        <MapPin className="w-5 h-5 text-[#E9CF95] shrink-0 mt-0.5" aria-hidden="true" />
-        <span>
-          {salonInfo.street}, {salonInfo.suite}, {salonInfo.city}, MN {salonInfo.zip}
-        </span>
-      </a>
+      <div className="lg:col-span-6 lg:col-start-7 relative">
+        <div className="relative max-w-[560px] mx-auto lg:mr-0 lg:ml-auto">
+          {/* Backlit like the salon's arched mirrors. */}
+          <div className="arch-glow" data-reveal="image" style={d(120)}>
+            <div className="arch overflow-hidden bg-bg-alt">
+              <img
+                src="/salon-lounge.jpg"
+                width={1312}
+                height={1199}
+                alt="The lounge at Haven Lofts: a walnut slat wall on olive green, a woven pendant light, two cognac leather chairs and a coffee bar"
+                className="block w-full aspect-[4/5] object-cover object-[60%_50%]"
+              />
+            </div>
+          </div>
+          <Candles className="absolute -bottom-2 right-3 sm:right-6 z-10" />
 
-      <AppointmentSeal className="hidden md:flex absolute right-8 lg:right-12 bottom-16 lg:bottom-20 w-32 h-32" />
+          {/* The smaller arch overlapping the corner: a close-up of the slat wall and pendant. */}
+          <div className="absolute -left-3 sm:-left-14 -bottom-12 sm:-bottom-16 w-32 sm:w-44 arch bg-bg p-2 z-10" data-reveal style={d(420)}>
+            <div className="arch overflow-hidden bg-bg-alt">
+              <img src="/salon-slat-wall.jpg" alt="" loading="lazy" className="block w-full aspect-[3/4] object-cover" />
+            </div>
+          </div>
+
+          <AppointmentSeal className="z-10 absolute -right-2 sm:-right-8 top-[16%] w-24 h-24 sm:w-32 sm:h-32" />
+        </div>
+      </div>
     </div>
   </section>
 );

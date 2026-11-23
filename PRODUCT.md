@@ -10,14 +10,14 @@ web
 
 Two audiences, weighted equally:
 
-- **Existing clients** of Sarah and Leah, who know them already and need the salon's address and how to book at Haven Lofts.
-- **New local clients** in Lakeville and the south metro who are looking for a stylist and need enough trust in Sarah and Leah to make a first appointment.
+- **Existing clients** of Sara and Leah, who know them already and need the salon's address and how to book at Haven Lofts.
+- **New local clients** in Lakeville and the south metro who are looking for a stylist and need enough trust in Sara and Leah to make a first appointment.
 
 Both arrive mostly to answer the same three questions: who are the stylists, what do they do, and how do I book.
 
 ## Product Purpose
 
-The website for Haven Lofts, a hair salon at 17685 Juniper Path, Suite 204, Lakeville, MN 55044, owned by stylists Sarah and Leah. It exists to turn a visit into a booked appointment with one of the two owners. Success is a visitor calling or texting the right stylist.
+The website for Haven Lofts, a hair salon at 17685 Juniper Path, Suite 204, Lakeville, MN 55044, owned by stylists Sara and Leah. It exists to turn a visit into a booked appointment with one of the two owners. Success is a visitor calling or texting the right stylist.
 
 ## Positioning
 
@@ -33,7 +33,7 @@ A by-appointment-only salon run by its two owners, each with about twenty years 
 ## Capabilities and Constraints
 
 - Sections: services, the space, the two stylists, location with map and directions, and a booking drawer per stylist.
-- **Spray tans:** Sarah and Leah each have their own spray tan tent, so spray tanning is offered alongside hair. Not yet on the site.
+- **Spray tans:** Sara and Leah each have their own spray tan tent, so spray tanning is offered alongside hair. Not yet on the site.
 - **Coffee bar:** a simple coffee bar in the lounge, worth mentioning as part of the visit. Do not invent a drink menu or prices.
 - Contact details (each stylist's phone, booking link, email, Instagram), service prices, the suite photo and headshots live in `src/data/salonData.ts`. A button or line appears only once its field is filled.
 - **Undecided / missing:** both stylists' real phone numbers, Instagram handles, prices, headshots and a photo of a suite. Until the phone numbers exist, the booking drawer shows a "booking line is almost ready" state.
@@ -52,7 +52,7 @@ A by-appointment-only salon run by its two owners, each with about twenty years 
 
 - Real photographs of the salon lounge: `public/salon-lounge.jpg`, `public/salon-slat-wall.jpg`.
 - The logo files and the poster above.
-- Sarah's and Leah's bios and specialties in `salonData.ts`.
+- Sara's and Leah's bios and specialties in `salonData.ts`.
 - `src/assets/images/*` are AI-generated renders, not the real salon; do not use them.
 - The owners' concept renders of the space (arched backlit mirrors, rattan pendants, olive walls, walnut slat walls, trailing ivy, white hydrangeas, candles, a floral accent wall, a "Spray Tan" neon sign) are a **style reference only**. They are not the real salon and never go on the site.
 
@@ -65,5 +65,5 @@ The owners are two middle-aged moms who worked hard on a beautiful space and wan
 
 1. Booking is the point: every section should leave the visitor one tap from calling or texting the right stylist.
 2. Real details only. A missing fact stays hidden, never filled with a placeholder or an invented number.
-3. Sarah and Leah are the product. Show who they are and what each does best, so a client can choose between them.
+3. Sara and Leah are the product. Show who they are and what each does best, so a client can choose between them.
 4. Serve regulars and newcomers at once: the address and how to book are always easy to find.

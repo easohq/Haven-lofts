@@ -7,8 +7,8 @@ import { toggleTheme } from '../utils/theme.ts';
 import { mapsUrl } from '../utils/maps.ts';
 
 const LINKS = [
-  { href: '#space', label: 'The space' },
   { href: '#services', label: 'Services' },
+  { href: '#space', label: 'Space' },
   { href: '#spray-tan', label: 'Spray tan' },
   { href: '#stylists', label: 'Stylists' },
   { href: '#visit', label: 'Visit' },
