@@ -3,7 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { SprayTan } from './components/SprayTan.tsx';
+import { OpenPhoto, PhotoViewer } from './components/Photo.tsx';
+import { PHOTO_ORDER, PhotoId } from './data/photos.ts';
 import { Navbar } from './components/Navbar.tsx';
 import { Hero } from './components/Hero.tsx';
 import { Services } from './components/Services.tsx';
@@ -13,7 +16,6 @@ import { LocationSection } from './components/LocationSection.tsx';
 import { Footer } from './components/Footer.tsx';
 import { BookDialog } from './components/BookDialog.tsx';
 import { MobileBottomBar } from './components/MobileBottomBar.tsx';
-import { Wave } from './components/Brand.tsx';
 import { INITIAL_SALON_INFO as salonInfo, INITIAL_STYLISTS as stylists, SERVICES } from './data/salonData.ts';
 
 /** Fade-up reveal as sections scroll into view. Without the script, everything simply shows. */
@@ -39,23 +41,22 @@ function useReveal() {
 export default function App() {
   const [booking, setBooking] = useState<{ open: boolean; stylistId: string | null }>({ open: false, stylistId: null });
   const book = (stylistId: string | null = null) => setBooking({ open: true, stylistId });
+  const [viewer, setViewer] = useState<number | null>(null);
+  const openPhoto = useCallback((id: PhotoId) => setViewer(PHOTO_ORDER.indexOf(id)), []);
   useReveal();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <OpenPhoto.Provider value={openPhoto}>
+    <div className="min-h-svh flex flex-col">
       <Navbar salonInfo={salonInfo} onBook={() => book()} />
       <main className="flex-1">
         <Hero salonInfo={salonInfo} onBook={() => book()} />
-        <Wave top="bg-bg" fill="text-bg-alt" />
-        <Services services={SERVICES} onBook={() => book()} />
-        <Wave top="bg-bg-alt" fill="text-surface" flip />
         <SpaceSection salonInfo={salonInfo} />
-        <Wave top="bg-surface" fill="text-olive" />
+        <Services services={SERVICES} onBook={() => book()} />
+        <SprayTan onBook={() => book()} />
         <StylistsSection stylists={stylists} onBook={book} />
-        <Wave top="bg-olive" fill="text-bg" />
         <LocationSection salonInfo={salonInfo} />
       </main>
-      <Wave top="bg-bg" fill="text-bg-alt" flip />
       <Footer salonInfo={salonInfo} stylists={stylists} onBook={() => book()} />
       <BookDialog
         open={booking.open}
@@ -65,6 +66,8 @@ export default function App() {
         stylistId={booking.stylistId}
       />
       <MobileBottomBar onBook={() => book()} />
+      <PhotoViewer index={viewer} onIndex={setViewer} onClose={() => setViewer(null)} />
     </div>
+    </OpenPhoto.Provider>
   );
 }

@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { SalonInfo } from '../types.ts';
-import { GoldArrow, Logo, Sprig } from './Brand.tsx';
+import { GoldArrow, Logo } from './Brand.tsx';
 import { Drawer } from './Drawer.tsx';
 import { toggleTheme } from '../utils/theme.ts';
 import { mapsUrl } from '../utils/maps.ts';
 
 const LINKS = [
-  { href: '#services', label: 'Services', note: 'The craft' },
-  { href: '#space', label: 'Space', note: 'Inside the lofts' },
-  { href: '#stylists', label: 'Stylists', note: 'Sarah & Leah' },
-  { href: '#visit', label: 'Visit', note: 'Find the lofts' },
+  { href: '#space', label: 'The space' },
+  { href: '#services', label: 'Services' },
+  { href: '#spray-tan', label: 'Spray tan' },
+  { href: '#stylists', label: 'Stylists' },
+  { href: '#visit', label: 'Visit' },
 ];
 
 /** Smooth-scroll to a section and keep the address bar in step. */
@@ -33,19 +34,52 @@ export const ThemeToggle: React.FC = () => (
   </button>
 );
 
+/** Which section is in the middle of the screen right now, for the nav's "you are here" mark. */
+function useCurrentSection() {
+  const [current, setCurrent] = useState<string | null>(null);
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setCurrent(`#${e.target.id}`)),
+      { rootMargin: '-45% 0px -50% 0px' }, // a thin band across the middle of the viewport
+    );
+    ['top', ...LINKS.map((l) => l.href.slice(1))].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+  }, []);
+  return current;
+}
+
 export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({ salonInfo, onBook }) => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const current = useCurrentSection();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-bg/85 backdrop-blur-md border-b border-gold/20">
+    <header className="nav-material sticky top-0 z-40" data-scrolled={scrolled || undefined}>
       <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 h-[72px] flex items-center justify-between gap-6">
         <a href="#top" onClick={(e) => goTo(e)} className="shrink-0" aria-label="Haven Lofts, back to top">
           <Logo alt="" className="h-14 sm:h-[60px] w-auto -my-1" />
         </a>
 
-        <nav aria-label="Main" className="hidden md:flex items-center gap-10 ml-auto mr-4">
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-10 ml-auto mr-4">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={(e) => goTo(e)} className="label !text-ink-soft hover:!text-ink transition-colors duration-300">
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={(e) => goTo(e)}
+              aria-current={current === l.href ? 'location' : undefined}
+              className="nav-link font-semibold text-ink-soft hover:text-ink"
+            >
               {l.label}
             </a>
           ))}
@@ -56,7 +90,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
           <button type="button" onClick={onBook} className="btn btn-primary btn-sm hidden sm:inline-flex">
             Book Appointment
           </button>
-          <button type="button" onClick={() => setOpen(true)} aria-label="Open menu" aria-haspopup="dialog" className="icon-btn md:hidden">
+          <button type="button" onClick={() => setOpen(true)} aria-label="Open menu" aria-haspopup="dialog" className="icon-btn lg:hidden">
             <Menu className="w-5 h-5" />
           </button>
         </div>
@@ -65,7 +99,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
       <Drawer open={open} onClose={() => setOpen(false)} labelledBy="menu-title">
         <div className="min-h-full flex flex-col px-7 pt-6 pb-8">
           <div className="flex items-center justify-between">
-            <p id="menu-title" className="kicker">Menu</p>
+            <h2 id="menu-title" className="display text-3xl">Menu</h2>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close menu" className="icon-btn">
               <X className="w-5 h-5" />
             </button>
@@ -74,8 +108,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
           <nav aria-label="Mobile" className="mt-12 flex flex-col gap-2">
             {LINKS.map((l) => (
               <a key={l.href} href={l.href} onClick={(e) => goTo(e, () => setOpen(false))} className="group py-3">
-                <span className="label block">{l.note}</span>
-                <span className="display block text-5xl mt-2 transition-all duration-500 group-hover:italic group-hover:text-cognac group-hover:translate-x-1">
+                <span className="display block text-5xl transition-[transform,color] duration-500 group-hover:text-cognac group-hover:translate-x-1">
                   {l.label}
                 </span>
               </a>
@@ -94,8 +127,7 @@ export const Navbar: React.FC<{ salonInfo: SalonInfo; onBook: () => void }> = ({
           </button>
 
           <div className="mt-auto pt-12">
-            <Sprig className="w-36 text-gold" />
-            <div className="mt-6 flex items-end justify-between gap-6">
+            <div className="flex items-end justify-between gap-6">
               <a href={mapsUrl(salonInfo)} target="_blank" rel="noopener noreferrer" className="text-ink-soft leading-relaxed hover:text-ink transition-colors">
                 {salonInfo.street}, {salonInfo.suite}
                 <br />

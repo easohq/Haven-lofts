@@ -1,127 +1,134 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SalonInfo } from '../types.ts';
+import { OpenPhoto, Photo } from './Photo.tsx';
+import { PHOTO_ORDER, PhotoId } from '../data/photos.ts';
 
-const LEAF = '#6B7A55';
+const d = (ms: number) => ({ '--delay': `${ms}ms` }) as React.CSSProperties;
 
-/** Fine line drawing of a Haven Lofts styling suite, drawn from a photo of the real room:
- *  a tall arched gold mirror, a black styling chair, a black cabinet, gold sconces and plants. */
-const SuiteDrawing: React.FC = () => (
-  <svg viewBox="0 0 400 500" className="block w-full h-full" role="img" aria-label="Drawing of a Haven Lofts suite: an arched gold mirror, a black styling chair, a black cabinet, gold sconces and plants">
-    {/* floor */}
-    <path d="M24 462 H376" stroke="var(--ink)" strokeOpacity="0.25" strokeWidth="1.2" />
-    {/* the arched floor mirror */}
-    <path d="M120 462 V176 A80 80 0 0 1 280 176 V462" fill="none" stroke="var(--gold)" strokeWidth="2.2" />
-    <path d="M129 462 V176 A71 71 0 0 1 271 176 V462" fill="none" stroke="var(--gold)" strokeWidth="1" />
-    <path d="M150 214 L196 168 M158 246 L222 182 M170 270 L204 236" stroke="var(--gold)" strokeOpacity="0.35" strokeWidth="1" strokeLinecap="round" />
-    {/* gold sconces either side */}
-    {[70, 330].map((x) => (
-      <g key={x} stroke="var(--gold)" strokeWidth="1.6" fill="none">
-        <path d={`M${x} 238 V222`} />
-        <path d={`M${x - 8} 238 H${x + 8}`} />
-        <circle cx={x} cy={212} r="10" />
-        <circle cx={x} cy={212} r="3.5" fill="var(--gold)" stroke="none" />
-      </g>
-    ))}
-    {/* black styling chair, chrome pedestal */}
-    <g>
-      <rect x="160" y="300" width="62" height="58" rx="10" fill="var(--ink)" />
-      <rect x="146" y="338" width="11" height="32" rx="5" fill="var(--ink)" />
-      <rect x="225" y="338" width="11" height="32" rx="5" fill="var(--ink)" />
-      <rect x="150" y="356" width="82" height="18" rx="7" fill="var(--ink)" />
-      <rect x="187" y="374" width="8" height="64" fill="var(--gold)" />
-      <ellipse cx="191" cy="414" rx="22" ry="4.5" fill="none" stroke="var(--gold)" strokeWidth="1.6" />
-      <ellipse cx="191" cy="446" rx="36" ry="7" fill="var(--ink)" />
-    </g>
-    {/* black cabinet with gold pulls */}
-    <g>
-      <rect x="292" y="334" width="80" height="128" fill="var(--ink)" />
-      {[366, 398, 430].map((y) => (
-        <path key={y} d={`M296 ${y} H368`} stroke="var(--surface)" strokeOpacity="0.35" strokeWidth="1" />
-      ))}
-      {[350, 382, 414, 446].map((y) => (
-        <rect key={y} x="324" y={y - 1.5} width="16" height="3" rx="1.5" fill="var(--gold)" />
-      ))}
-    </g>
-    {/* plant on the cabinet */}
-    <g>
-      {[
-        'M332 304 C 328 276, 322 254, 326 228 C 334 252, 338 276, 336 304Z',
-        'M330 304 C 318 284, 306 268, 300 246 C 314 262, 326 280, 334 304Z',
-        'M336 304 C 346 282, 356 266, 366 250 C 358 270, 348 288, 338 304Z',
-      ].map((d) => (
-        <path key={d} d={d} fill={LEAF} />
-      ))}
-      <path d="M318 304 H350 L346 334 H322Z" fill="var(--surface)" stroke="var(--ink)" strokeWidth="1.2" />
-    </g>
-    {/* floor plant, left */}
-    <g>
-      {[
-        'M58 420 C 52 386, 40 362, 30 344 C 48 360, 60 384, 64 420Z',
-        'M62 420 C 62 384, 66 356, 76 330 C 76 360, 70 390, 68 420Z',
-        'M66 420 C 74 394, 86 376, 100 362 C 92 384, 80 402, 72 420Z',
-      ].map((d) => (
-        <path key={d} d={d} fill={LEAF} />
-      ))}
-      <path d="M46 420 H86 L80 462 H52Z" fill="var(--surface)" stroke="var(--ink)" strokeWidth="1.2" />
-    </g>
-  </svg>
-);
+const SUITES: { id: PhotoId; wide?: boolean }[] = [
+  { id: 'gallery-wall' },
+  { id: 'suite-arch-mirror' },
+  { id: 'suite-slat', wide: true },
+  { id: 'suite-velvet' },
+  { id: 'suite-macrame' },
+  { id: 'treatment-room', wide: true },
+  { id: 'suite-window' },
+  { id: 'suite-macrame-2' },
+];
 
-// Inside the lofts: the bright suites and the olive lounge, told side by side with an arched "mirror" frame.
-export const SpaceSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo }) => (
-  <section id="space" className="bg-surface pt-24 pb-28 lg:pt-32 lg:pb-40 scroll-mt-16">
-    <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-center">
-      <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1">
-        <p className="kicker" data-reveal>Inside the lofts</p>
-        <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)] mt-7">
-          The <em>space</em>
-        </h2>
-        <p data-reveal className="mt-6 text-lg leading-[1.7] text-ink-soft max-w-lg">
-          Haven Lofts is a set of private suites, each styled by the stylist who works in it, around a shared lounge.
-          You'll find us in {salonInfo.suite}.
-        </p>
-
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-12">
-          <div data-reveal>
-            <span className="text-gold text-xs" aria-hidden="true">✦</span>
-            <h3 className="display text-4xl mt-3">The suites</h3>
-            <span className="block w-14 h-px bg-gold mt-5" aria-hidden="true" />
-            <p className="mt-5 text-lg leading-[1.7] text-ink-soft">
-              Bright, quiet rooms with tall arched gold mirrors, black styling chairs, warm sconces and plenty of green.
-              Just you and your stylist.
-            </p>
-          </div>
-          <div data-reveal style={{ '--delay': '140ms' } as React.CSSProperties} className="sm:mt-20">
-            <span className="text-gold text-xs" aria-hidden="true">✦</span>
-            <h3 className="display text-4xl mt-3">The lounge</h3>
-            <span className="block w-14 h-px bg-gold mt-5" aria-hidden="true" />
-            <p className="mt-5 text-lg leading-[1.7] text-ink-soft">
-              Olive walls, a walnut slat wall, cognac leather chairs and a coffee bar for while you wait.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Arched like the suite's own mirror. A real photo replaces the drawing once salonData.ts has one. */}
-      <div className="lg:col-span-5 lg:col-start-1 lg:row-start-1 max-w-[420px] w-full mx-auto lg:mx-0" data-reveal="image">
-        <div className="double-frame arch glow">
-          <div className="double-frame-inner arch overflow-hidden aspect-[4/5] bg-bg">
-            {salonInfo.suitePhoto ? (
-              <img
-                src={salonInfo.suitePhoto}
-                alt="A styling suite at Haven Lofts: arched gold mirror, black styling chair and cabinet, plants"
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full px-6 pt-12 pb-4">
-                <SuiteDrawing />
-              </div>
-            )}
-          </div>
-        </div>
-        <p className="label !text-ink-soft mt-5 text-center">A suite at Haven Lofts</p>
+/** The suites as a strip you swipe (phones) or step through with the arrows (desktop). */
+const SuiteStrip: React.FC = () => {
+  const strip = useRef<HTMLUListElement>(null);
+  const step = (dir: 1 | -1) => {
+    const el = strip.current;
+    if (!el) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: reduce ? 'auto' : 'smooth' });
+  };
+  return (
+    <div className="relative">
+      <ul ref={strip} className="suite-strip flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory overscroll-x-contain px-5 sm:px-8 lg:px-12 pb-2" aria-label="The suites">
+        {SUITES.map((s, i) => (
+          <li key={s.id} className={`snap-start shrink-0 ${s.wide ? 'w-[88vw] sm:w-[62vw] lg:w-[44vw]' : 'w-[70vw] sm:w-[40vw] lg:w-[24vw]'}`} data-reveal style={d((i % 4) * 90)}>
+            <Photo id={s.id} sizes="(min-width:1024px) 44vw, 88vw" drift={false} className="w-full aspect-[3/4] sm:h-[min(68vh,640px)] sm:aspect-auto" />
+          </li>
+        ))}
+      </ul>
+      <div className="hidden sm:flex justify-end gap-3 mt-6 px-8 lg:px-12">
+        <button type="button" onClick={() => step(-1)} aria-label="Previous suites" className="icon-btn !w-12 !h-12">
+          <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+        </button>
+        <button type="button" onClick={() => step(1)} aria-label="More suites" className="icon-btn !w-12 !h-12">
+          <ChevronRight className="w-5 h-5" aria-hidden="true" />
+        </button>
       </div>
     </div>
-  </section>
-);
+  );
+};
+
+// A walk through the door: the welcome, the lounge, the suites, the wash. Each stop is the photo first,
+// with a few words beside it, laid out like a magazine feature rather than a gallery grid.
+export const SpaceSection: React.FC<{ salonInfo: SalonInfo }> = ({ salonInfo }) => {
+  const open = useContext(OpenPhoto);
+  return (
+    <section id="space" className="relative pt-28 lg:pt-40 pb-28 lg:pb-40 scroll-mt-16">
+      {/* The welcome */}
+      <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-14 items-end">
+        <div className="lg:col-span-5 lg:self-start">
+          <h2 data-reveal className="display text-[clamp(3rem,6.5vw,5.75rem)]">
+            Come on in
+          </h2>
+          <p data-reveal style={d(90)} className="mt-6 text-lg leading-[1.6] max-w-md">
+            Step through the door of {salonInfo.suite} and you're greeted by our mirror on a black wall, a pair of green
+            velvet chairs, and a hallway papered in songbirds and blossoms.
+          </p>
+          <p data-reveal style={d(160)} className="mt-5 text-lg leading-[1.6] max-w-md">
+            Haven Lofts is a set of private suites around a shared lounge. Each suite is styled by the stylist who works
+            in it, so no two rooms look alike.
+          </p>
+          <button type="button" onClick={() => open(PHOTO_ORDER[0])} className="link-u text-lg font-semibold mt-8" data-reveal style={d(220)}>
+            See all {PHOTO_ORDER.length} photos
+          </button>
+        </div>
+        <div className="lg:col-span-3 lg:col-start-7 hidden sm:block" data-reveal="photo" style={d(120)}>
+          <Photo id="entry-hall" sizes="(min-width:1024px) 22vw, 45vw" className="w-full aspect-[3/4]" />
+        </div>
+        <div className="lg:col-span-3 lg:col-start-10 lg:-mb-24" data-reveal="photo">
+          <Photo id="entry-mirror" sizes="(min-width:1024px) 22vw, 90vw" className="arch w-full aspect-[3/4]" />
+          <p className="mt-4 text-ink-soft">The first thing you'll see.</p>
+        </div>
+      </div>
+
+      {/* The lounge */}
+      <div className="mt-28 lg:mt-48 max-w-[88rem] mx-auto sm:px-8 lg:px-12 relative">
+        <div data-reveal="photo">
+          <Photo id="lounge-wide" sizes="(min-width:1408px) 1312px, 100vw" className="w-full aspect-[4/3] lg:aspect-[16/8]" />
+        </div>
+        <div
+          data-reveal
+          style={d(140)}
+          className="relative bg-bg -mt-16 mx-5 sm:mx-0 sm:-mt-28 sm:max-w-md lg:max-w-lg sm:ml-8 lg:ml-16 p-7 sm:p-10"
+        >
+          <h3 className="display text-[clamp(2.5rem,4.5vw,3.75rem)]">The lounge</h3>
+          <p className="mt-4 text-lg leading-[1.6]">
+            Olive walls, a walnut slat shelf, woven pendant lights and cognac leather chairs. The coffee bar is simple,
+            but there's always something warm to sip while you wait.
+          </p>
+        </div>
+      </div>
+
+      {/* The suites */}
+      <div className="mt-28 lg:mt-40">
+        <div className="max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-5 items-end mb-12">
+          <h3 data-reveal className="display text-[clamp(2.75rem,5vw,4.25rem)] lg:col-span-6">
+            The suites
+          </h3>
+          <p data-reveal style={d(90)} className="text-lg leading-[1.6] lg:col-span-5 lg:col-start-8">
+            A gallery wall over a mustard velvet sofa. A tall arched gold mirror. Walnut slats and a wash chair. Quiet
+            rooms with a door that closes: just you and your stylist.
+          </p>
+        </div>
+        <SuiteStrip />
+      </div>
+
+      {/* The wash */}
+      <div className="mt-28 lg:mt-40 max-w-[88rem] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12 items-center">
+        <div className="md:col-span-6 lg:col-span-5" data-reveal="photo">
+          <Photo id="shampoo" sizes="(min-width:768px) 45vw, 90vw" className="w-full aspect-[4/5]" />
+        </div>
+        <div className="md:col-span-6 lg:col-span-5 lg:col-start-7">
+          <h3 data-reveal className="display text-[clamp(2.5rem,4.5vw,3.75rem)]">The wash</h3>
+          <p data-reveal style={d(90)} className="mt-4 text-lg leading-[1.6] max-w-md">
+            Reclining chairs at the wash bowls, under walnut cabinets and a trailing plant. Lean back; this part
+            doesn't need rushing either.
+          </p>
+          <div className="mt-10 grid grid-cols-2 gap-4 max-w-md" data-reveal style={d(160)}>
+            <Photo id="hallway" sizes="(min-width:768px) 20vw, 45vw" className="w-full aspect-[3/4]" />
+            <Photo id="floral-panel" sizes="(min-width:768px) 20vw, 45vw" className="w-full aspect-[3/4] mt-12" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
