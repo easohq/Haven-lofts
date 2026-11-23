@@ -228,9 +228,6 @@ a:hover .arrow, button:hover .arrow { transform: translateX(5px); }
 }
 .link-u:hover { color: var(--cognac); text-decoration-color: var(--cognac); }
 
-/* Specialties read as a sentence: commas between them, no ornaments. */
-.spec-list li { display: inline; }
-.spec-list li:not(:last-child)::after { content: ', '; }
 
 }
 
