@@ -508,3 +508,11 @@ dialog.viewer::backdrop { background: transparent; }
 /* A text link on the green and dark surfaces: light gold underline. */
 .link-light { text-decoration-color: var(--gold-light); }
 .link-light:hover { color: var(--gold-light); text-decoration-color: var(--gold-light); }
+
+/* Front page photo: a soft darkening only along the bottom, where the name sits. */
+.hero-scrim { background: linear-gradient(to top, rgb(18 14 9 / 0.7) 0%, rgb(18 14 9 / 0.3) 30%, rgb(18 14 9 / 0) 55%); }
+@media (prefers-reduced-motion: no-preference) {
+  /* The photo settles in, like your eyes adjusting as you step inside. */
+  .hero-photo img { animation: settle 2400ms var(--ease) both; }
+}
+@keyframes settle { from { transform: scale(1.08); } }
